@@ -12,3 +12,12 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Article {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  text      String    @db.Text
+  tags      String[]  
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt @db.Timestamp(0)
+}
