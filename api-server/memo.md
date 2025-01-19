@@ -13,5 +13,17 @@ npx prisma init
 npx prisma migrate dev --name article
 _init
 ```
+### prisma-clientインストール
 
-### a
+```
+npm i @prisma/client
+
+※migrationした時にインストールはされている
+```
+
+### prismaファイル作成
+
+```
+nest g module prisma
+nest g service prisma --no-spec
+```
