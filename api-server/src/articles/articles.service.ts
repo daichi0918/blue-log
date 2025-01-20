@@ -18,8 +18,8 @@ export class ArticlesService {
     });
   }
 
-  findAll() {
-    return `This action returns all articles`;
+  async findAll(): Promise<Array<Article>> {
+    return await this.prismaService.article.findMany();
   }
 
   findOne(id: number) {
