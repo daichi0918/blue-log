@@ -28,3 +28,10 @@ npm i @prisma/client
 nest g module prisma
 nest g service prisma --no-spec
 ```
+
+### class-validatorインストール
+
+```
+npm i class-validator class-transfor
+mer
+```
