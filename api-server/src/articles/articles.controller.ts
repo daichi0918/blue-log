@@ -16,10 +16,10 @@ import { Article } from '@prisma/client';
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
-  @Post()
-  async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
-    return await this.articlesService.create(createArticleDto);
-  }
+  // @Post()
+  // async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
+  //   return await this.articlesService.create(createArticleDto);
+  // }
 
   @Get()
   async findAll() {
