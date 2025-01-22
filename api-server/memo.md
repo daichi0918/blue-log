@@ -35,3 +35,9 @@ nest g service prisma --no-spec
 npm i class-validator class-transfor
 mer
 ```
+
+### ユーザー追加コマンド
+
+```
+npx prisma migrate dev --name addUser
+```
