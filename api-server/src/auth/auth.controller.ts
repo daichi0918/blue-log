@@ -13,12 +13,12 @@ export class AuthController {
     return await this.authService.createUser(createUserDto);
   }
 
-  // @Post('signin')
-  // async signIn(
-  //   @Body() credentialsDto: CredentialsDto,
-  // ): Promise<{ token: string }> {
-  //   return await this.authService.signIn(credentialsDto);
-  // }
+  @Post('signin')
+  async signIn(
+    @Body() credentialsDto: CredentialsDto,
+  ): Promise<{ token: string }> {
+    return await this.authService.signIn(credentialsDto);
+  }
 
   // @Post('authentication')
   // @UseGuards(AuthGuard('jwt'))
