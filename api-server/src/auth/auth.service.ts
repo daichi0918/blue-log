@@ -64,7 +64,6 @@ export class AuthService {
   /**
    * ログイン機能
    * @param credentialsDto
-   * @returns
    */
   async signIn(credentialsDto: CredentialsDto): Promise<any> {
     const { email, password } = credentialsDto;
@@ -78,10 +77,42 @@ export class AuthService {
         sub: user.id,
         username: user.name,
       };
-      const token = this.jwtService.sign(payload);
-      return { token };
+      const accessToken = this.jwtService.sign(payload);
+      return { accessToken };
     }
 
     throw new UnauthorizedException();
   }
+
+  // /**
+  //  * 認証チェック機能
+  //  * @param {number} userId
+  //  */
+  // async authCheck(userId: number) {
+  //   const user = await this.prismaService.user.findUnique({
+  //     where: {
+  //       id: userId,
+  //     },
+  //   });
+
+  //   if (!user) throw new UnauthorizedException('認証データが存在しません');
+
+  //   const resUser: ResponseUserType = {
+  //     id: user.id,
+  //     name: user.name,
+  //     email: user.email,
+  //     createdAt: user.createdAt,
+  //     updateAt: user.updateAt,
+  //   };
+
+  //   const payload: JwtPayload = {
+  //     sub: user.id,
+  //     username: user.name,
+  //   };
+
+  //   return {
+  //     user: resUser,
+  //     accessToken: this.jwtService.sign(payload),
+  //   };
+  // }
 }
