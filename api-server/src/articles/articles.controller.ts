@@ -36,6 +36,7 @@ export class ArticlesController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   async findById(@Param('id') id: string): Promise<Article> {
     return await this.articlesService.findById(+id);
   }
