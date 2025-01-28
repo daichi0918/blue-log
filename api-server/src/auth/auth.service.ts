@@ -73,17 +73,15 @@ export class AuthService {
         email,
       },
     });
-    return { user };
-    //   if (user && (await bcrypt.compare(password, user.password))) {
-    //     const payload: JwtPayload = {
-    //       sub: user.id,
-    //       username: user.name,
-    //     };
-    //     const token = this.jwtService.sign(payload);
-    //     return { token };
-    //   }
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const payload: JwtPayload = {
+        sub: user.id,
+        username: user.name,
+      };
+      const token = this.jwtService.sign(payload);
+      return { token };
+    }
 
-    //   throw new UnauthorizedException();
-    // }
+    throw new UnauthorizedException();
   }
 }
