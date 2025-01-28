@@ -7,16 +7,16 @@ import { Article } from '@prisma/client';
 @Injectable()
 export class ArticlesService {
   constructor(private readonly prismaService: PrismaService) {}
-  async create(createArticleDto: CreateArticleDto): Promise<Article> {
-    const { title, text, tags } = createArticleDto;
-    return await this.prismaService.article.create({
-      data: {
-        title,
-        text,
-        tags,
-      },
-    });
-  }
+  // async create(createArticleDto: CreateArticleDto): Promise<Article> {
+  //   const { title, text, tags } = createArticleDto;
+  //   return await this.prismaService.article.create({
+  //     data: {
+  //       title,
+  //       text,
+  //       tags,
+  //     },
+  //   });
+  // }
 
   async findAll(): Promise<Array<Article>> {
     return await this.prismaService.article.findMany();
