@@ -4,10 +4,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserType } from 'src/interfaces/User';
 import { CredentialsDto } from './dto/credentials.dto';
 import * as bcrypt from 'bcryptjs';
+import { JwtPayload } from 'src/types/jwtPayload';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   /**
    * 新規ユーザー作成
@@ -46,13 +51,13 @@ export class AuthService {
       updateAt: createdUser.updateAt,
     };
 
-    // const payload: JwtPayload = {
-    //   sub: createdUser.id,
-    //   username: createdUser.name,
-    // };
+    const payload: JwtPayload = {
+      sub: createdUser.id,
+      username: createdUser.name,
+    };
     return {
       user: resUser,
-      // accessToken: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
     };
   }
 
