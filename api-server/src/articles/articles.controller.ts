@@ -41,12 +41,17 @@ export class ArticlesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
-    return this.articlesService.update(+id, updateArticleDto);
+  @UseGuards(AuthGuard('jwt'))
+  async update(
+    @Param('id') id: string,
+    @Body() updateArticleDto: UpdateArticleDto,
+  ) {
+    return await this.articlesService.update(+id, updateArticleDto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.articlesService.delete(+id);
+  @UseGuards(AuthGuard('jwt'))
+  async delete(@Param('id') id: string) {
+    await this.articlesService.delete(+id);
   }
 }

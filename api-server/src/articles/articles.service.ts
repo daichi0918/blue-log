@@ -54,7 +54,7 @@ export class ArticlesService {
   }
 
   async delete(id: number) {
-    return await this.prismaService.article.delete({
+    await this.prismaService.article.delete({
       where: {
         id,
       },
