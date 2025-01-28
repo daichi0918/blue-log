@@ -56,6 +56,11 @@ export class AuthService {
     };
   }
 
+  /**
+   * ログイン機能
+   * @param credentialsDto
+   * @returns
+   */
   async signIn(credentialsDto: CredentialsDto): Promise<any> {
     const { email, password } = credentialsDto;
     const user = await this.prismaService.user.findUnique({
