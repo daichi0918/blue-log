@@ -24,6 +24,7 @@ model Article {
   userId    Int
   user User @relation(fields:[userId], references: [id], onDelete: Cascade)
   likes     Like[]
+  bookmarks Bookmark[]
 }
 
 model User {
@@ -39,9 +40,21 @@ model User {
   updateAt  DateTime  @updatedAt @db.Timestamp(0)
   articles  Article[]
   likes     Like[]
+  bookmarks Bookmark[]
 }
 
 model Like {
+  userId    Int
+  articleId Int
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, articleId]) // 複合主キー
+}
+
+model Bookmark {
   userId    Int
   articleId Int
   createdAt DateTime  @default(now()) @db.Timestamp(0)
