@@ -41,3 +41,10 @@ mer
 ```
 npx prisma migrate dev --name addUser
 ```
+
+### bcryptインストール
+
+```
+npm i bcryptjs
+npm i -D @types/bcryptjs
+```

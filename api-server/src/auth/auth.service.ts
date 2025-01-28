@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserType } from 'src/interfaces/User';
 import { CredentialsDto } from './dto/credentials.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -27,14 +28,13 @@ export class AuthService {
         `${email} は別のアカウントで使用されています。`,
       );
     }
-    // const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const createdUser = await this.prismaService.user.create({
       data: {
         name,
         email,
-        password,
-        // password: hashedPassword,
+        password: hashedPassword,
       },
     });
 
