@@ -16,10 +16,14 @@ import { Article } from '@prisma/client';
 import { Request as ExpressRequest } from 'express';
 import { RequestUser } from 'src/types/requestUser';
 import { AuthGuard } from '@nestjs/passport';
+import { LikeService } from 'src/like/like.service';
 
 @Controller('articles')
 export class ArticlesController {
-  constructor(private readonly articlesService: ArticlesService) {}
+  constructor(
+    private readonly articlesService: ArticlesService,
+    private readonly likeService: LikeService,
+  ) {}
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
@@ -54,5 +58,23 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   async delete(@Param('id') id: string) {
     await this.articlesService.delete(+id);
+  }
+
+  @Post(':articleId/likes')
+  @UseGuards(AuthGuard('jwt'))
+  likeArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.likeService.create(+articleId, +req.user.userId);
+  }
+
+  @Delete(':articleId/likes')
+  @UseGuards(AuthGuard('jwt'))
+  unlikeArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.likeService.remove(+articleId, +req.user.userId);
   }
 }
