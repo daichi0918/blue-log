@@ -16,10 +16,16 @@ import { Article } from '@prisma/client';
 import { Request as ExpressRequest } from 'express';
 import { RequestUser } from 'src/types/requestUser';
 import { AuthGuard } from '@nestjs/passport';
+import { LikeService } from 'src/like/like.service';
+import { BookmarkService } from 'src/bookmark/bookmark.service';
 
 @Controller('articles')
 export class ArticlesController {
-  constructor(private readonly articlesService: ArticlesService) {}
+  constructor(
+    private readonly articlesService: ArticlesService,
+    private readonly likeService: LikeService,
+    private readonly bookmarkService: BookmarkService,
+  ) {}
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
@@ -54,5 +60,41 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   async delete(@Param('id') id: string) {
     await this.articlesService.delete(+id);
+  }
+
+  @Post(':articleId/like')
+  @UseGuards(AuthGuard('jwt'))
+  likeArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.likeService.create(+articleId, +req.user.userId);
+  }
+
+  @Delete(':articleId/like')
+  @UseGuards(AuthGuard('jwt'))
+  unlikeArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.likeService.remove(+articleId, +req.user.userId);
+  }
+
+  @Post(':articleId/bookmark')
+  @UseGuards(AuthGuard('jwt'))
+  bookmarkArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.bookmarkService.create(+articleId, +req.user.userId);
+  }
+
+  @Delete(':articleId/bookmark')
+  @UseGuards(AuthGuard('jwt'))
+  unbookmarkArticle(
+    @Param('articleId') articleId: string,
+    @Request() req: ExpressRequest & { user: RequestUser },
+  ) {
+    return this.likeService.remove(+articleId, +req.user.userId);
   }
 }
