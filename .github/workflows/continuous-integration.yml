@@ -1,0 +1,81 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '**' # すべてのブランチに対して適用
+    paths:
+      - 'frontend/**' # frontendディレクトリ内の変更のみ対象
+  pull_request:
+    branches:
+      - develop # developブランチに対するPR時のみ
+    paths:
+      - 'frontend/**' # frontendディレクトリ内の変更のみ対象
+
+env:
+  NODE_VERSION: '20.0.0'
+  PNPM_VERSION: '9.15.0'
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Debug root directory
+        run: ls -la
+      # - name: Debug frontend directory
+      #   run: ls -la frontend
+      - name: Debug directory structure
+        run: ls -R
+      - name: Setup environment
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm run lint
+        working-directory: frontend
+
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm run format
+        working-directory: frontend
+
+  typecheck:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm run typecheck
+        working-directory: frontend
