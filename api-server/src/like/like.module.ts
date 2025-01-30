@@ -4,6 +4,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Module({
   providers: [LikeService, PrismaService],
-  exports: [LikeService], // ここを追加
+  exports: [LikeService],
 })
 export class LikeModule {}
