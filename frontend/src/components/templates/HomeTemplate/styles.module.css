@@ -4,13 +4,45 @@
   align-items: center;
   background: #fff;
   color: #000;
-  padding: 5px 25px;
+  padding: 10px 25px;
 }
 
 .header div:nth-child(2) {
   margin: 0 auto;
 }
 
+/* 検索 */
+.inputContainer {
+  position: relative;
+}
+.inputContainer::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("../../../img/icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.input {
+  background: var(--gray_00);
+  border: 1px solid var(--gray_03);
+  min-width: 400px;
+  min-height: 40px;
+  border-radius: 4px;
+  padding-left: 40px;
+}
+
+.input::placeholder {
+  font-size: 14px;
+  color: var(--gray_05);
+}
+
+/* ボタン */
 .header .button {
   font-size: 14px;
   font-weight: bold;
@@ -26,20 +58,20 @@
   cursor: pointer;
 }
 
-.button_signup {
+.buttonSignup {
   color: var(--blue_04);
   background: var(--gray_00);
 }
 
-.button_signup:hover {
+.buttonSignup:hover {
   background: var(--gray_01);
 }
 
-.button_signin {
+.buttonSignin {
   color: var(--gray_00);
   background: var(--blue_04);
 }
 
-.button_signin:hover {
+.buttonSignin:hover {
   background: var(--blue_05);
 }

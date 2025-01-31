@@ -59,6 +59,7 @@
 
 html {
   font-family: "Noto Sans JP", sans-serif;
+  color: #1a1a1a;
 }
 body {
   background: var(--gray_01);
