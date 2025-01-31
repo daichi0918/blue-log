@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  color: #000;
+  padding: 5px 25px;
+}
+
+.header div:nth-child(2) {
+  margin: 0 auto;
+}
+
+.header .button {
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  /* padding: 10px 15px; */
+  margin-right: 10px;
+  min-width: 88px;
+  min-height: 40px;
+  border: 1px solid var(--blue_04);
+}
+
+.header .button:hover {
+  cursor: pointer;
+}
+
+.button_signup {
+  color: var(--blue_04);
+  background: var(--gray_00);
+}
+
+.button_signup:hover {
+  background: var(--gray_01);
+}
+
+.button_signin {
+  color: var(--gray_00);
+  background: var(--blue_04);
+}
+
+.button_signin:hover {
+  background: var(--blue_05);
+}

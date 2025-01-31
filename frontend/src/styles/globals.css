@@ -1,42 +1,66 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 
+  ・白背景コンポーネントのhove時の背景色
+  ・サブコンポーネントの背景色 
+  */
+  --blue_01: #dcf0ff;
+
+  /* blue_01をhoverした時の背景色 */
+  --blue_02: #97d3ff;
+
+  /* 
+  ・ブランドカラー
+  ・いいねのカラー
+  */
+  --blue_03: #008bf2;
+
+  /* プライマリーカラー */
+  --blue_04: #0055ad;
+
+  /* blue_04のhover時の背景色 */
+  --blue_05: #00316a;
+
+  /* 
+  ・デフォルトの背景色
+  ・有色の背景色に対する文字色
+  */
+  --gray_00: #ffffff;
+
+  /*
+  ・背景色
+  ・非活性コンポーネントの背景色
+  */
+  --gray_01: #f9f9f9;
+
+  /* 補助的な罫線 */
+  --gray_02: #e8e8e8;
+
+  /* フォームの罫線 */
+  --gray_03: #e8e8e8;
+
+  /* 非活性なテキストやアイコン */
+  --gray_04: #b4b4b4;
+
+  /*
+  ・補助的なテキスト
+  ・活性のアイコン
+  */
+  --gray_05: #6c6c6c;
+
+  /* テキスト */
+  --gray_06: #1a1a1a;
+
+  /* 
+  ・エラー
+  ・破壊的アクション
+  */
+  --red: #ec0000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: "Noto Sans JP", sans-serif;
 }
-
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
+  background: var(--gray_01);
   margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
