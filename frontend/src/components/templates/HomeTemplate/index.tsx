@@ -21,6 +21,20 @@ export const HomeTemplate = () => {
           </button>
         </div>
       </header>
+
+      <footer className={style.footer}>
+        <div className={style.footerContainer}>
+          <div className={style.footerHome}>
+            <p>HOME</p>
+          </div>
+          <div className={style.footerPrivacyPolicy}>
+            <p>プライバシーポリシー</p>
+          </div>
+          <div className={style.footerTermsOfUse}>
+            <p>利用規約</p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };

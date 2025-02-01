@@ -1,10 +1,14 @@
+/* ヘッダー */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
-  color: #000;
+  background: var(--gray_00);
   padding: 10px 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .header div:nth-child(2) {
@@ -74,4 +78,52 @@
 
 .buttonSignin:hover {
   background: var(--blue_05);
+}
+
+/* フッター */
+.footer {
+  position: relative;
+  margin-top: 100px;
+  width: 100%;
+}
+
+.footerContainer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: var(--gray_00);
+  padding: 10px 0;
+}
+
+.footerContainer > div {
+  min-height: 21px;
+  cursor: pointer;
+}
+
+.footerContainer > div > p {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 14px;
+  color: var(--gray_05);
+}
+
+.footerHome {
+  min-width: 73px;
+}
+
+.footerHome > p {
+  color: var(--gray_06) !important;
+}
+
+.footerPrivacyPolicy {
+  min-width: 172px;
+  border-left: 1px solid var(--gray_02);
+  border-right: 1px solid var(--gray_02);
+}
+
+.footerTermsOfUse {
+  min-width: 88px;
 }
