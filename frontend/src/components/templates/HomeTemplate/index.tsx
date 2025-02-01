@@ -1,11 +1,22 @@
 "use client";
 
+import { NotLoginHeader } from "@/components/organisms/NotLoginHeader";
+
+/**
+ * HomeTemplate
+ *
+ * @package templates
+ */
 import style from "./styles.module.css";
 
+/**
+ * HomeTemplate
+ * @returns {JSX.Element}
+ */
 export const HomeTemplate = () => {
   return (
     <>
-      <header className={style.header}>
+      {/* <header className={style.header}>
         <div>
           <p>タイトル</p>
         </div>
@@ -20,8 +31,8 @@ export const HomeTemplate = () => {
             ログイン
           </button>
         </div>
-      </header>
-
+      </header> */}
+      <NotLoginHeader />
       <footer className={style.footer}>
         <div className={style.footerContainer}>
           <div className={style.footerHome}>
