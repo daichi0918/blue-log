@@ -28,7 +28,7 @@
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
-  background-image: url("../../../img/icon.svg");
+  background-image: url("/searchIcon.svg");
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;

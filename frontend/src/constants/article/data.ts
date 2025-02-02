@@ -1,6 +1,6 @@
 export const ARTICLES_SAMPLE = [
   {
-    id: 5,
+    id: 1,
     title: "Title2",
     tags: ["TypeScript", "Nuxt.js"],
     createdAt: "2025-01-30T11:02:45.000Z",
@@ -11,9 +11,11 @@ export const ARTICLES_SAMPLE = [
       image: null,
     },
     likeCount: 1,
+    liked: false,
+    bookmark: false,
   },
   {
-    id: 5,
+    id: 2,
     title:
       "記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事記事のタイトル記事のタイトル記事のタイトル記事の記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事のタイトル記事記事のタイトル記事のタイトル記事のタイトル記事の",
     tags: ["TypeScript", "Nuxt.js"],
@@ -25,9 +27,11 @@ export const ARTICLES_SAMPLE = [
       image: null,
     },
     likeCount: 1,
+    liked: false,
+    bookmark: false,
   },
   {
-    id: 5,
+    id: 3,
     title: "Title2",
     tags: ["TypeScript", "Nuxt.js"],
     createdAt: "2025-01-30T11:02:45.000Z",
@@ -38,5 +42,7 @@ export const ARTICLES_SAMPLE = [
       image: null,
     },
     likeCount: 1,
+    liked: false,
+    bookmark: false,
   },
 ];
