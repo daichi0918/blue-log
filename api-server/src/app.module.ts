@@ -9,7 +9,13 @@ import { LikeModule } from './like/like.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
 
 @Module({
-  imports: [PrismaModule, ArticlesModule, AuthModule, LikeModule, BookmarkModule],
+  imports: [
+    PrismaModule,
+    ArticlesModule,
+    AuthModule,
+    LikeModule,
+    BookmarkModule,
+  ],
   controllers: [AppController],
   providers: [AppService, LikeService],
 })
