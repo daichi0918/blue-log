@@ -1,7 +1,7 @@
-import styles from "./page.module.css";
+import { HomeTemplate } from "@/components/templates/HomeTemplate";
 
 const Home = () => {
-  return <div className={styles.page}>Hello World</div>;
+  return <HomeTemplate />;
 };
 
 export default Home;
