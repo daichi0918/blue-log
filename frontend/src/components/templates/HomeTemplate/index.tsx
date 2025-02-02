@@ -8,6 +8,7 @@
 import { Footer } from "@/components/organisms/Footer";
 import { NotLoginHeader } from "@/components/organisms/NotLoginHeader";
 import { ARTICLES_SAMPLE } from "@/constants/article/data";
+import { formatDate } from "@/utils/getFormatDate";
 import { getRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
@@ -51,7 +52,12 @@ export const HomeTemplate = () => {
                         </span>
                       )}
                     </div>
-                    <div></div>
+                    <div className={style.nameDateWrapper}>
+                      <p className={style.userName}>{article.user.name}</p>
+                      <p className={style.date}>
+                        {formatDate(article.createdAt)}
+                      </p>
+                    </div>
                   </div>
                   <div></div>
                 </section>
