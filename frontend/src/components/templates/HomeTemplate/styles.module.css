@@ -27,7 +27,7 @@
 
 .articleTitle {
   color: var(--gray_06);
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
@@ -52,7 +52,7 @@
   color: var(--gray_06);
   border: 2px;
   padding: 3px 8px;
-  font-size: 12px;
+  font-size: 1.2rem;
   margin-right: 5px;
 }
 
@@ -96,12 +96,12 @@
 }
 
 .userName {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray_06);
 }
 
 .date {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray_05);
 }
 
@@ -124,7 +124,7 @@
 }
 
 .likeCount {
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: var(--gray_05);
 }
