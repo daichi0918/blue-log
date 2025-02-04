@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  HttpStatus,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -18,7 +19,10 @@ import { RequestUser } from 'src/types/requestUser';
 import { AuthGuard } from '@nestjs/passport';
 import { LikeService } from 'src/like/like.service';
 import { BookmarkService } from 'src/bookmark/bookmark.service';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { findAllOkSample } from './constants/findAllSample';
 
+@ApiTags('articles')
 @Controller('articles')
 export class ArticlesController {
   constructor(
@@ -35,7 +39,15 @@ export class ArticlesController {
   ): Promise<Article> {
     return await this.articlesService.create(createArticleDto, req.user.userId);
   }
-
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: '記事一覧',
+    content: {
+      'application/json': {
+        example: findAllOkSample,
+      },
+    },
+  })
   @Get()
   async findAll() {
     return await this.articlesService.findAll();
