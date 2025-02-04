@@ -16,6 +16,10 @@
   margin: 0 auto;
 }
 
+.title {
+  font-size: 2rem;
+}
+
 /* 検索 */
 .inputContainer {
   position: relative;

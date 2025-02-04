@@ -6,8 +6,8 @@
  * @package templates
  */
 import Image from "next/image";
-import { Footer } from "@/components/organisms/Footer";
-import { NotLoginHeader } from "@/components/organisms/NotLoginHeader";
+import { Footer } from "@/components/molecules/Footer";
+import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { ARTICLES_SAMPLE } from "@/constants/article/data";
 import { formatDate } from "@/utils/getFormatDate";
 import { getRandomColor } from "@/utils/getRandomColor";

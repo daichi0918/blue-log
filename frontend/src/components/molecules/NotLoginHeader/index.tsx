@@ -14,7 +14,7 @@ export const NotLoginHeader = () => {
   return (
     <header className={style.header}>
       <div>
-        <p>タイトル</p>
+        <p className={style.title}>タイトル</p>
       </div>
       <div className={style.inputContainer}>
         <input className={style.input} placeholder={"キーワード検索"} />
