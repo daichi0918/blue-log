@@ -1,0 +1,112 @@
+.articleTitle {
+  color: var(--gray_06);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.articleTitle h1 {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  line-height: 1.5em;
+  max-height: calc(1.5em * 2);
+}
+
+.articleTagsWrapper {
+  display: flex;
+}
+
+.articleTag {
+  background: var(--blue_01);
+  color: var(--gray_06);
+  border: 2px;
+  padding: 3px 8px;
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.articleInfo {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.articleInfo .userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo .userImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.noUserImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.nameDateWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.nameDateWrapper > p {
+  margin: 0;
+  padding: 0;
+}
+
+.userName {
+  font-size: 1.2rem;
+  color: var(--gray_06);
+}
+
+.date {
+  font-size: 1.2rem;
+  color: var(--gray_05);
+}
+
+.likeBookmarkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liked,
+.notLiked {
+  margin-right: 15px;
+}
+
+.likeCount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--gray_05);
+}
+
+.bookmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

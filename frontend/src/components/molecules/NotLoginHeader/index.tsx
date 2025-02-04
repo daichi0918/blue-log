@@ -1,8 +1,10 @@
 /**
  * NotLoginHeader
  *
- * @package organisms
+ * @package molecules
  */
+
+import { memo } from "react";
 
 import style from "./styles.module.css";
 
@@ -10,7 +12,7 @@ import style from "./styles.module.css";
  * HomeTemplate
  * @returns {JSX.Element}
  */
-export const NotLoginHeader = () => {
+export const NotLoginHeader = memo(() => {
   return (
     <header className={style.header}>
       <div>
@@ -29,4 +31,4 @@ export const NotLoginHeader = () => {
       </div>
     </header>
   );
-};
+});
