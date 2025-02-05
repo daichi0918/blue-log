@@ -2,6 +2,10 @@ name: 'Chromatic Publish'
 
 on: push
 
+env:
+  NODE_VERSION: '20.0.0'
+  PNPM_VERSION: '9.15.0'
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -12,14 +16,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: ./.github/actions/setup
         with:
-          node-version: 20
-          cache: 'pnpm' # Yarnではなくpnpmをキャッシュ
-      - run: npm install -g pnpm # 🔹 pnpm を明示的にインストール
-      - run: pnpm install # 🔹 依存関係をインストール
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
       - uses: chromaui/action@latest
+        # Options required for Chromatic's GitHub Action
         with:
+          #👇 Chromatic projectToken,
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          workingDir: frontend # Chromaticの作業ディレクトリを指定
