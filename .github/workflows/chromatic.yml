@@ -9,6 +9,7 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: storybook-auto-build
     defaults:
       run:
         working-directory: frontend # frontend ディレクトリ内で実行
