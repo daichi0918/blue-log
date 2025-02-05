@@ -20,6 +20,7 @@ import style from "./styles.module.css";
  */
 export const HomeTemplate = () => {
   const [articleDisplayLength, setArticleDisplayLength] = useState<number>(10);
+  console.log("10");
   return (
     <>
       <NotLoginHeader />
