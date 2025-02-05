@@ -91,7 +91,7 @@ const eslintConfig = [
       "src/components/ui/*", // 特定のディレクトリを無視
       "*.md", // Markdownファイルを無視
       "**/*.stories.tsx", // stories.tsxファイルを無視
-      "src/apis/*",
+      "src/apis/config.ts",
     ],
   },
 ];

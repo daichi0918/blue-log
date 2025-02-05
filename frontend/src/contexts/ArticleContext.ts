@@ -21,7 +21,6 @@ type ContextInterface = {
  * TodoContext
  */
 export const ArticleContext = createContext({} as ContextInterface);
-
 /**
  * ArticleProvider
  *
