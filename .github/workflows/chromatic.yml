@@ -27,4 +27,4 @@ jobs:
           #👇 Chromatic projectToken,
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          storybookBaseDir: frontend
+          workingDir: frontend
