@@ -5,12 +5,13 @@
  *
  * @package templates
  */
-import { useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
 import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { ARTICLES_SAMPLE } from "@/constants/article/data";
+import { type EventType } from "@/type/Event";
 
 import style from "./styles.module.css";
 
@@ -19,11 +20,24 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const HomeTemplate = () => {
+  /* state定義 */
   const [articleDisplayLength, setArticleDisplayLength] = useState<number>(10);
-  console.log("10");
+  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
+
+  /* action定義 */
+  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
+    setInputArticleSearch(e.target.value);
+  }, []);
+  const handleShowMoreArticles = () => {
+    setArticleDisplayLength((prev) => prev + 10);
+  };
+
   return (
     <>
-      <NotLoginHeader />
+      <NotLoginHeader
+        searchInputValue={inputArticleSearch}
+        handleInputSearch={handleInputSearch}
+      />
       <main className={style.articlesContainer}>
         {/* 並び替え */}
         <section className={style.articleCardSort}>
@@ -52,6 +66,7 @@ export const HomeTemplate = () => {
               color={"secondary"}
               size={"medium"}
               text={"もっと見る"}
+              onClick={handleShowMoreArticles}
             />
           </section>
         )}

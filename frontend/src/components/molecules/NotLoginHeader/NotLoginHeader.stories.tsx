@@ -1,3 +1,6 @@
+import { useCallback, useState } from "react";
+import { EventType } from "@/type/Event";
+
 import { NotLoginHeader } from ".";
 
 export default {
@@ -9,7 +12,19 @@ export default {
 };
 
 export const NotLoginHeaderOrganisms = () => {
-  return <NotLoginHeader />;
+  /* state定義 */
+  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
+
+  /* action定義 */
+  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
+    setInputArticleSearch(e.target.value);
+  }, []);
+  return (
+    <NotLoginHeader
+      searchInputValue={inputArticleSearch}
+      handleInputSearch={handleInputSearch}
+    />
+  );
 };
 
 NotLoginHeaderOrganisms.storyName = "Default";
