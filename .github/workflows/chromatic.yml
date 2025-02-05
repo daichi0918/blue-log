@@ -16,10 +16,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm' # Yarnではなくpnpmをキャッシュ
-      - run: corepack enable # corepackを有効化（pnpmを使うため）
-      - run: pnpm install # pnpmで依存関係をインストール
+      - run: npm install -g pnpm # 🔹 pnpm を明示的にインストール
+      - run: pnpm install # 🔹 依存関係をインストール
       - uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          working-directory: frontend # Chromaticの作業ディレクトリを指定
+          workingDir: frontend # Chromaticの作業ディレクトリを指定
