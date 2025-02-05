@@ -24,3 +24,33 @@
 .articlesContainer article > section {
   margin: 5px 0;
 }
+
+/* もっとみる */
+.showMore {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.button {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 4px;
+  /* padding: 10px 15px; */
+  margin-right: 10px;
+  min-width: 88px;
+  min-height: 40px;
+  border: 1px solid var(--blue_04);
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.buttonSignup {
+  color: var(--blue_04);
+  background: var(--gray_00);
+}
+
+.buttonSignup:hover {
+  background: var(--gray_01);
+}

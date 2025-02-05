@@ -46,7 +46,7 @@ export const ARTICLES_SAMPLE = [
     bookmark: false,
   },
   {
-    id: 3,
+    id: 15,
     title: "Title2",
     tags: ["TypeScript", "Nuxt.js"],
     createdAt: "2025-01-30T11:02:45.000Z",
@@ -61,7 +61,7 @@ export const ARTICLES_SAMPLE = [
     bookmark: false,
   },
   {
-    id: 3,
+    id: 16,
     title: "Title2",
     tags: ["TypeScript", "Nuxt.js"],
     createdAt: "2025-01-30T11:02:45.000Z",
