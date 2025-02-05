@@ -10,8 +10,8 @@ import style from "./styles.module.css";
  */
 
 type BaseButtonProps = {
-  color: "primary" | "secondary" | "danger"; // 例として3種類
-  size: "small" | "medium" | "large";
+  color: "primary" | "secondary";
+  size: "small" | "medium";
   text: string;
   additionalStyle?: CSSProperties;
 } & JSX.IntrinsicElements["button"];
