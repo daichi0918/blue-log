@@ -1,0 +1,63 @@
+.articlesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 65%;
+  margin: 100px auto;
+}
+
+.articlesContainer > section {
+  width: 100%;
+}
+
+/* 並び替え */
+.articleCardSort {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.sortTitleWrapper {
+  margin-right: 10px;
+}
+
+.sortTitle {
+  font-size: 1.4rem;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectWrapper::after {
+  content: "";
+  position: absolute;
+  top: 47%;
+  right: 12px;
+  border-right: 3.5px solid transparent;
+  border-left: 3.5px solid transparent;
+  border-top: 4px solid var(--gray_05);
+  border-bottom: 0;
+}
+
+.selectWrapper:hover {
+  cursor: pointer;
+}
+
+.select {
+  padding: 5px 32px 5px 16px;
+  height: 32px;
+  background: var(--gray_00);
+  border: 1px solid var(--gray_03);
+  border-radius: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 1.4rem;
+}
+
+/* もっとみる */
+.showMore {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
