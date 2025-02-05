@@ -2,25 +2,7 @@
 name: 'Chromatic Publish'
 
 # Event for the workflow
-on:
-  push:
-    branches:
-      - '**' # すべてのブランチに対して適用
-    paths:
-      - 'frontend/**' # frontendディレクトリ内の変更のみ対象
-  pull_request:
-    branches:
-      - develop # developブランチに対するPR時のみ
-    paths:
-      - 'frontend/**' # frontendディレクトリ内の変更のみ対象
-
-env:
-  NODE_VERSION: '20.0.0'
-  PNPM_VERSION: '9.15.0'
-
-defaults:
-  run:
-    working-directory: frontend
+on: push
 
 # List of jobs
 jobs:
@@ -34,11 +16,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          pnpm-version: ${{ env.PNPM_VERSION }}
-          cache-dependency-path: frontend/pnpm-lock.yaml
-      - run: pnpm
-        working-directory: frontend
+          node-version: 20
+          cache: 'yarn'
+      - run: yarn
       #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@latest
         # Options required for Chromatic's GitHub Action
