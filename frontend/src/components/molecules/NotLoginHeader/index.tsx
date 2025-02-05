@@ -5,6 +5,8 @@
  */
 
 import { memo } from "react";
+import { BaseButton } from "@/components/atoms/BaseButton";
+import { Button } from "@/stories/Button";
 
 import style from "./styles.module.css";
 
@@ -22,12 +24,13 @@ export const NotLoginHeader = memo(() => {
         <input className={style.input} placeholder={"キーワード検索"} />
       </div>
       <div>
-        <button className={`${style.button} ${style.buttonSignup}`}>
-          新規登録
-        </button>
-        <button className={`${style.button} ${style.buttonSignin}`}>
-          ログイン
-        </button>
+        <BaseButton
+          color={"primary"}
+          size={"medium"}
+          text={"新規登録"}
+          additionalStyle={{ marginRight: "15px" }}
+        />
+        <BaseButton color={"secondary"} size={"medium"} text={"ログイン"} />
       </div>
     </header>
   );
