@@ -1,20 +1,20 @@
 import type { FC } from "react";
 import { memo } from "react";
 import Image from "next/image";
-import { type ArticleType } from "@/type/Article";
+import { type ArticleCardType } from "@/type/ArticleCard";
 import { formatDate } from "@/utils/getFormatDate";
 import { getRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
 /**
- * Article
+ * ArticleCard
  *
  * @package molecules
  */
 
-type ArticleProps = {
-  article: ArticleType;
+type ArticleCardProps = {
+  article: ArticleCardType;
 };
 
 /**
@@ -22,11 +22,11 @@ type ArticleProps = {
  * @param {ArticleProps}
  * @returns {JSX.Element}
  */
-export const Article: FC<ArticleProps> = memo((props) => {
+export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
   const { article } = props;
 
   return (
-    <article key={article.id}>
+    <article key={article.id} className={style.articleItem}>
       <section className={style.articleTitle}>
         <h1>{article.title}</h1>
       </section>

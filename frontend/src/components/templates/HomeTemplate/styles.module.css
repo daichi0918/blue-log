@@ -10,19 +10,45 @@
   width: 100%;
 }
 
-.articlesContainer article {
-  border: 1px solid var(--gray_02);
-  background: var(--gray_00);
+/* 並び替え */
+.articleCardSort {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 15px 30px;
-  cursor: pointer;
-  margin: 10px 0;
+  justify-content: end;
+  align-items: center;
 }
 
-.articlesContainer article > section {
-  margin: 5px 0;
+.sortTitleWrapper {
+  margin-right: 10px;
+}
+
+.sortTitle {
+  font-size: 1.4rem;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectWrapper::after {
+  content: "";
+  position: absolute;
+  top: 47%;
+  right: 12px;
+  border-right: 3.5px solid transparent;
+  border-left: 3.5px solid transparent;
+  border-top: 4px solid var(--gray_05);
+  border-bottom: 0;
+}
+
+.select {
+  padding: 5px 32px 5px 16px;
+  height: 32px;
+  background: var(--gray_00);
+  border: 1px solid var(--gray_03);
+  border-radius: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 1.4rem;
 }
 
 /* もっとみる */
@@ -30,27 +56,4 @@
   display: flex;
   justify-content: center;
   margin-top: 15px;
-}
-.button {
-  font-size: 1.4rem;
-  font-weight: bold;
-  border-radius: 4px;
-  /* padding: 10px 15px; */
-  margin-right: 10px;
-  min-width: 88px;
-  min-height: 40px;
-  border: 1px solid var(--blue_04);
-}
-
-.button:hover {
-  cursor: pointer;
-}
-
-.buttonSignup {
-  color: var(--blue_04);
-  background: var(--gray_00);
-}
-
-.buttonSignup:hover {
-  background: var(--gray_01);
 }

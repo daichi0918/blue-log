@@ -1,13 +1,13 @@
 /**
- * Article
+ * ArticleCard
  *
  * @package interface
  */
 
 /**
- * TodoType
+ * ArticleCardType
  */
-export type ArticleType = {
+export type ArticleCardType = {
   id: number;
   title: string;
   tags: Array<string>;
