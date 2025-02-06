@@ -16,4 +16,3 @@ export const fetchArticleListApi = async () => {
     }
   }
 };
-console.log("sss");

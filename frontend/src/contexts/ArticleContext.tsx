@@ -6,7 +6,7 @@
  * @package contexts
  */
 import type { ReactNode } from "react";
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { type ArticleCardType } from "@/type/ArticleCard";
 
 type Props = {
@@ -26,10 +26,12 @@ export const ArticleContext = createContext({} as ContextInterface);
  *
  * @param children
  */
-// export const ArticleProvider= ({ children }: Props) => {
-//   const [articleList, setArticleList] = useState<Array<ArticleCardType>>([]);
+export const ArticleProvider = ({ children }: Props) => {
+  const [articleList, setArticleList] = useState<Array<ArticleCardType>>([]);
 
-//   return (
-//     <ArticleContext.Provider value={{articleList, setArticleList}}>{children}</ArticleContext.Provider>
-//   );
-// };
+  return (
+    <ArticleContext.Provider value={{ articleList }}>
+      {children}
+    </ArticleContext.Provider>
+  );
+};
