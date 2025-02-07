@@ -14,6 +14,7 @@
     "format": "prettier --check \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc,yml,yaml}\"",
     "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc,yml,yaml}\"",
     "prepare": "cd .. && husky frontend/.husky",
+    "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_c21433859adca78"
@@ -25,6 +26,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
     "@chromatic-com/storybook": "^3.2.4",
     "@eslint/eslintrc": "^3",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
