@@ -71,13 +71,15 @@ export const HomeTemplate = () => {
         </section>
         {/* 記事一覧リスト */}
         <section>
-          {ARTICLES_SAMPLE.length > 0 &&
-            ARTICLES_SAMPLE.slice(0, articleDisplayLength).map((article) => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
+          {articleListAll.length > 0 &&
+            articleListAll
+              .slice(0, articleDisplayLength)
+              .map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
         </section>
         {/* もっと見るボタン */}
-        {ARTICLES_SAMPLE.length > articleDisplayLength && (
+        {articleListAll.length > articleDisplayLength && (
           <section className={style.showMore}>
             <BaseButton
               color={"secondary"}
