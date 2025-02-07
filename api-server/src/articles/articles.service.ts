@@ -24,6 +24,9 @@ export class ArticlesService {
 
   async findAll(): Promise<Array<any>> {
     const articles = await this.prismaService.article.findMany({
+      orderBy: {
+        createdAt: 'asc', // 昇順（古いものから新しいものへ）
+      },
       select: {
         id: true,
         title: true,

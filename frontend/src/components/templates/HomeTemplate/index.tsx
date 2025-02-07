@@ -30,9 +30,17 @@ export const HomeTemplate = () => {
   );
 
   /* action定義 */
+
+  /**
+   * キーワード検索Input
+   * @param {e}
+   */
   const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
     setInputArticleSearch(e.target.value);
   }, []);
+  /**
+   * もっと見るボタン押下時の処理
+   */
   const handleShowMoreArticles = () => {
     setArticleDisplayLength((prev) => prev + 10);
   };
