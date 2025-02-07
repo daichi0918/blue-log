@@ -12,6 +12,7 @@ import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
 import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { ARTICLES_SAMPLE } from "@/constants/article/data";
+import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 
 import style from "./styles.module.css";
@@ -24,6 +25,9 @@ export const HomeTemplate = () => {
   /* state定義 */
   const [articleDisplayLength, setArticleDisplayLength] = useState<number>(10);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
+  const [articleListAll, setArticleListAll] = useState<Array<ArticleCardType>>(
+    [],
+  );
 
   /* action定義 */
   const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
@@ -33,18 +37,17 @@ export const HomeTemplate = () => {
     setArticleDisplayLength((prev) => prev + 10);
   };
 
-  const fetchData = async () => {
-    try {
-      const data = await fetchArticleListApi();
-      console.log("data");
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-  useEffect(() => {
-    void fetchData();
+  const fetchArticleCardList = useCallback(async (): Promise<void> => {
+    const res = await fetchArticleListApi();
+    console.log("res");
+    console.log(res);
+    setArticleListAll(
+      res?.data && typeof res.data === "object" ? res.data : [],
+    );
   }, []);
+  useEffect(() => {
+    void fetchArticleCardList();
+  }, [fetchArticleCardList]);
 
   return (
     <>
