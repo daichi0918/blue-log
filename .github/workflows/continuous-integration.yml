@@ -89,5 +89,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
       - run: pnpm run test
         working-directory: frontend
