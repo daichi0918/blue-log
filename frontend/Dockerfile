@@ -8,8 +8,10 @@ RUN npm install -g pnpm
 WORKDIR /usr/src/app
 
 # 依存パッケージをインストール
-COPY pnpm-lock.yaml ./
 COPY package.json ./
+COPY pnpm-lock.yaml ./
+
+
 RUN pnpm install --frozen-lockfile
 
 # アプリケーションコードをコピー
