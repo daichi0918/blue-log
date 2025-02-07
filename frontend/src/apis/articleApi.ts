@@ -5,7 +5,9 @@ import { type AxiosResponse } from "axios";
 /**
  * 記事一覧リストのAPI
  */
-export const fetchArticleListApi = async () => {
+export const fetchArticleListApi = async (): Promise<
+  ArticleCardType[] | string | undefined
+> => {
   try {
     const { data }: AxiosResponse<Array<ArticleCardType>> =
       await globalAxios.get("/articles");

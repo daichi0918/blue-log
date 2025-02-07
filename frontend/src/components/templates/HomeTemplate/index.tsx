@@ -5,7 +5,8 @@
  *
  * @package templates
  */
-import { ChangeEvent, useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { fetchArticleListApi } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
@@ -31,6 +32,19 @@ export const HomeTemplate = () => {
   const handleShowMoreArticles = () => {
     setArticleDisplayLength((prev) => prev + 10);
   };
+
+  const fetchData = async () => {
+    try {
+      const data = await fetchArticleListApi();
+      console.log("data");
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    void fetchData();
+  }, []);
 
   return (
     <>

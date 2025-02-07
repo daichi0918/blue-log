@@ -1,5 +1,9 @@
 # blue-log
 
+### 難しいところ
+
+- article のグローバルステートの定義
+
 ### 参考
 
 - https://qiita.com/ogadra/items/1acfc96bb92baa7bbeb6
