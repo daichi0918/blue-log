@@ -33,11 +33,19 @@ export const SignInTemplate = () => {
           <h1 className={style.title}>ログイン</h1>
           <div className={style.inputWrapper}>
             <p className={style.inputLabel}>メールアドレス</p>
-            <input className={style.input} placeholder={"abcd.1234@mail.com"} />
+            <input
+              className={style.input}
+              placeholder={"abcd.1234@mail.com"}
+              type={"text"}
+            />
           </div>
           <div className={style.inputWrapper}>
             <p className={style.inputLabel}>パスワード</p>
-            <input className={style.input} placeholder={"TestUser#1"} />
+            <input
+              className={style.input}
+              placeholder={"TestUser#1"}
+              type={"password"}
+            />
             <div className={style.passwordToggle}>
               <Image
                 src="/eye-open.svg"
@@ -55,6 +63,10 @@ export const SignInTemplate = () => {
                 text={"ログイン"}
                 additionalStyle={{ width: "100%" }}
               />
+            </div>
+            <div className={style.authLinkWrapper}>
+              <p className={style.authHelperText}>アカウントをお持ちでない方</p>
+              <p className={style.authLink}>新規登録</p>
             </div>
           </div>
         </div>

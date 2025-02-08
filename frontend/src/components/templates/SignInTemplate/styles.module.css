@@ -69,3 +69,25 @@
   margin-top: 20px;
   width: 100%;
 }
+
+.authLinkWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.authHelperText {
+  font-size: 1.2rem;
+  color: var(--gray_06);
+  margin-right: 3px;
+}
+
+.authLink {
+  font-size: 1.2rem;
+  color: var(--blue_04);
+  text-decoration: underline;
+}
+
+.authLink:hover {
+  cursor: pointer;
+}
