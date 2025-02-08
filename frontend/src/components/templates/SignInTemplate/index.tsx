@@ -74,7 +74,7 @@ export const SignInTemplate = () => {
         return;
       }
       if (res?.data?.user) {
-        void signIn(res.data.user);
+        await signIn(res.data.user);
         console.log(res.data);
         // 暗号化
         const ecrypted = crypto.AES.encrypt(res.data.accessToken, "hogefuga");
@@ -82,7 +82,7 @@ export const SignInTemplate = () => {
         router.push(NAVIGATION_PATH.TOP);
       }
     },
-    [email, password],
+    [email, password, router, signIn],
   );
 
   return (
