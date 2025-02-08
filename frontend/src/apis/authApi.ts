@@ -51,7 +51,7 @@ export const signUpApi = async (
 ) => {
   try {
     const { data }: AxiosResponse<AuthResponseType> = await globalAxios.post(
-      "auth/sign_up",
+      "auth/signup",
       {
         name,
         email,
