@@ -4,9 +4,9 @@ import { memo } from "react";
 import style from "./styles.module.css";
 
 /**
- * Footer
+ * BaseButton
  *
- * @package molecules
+ * @package atoms
  */
 
 type BaseButtonProps = {

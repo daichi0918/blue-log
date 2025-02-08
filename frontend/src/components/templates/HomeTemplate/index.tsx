@@ -11,7 +11,6 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
 import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
-import { ARTICLES_SAMPLE } from "@/constants/article/data";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 
