@@ -18,7 +18,7 @@ export const BASE_PATH = "";
 export const NAVIGATION_LIST = {
   LOGIN: `${BASE_PATH}/signin`,
   SIGNUP: `${BASE_PATH}/signup`,
-  TOP: `${BASE_PATH}`,
+  TOP: `${BASE_PATH}/`,
 };
 
 /**

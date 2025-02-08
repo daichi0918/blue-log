@@ -88,6 +88,8 @@ export const authenticationApi = async () => {
     const { data }: AxiosResponse<AuthResponseType> = await globalAxios.post(
       "/auth/authentication/",
     );
+    console.log("authentication");
+    console.log(data);
     const res: ResponseType<AuthResponseType> = {
       code: 200,
       data,

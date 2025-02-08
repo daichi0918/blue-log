@@ -42,7 +42,7 @@ export const useAuth = () => {
    */
   const isExitBeforeAuthPage = useCallback(() => {
     return (
-      pathname === NAVIGATION_PATH.SIGNIN || pathname === NAVIGATION_PATH.SIGNUP
+      pathname == NAVIGATION_PATH.SIGNIN || pathname === NAVIGATION_PATH.SIGNUP
     );
   }, [pathname]);
 
@@ -52,12 +52,12 @@ export const useAuth = () => {
   const authRouting = useCallback(async () => {
     let auth = false;
     const res = await authenticationApi();
+
     if (res?.data?.user) {
       setUser(res?.data?.user);
       setIsAuth(true);
       auth = true;
     }
-
     // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
     if (!auth && !isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
     // // ログイン済で未ログインのページにいる場合、Todo一覧ページにリダイレクト
