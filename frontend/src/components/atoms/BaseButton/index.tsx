@@ -21,12 +21,20 @@ type BaseButtonProps = {
  * @returns {JSX.Element}
  */
 export const BaseButton: FC<BaseButtonProps> = memo((props) => {
-  const { color, size, text, additionalStyle, onClick } = props;
+  const {
+    color,
+    size,
+    text,
+    additionalStyle,
+    onClick,
+    type = "button",
+  } = props;
   return (
     <button
       className={`${style.button} ${style[color]} ${style[size]}`}
       style={{ ...style, ...additionalStyle }}
       onClick={onClick}
+      type={type}
     >
       {text}
     </button>
