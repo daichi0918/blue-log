@@ -7,6 +7,7 @@
  */
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { fetchArticleListApi } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
@@ -23,9 +24,11 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const SignInTemplate = () => {
+  const router = useRouter();
   /* state定義 */
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   /* action定義 */
   /**
@@ -42,6 +45,18 @@ export const SignInTemplate = () => {
   const handleInputPassword: EventType["onChangeInput"] = useCallback((e) => {
     setPassword(e.target.value);
   }, []);
+  /**
+   * パスワードの表示切り替え
+   */
+  const togglePasswordVisibility = useCallback(() => {
+    setIsPasswordVisible((prev) => !prev);
+  }, []);
+  /**
+   * ログイン画面への遷移
+   */
+  const navigateToSignUp = useCallback(() => {
+    router.push("/signup");
+  }, [router]);
   return (
     <>
       <div className={style.container}>
@@ -65,20 +80,26 @@ export const SignInTemplate = () => {
             </div>
             <InputForm
               placeholder={"TestUser#1"}
-              type={"password"}
+              type={isPasswordVisible ? "text" : "password"}
               value={password}
               onChange={handleInputPassword}
               additionalStyle={{ width: "100%" }}
             />
-            <div className={style.passwordToggle}>
+            <div
+              className={style.passwordToggle}
+              onClick={togglePasswordVisibility}
+            >
               <Image
-                src="/eye-open.svg"
-                alt={"eyeOpen"}
+                // TODO: eye-closed.svgの追加
+                src={isPasswordVisible ? "/eye-closed.svg" : "/eye-open.svg"}
+                alt={isPasswordVisible ? "eyeClosed" : "eyeOpen"}
                 className={style.eye}
                 width={15}
                 height={15}
               />
-              <p className={style.passwordToggleText}>表示する</p>
+              <p className={style.passwordToggleText}>
+                {isPasswordVisible ? "非表示にする" : "表示する"}
+              </p>
             </div>
             <div className={style.buttonWrapper}>
               <BaseButton
@@ -90,7 +111,9 @@ export const SignInTemplate = () => {
             </div>
             <div className={style.authLinkWrapper}>
               <p className={style.authHelperText}>アカウントをお持ちでない方</p>
-              <p className={style.authLink}>新規登録</p>
+              <p className={style.authLink} onClick={navigateToSignUp}>
+                新規登録
+              </p>
             </div>
           </div>
         </div>

@@ -8,13 +8,8 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { fetchArticleListApi } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
-import { ArticleCard } from "@/components/molecules/ArticleCard";
-import { Footer } from "@/components/molecules/Footer";
-import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
-import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 
 import style from "./styles.module.css";
@@ -29,6 +24,7 @@ export const SignUpTemplate = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   /* action定義 */
   /**
@@ -51,6 +47,12 @@ export const SignUpTemplate = () => {
    */
   const handleInputPassword: EventType["onChangeInput"] = useCallback((e) => {
     setPassword(e.target.value);
+  }, []);
+  /**
+   * パスワードの表示切り替え
+   */
+  const togglePasswordVisibility = useCallback(() => {
+    setIsPasswordVisible((prev) => !prev);
   }, []);
   /**
    * ログイン画面への遷移
@@ -90,20 +92,26 @@ export const SignUpTemplate = () => {
             </div>
             <InputForm
               placeholder={"TestUser#1"}
-              type={"password"}
+              type={isPasswordVisible ? "text" : "password"}
               value={password}
               onChange={handleInputPassword}
               additionalStyle={{ width: "100%" }}
             />
-            <div className={style.passwordToggle}>
+            <div
+              className={style.passwordToggle}
+              onClick={togglePasswordVisibility}
+            >
               <Image
-                src="/eye-open.svg"
-                alt={"eyeOpen"}
+                // TODO: eye-closed.svgの追加
+                src={isPasswordVisible ? "/eye-closed.svg" : "/eye-open.svg"} // 目のアイコンを変更
+                alt={isPasswordVisible ? "eyeClosed" : "eyeOpen"}
                 className={style.eye}
                 width={15}
                 height={15}
               />
-              <p className={style.passwordToggleText}>表示する</p>
+              <p className={style.passwordToggleText}>
+                {isPasswordVisible ? "非表示にする" : "表示する"}
+              </p>
             </div>
             <div className={style.buttonWrapper}>
               <BaseButton
