@@ -57,7 +57,12 @@ export const SignInTemplate = () => {
             />
           </div>
           <div className={style.inputWrapper}>
-            <p className={style.inputLabel}>パスワード</p>
+            <div className={style.inputLabelWrapper}>
+              <p className={style.inputLabel}>パスワード</p>
+              <p className={style.inputLabelHelper}>
+                （英大小・数字・記号を1文字以上含む）
+              </p>
+            </div>
             <InputForm
               placeholder={"TestUser#1"}
               type={"password"}

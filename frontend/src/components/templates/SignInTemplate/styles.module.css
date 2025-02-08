@@ -26,10 +26,20 @@
   margin-bottom: 15px;
 }
 
+.inputLabelWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .inputLabel {
   font-size: 1.4rem;
   font-weight: bold;
   margin: 5px;
+}
+
+.inputLabelHelper {
+  font-size: 1.2rem;
+  color: var(--gray_05);
 }
 
 .input {
