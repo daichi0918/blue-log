@@ -48,6 +48,14 @@ export const SignInTemplate = () => {
               />
               <p className={style.passwordToggleText}>表示する</p>
             </div>
+            <div className={style.buttonWrapper}>
+              <BaseButton
+                color={"primary"}
+                size={"medium"}
+                text={"ログイン"}
+                additionalStyle={{ width: "100%" }}
+              />
+            </div>
           </div>
         </div>
       </div>

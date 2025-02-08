@@ -42,13 +42,17 @@
 }
 
 .input::placeholder {
-  color: var(--gray_05);
+  color: var(--gray_04);
 }
 
 .passwordToggle {
   display: flex;
   align-items: center;
   margin: 0;
+}
+
+.passwordToggle:hover {
+  cursor: pointer;
 }
 
 .eye {
@@ -59,4 +63,9 @@
   font-size: 1.2rem;
   color: var(--blue_04);
   margin: 3px 0 0 5px;
+}
+
+.buttonWrapper {
+  margin-top: 20px;
+  width: 100%;
 }
