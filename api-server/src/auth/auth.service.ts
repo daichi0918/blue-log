@@ -73,12 +73,17 @@ export class AuthService {
       },
     });
     if (user && (await bcrypt.compare(password, user.password))) {
+      const resUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
       const payload: JwtPayload = {
         sub: user.id,
         username: user.name,
       };
       const accessToken = this.jwtService.sign(payload);
-      return { accessToken };
+      return { user: resUser, accessToken };
     }
 
     throw new UnauthorizedException();
