@@ -61,7 +61,7 @@ export const useAuth = () => {
     // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
     if (!auth && !isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
     // // ログイン済で未ログインのページにいる場合、Todo一覧ページにリダイレクト
-    // if (auth && isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
+    if (auth && isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.TOP);
   }, [isExitBeforeAuthPage, router]);
 
   useEffect(() => {

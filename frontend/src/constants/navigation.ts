@@ -16,12 +16,9 @@ export const BASE_PATH = "";
  * @type {{TOP: string, CREATE: string, EDIT: string, DETAIL: string}}
  */
 export const NAVIGATION_LIST = {
-  LOGIN: `${BASE_PATH}/`,
+  LOGIN: `${BASE_PATH}/signin`,
   SIGNUP: `${BASE_PATH}/signup`,
-  TOP: `${BASE_PATH}/todo`,
-  DETAIL: `${BASE_PATH}/todo/detail/:id`,
-  CREATE: `${BASE_PATH}/todo/create`,
-  EDIT: `${BASE_PATH}/todo/edit/:id`,
+  TOP: `${BASE_PATH}`,
 };
 
 /**

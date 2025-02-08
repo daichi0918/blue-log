@@ -3,6 +3,9 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CredentialsDto } from './dto/credentials.dto';
 import { User } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
+import { Request as ExpressRequest } from 'express';
+import { RequestUser } from '../types/requestUser';
 
 @Controller('auth')
 export class AuthController {
@@ -20,9 +23,9 @@ export class AuthController {
     return await this.authService.signIn(credentialsDto);
   }
 
-  // @Post('authentication')
-  // @UseGuards(AuthGuard('jwt'))
-  // async authentication(@Request() req: ExpressRequest & { user: RequestUser }) {
-  //   return await this.authService.authCheck(req.user.userId);
-  // }
+  @Post('authentication')
+  @UseGuards(AuthGuard('jwt'))
+  async authentication(@Request() req: ExpressRequest & { user: RequestUser }) {
+    return await this.authService.authCheck(req.user.userId);
+  }
 }

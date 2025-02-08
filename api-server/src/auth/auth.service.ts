@@ -89,35 +89,35 @@ export class AuthService {
     throw new UnauthorizedException();
   }
 
-  // /**
-  //  * 認証チェック機能
-  //  * @param {number} userId
-  //  */
-  // async authCheck(userId: number) {
-  //   const user = await this.prismaService.user.findUnique({
-  //     where: {
-  //       id: userId,
-  //     },
-  //   });
+  /**
+   * 認証チェック機能
+   * @param {number} userId
+   */
+  async authCheck(userId: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
 
-  //   if (!user) throw new UnauthorizedException('認証データが存在しません');
+    if (!user) throw new UnauthorizedException('認証データが存在しません');
 
-  //   const resUser: ResponseUserType = {
-  //     id: user.id,
-  //     name: user.name,
-  //     email: user.email,
-  //     createdAt: user.createdAt,
-  //     updateAt: user.updateAt,
-  //   };
+    const resUser: ResponseUserType = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updateAt: user.updateAt,
+    };
 
-  //   const payload: JwtPayload = {
-  //     sub: user.id,
-  //     username: user.name,
-  //   };
+    const payload: JwtPayload = {
+      sub: user.id,
+      username: user.name,
+    };
 
-  //   return {
-  //     user: resUser,
-  //     accessToken: this.jwtService.sign(payload),
-  //   };
-  // }
+    return {
+      user: resUser,
+      accessToken: this.jwtService.sign(payload),
+    };
+  }
 }
