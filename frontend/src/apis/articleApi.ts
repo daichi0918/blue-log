@@ -22,6 +22,8 @@ export const fetchArticleListApi = async () => {
     };
     if (isAxiosError(err)) {
       const axiosError = err as IErrorResponse;
+      console.log("axiosError");
+      console.log(axiosError);
       res.code = axiosError.response.status;
       res.message = axiosError.response.data.message;
     }
