@@ -5,19 +5,14 @@
  *
  * @package templates
  */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { fetchArticleListApi } from "@/apis/articleApi";
 import { signInApi } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
-import { ArticleCard } from "@/components/molecules/ArticleCard";
-import { Footer } from "@/components/molecules/Footer";
-import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 import crypto from "crypto-js";
 

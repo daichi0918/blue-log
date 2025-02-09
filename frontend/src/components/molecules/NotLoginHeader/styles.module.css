@@ -37,18 +37,10 @@
   background-repeat: no-repeat;
   pointer-events: none;
 }
-.input {
-  background: var(--gray_00);
-  border: 1px solid var(--gray_03);
-  min-width: 400px;
-  min-height: 40px;
-  border-radius: 4px;
-  padding-left: 40px;
-}
 
-.input::placeholder {
-  font-size: 1.4rem;
-  color: var(--gray_04);
+.authSection {
+  display: flex;
+  align-items: center;
 }
 
 /* ボタン */
@@ -83,4 +75,20 @@
 
 .buttonSignin:hover {
   background: var(--blue_05);
+}
+
+.userImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.noUserImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
 }

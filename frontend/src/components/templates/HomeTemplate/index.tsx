@@ -11,6 +11,7 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
 import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
+import { useAuth } from "@/hooks/useAuth";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 
@@ -21,6 +22,7 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const HomeTemplate = () => {
+  const { isAuth, user } = useAuth();
   /* state定義 */
   const [articleDisplayLength, setArticleDisplayLength] = useState<number>(10);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
@@ -59,6 +61,8 @@ export const HomeTemplate = () => {
   return (
     <>
       <NotLoginHeader
+        user={user}
+        isAuth={isAuth}
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
