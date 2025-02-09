@@ -1,6 +1,8 @@
+import { AuthProvider } from "@/contexts/AuthContext";
+
 import "@/styles/globals.css";
 
-import { FC } from "react";
+import { type FC } from "react";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -14,7 +16,9 @@ export const metadata = {
 const RootLayout: FC<RootLayoutProps> = (props) => {
   return (
     <html lang="ja">
-      <body className="">{props.children}</body>
+      <body className="">
+        <AuthProvider>{props.children}</AuthProvider>
+      </body>
     </html>
   );
 };
