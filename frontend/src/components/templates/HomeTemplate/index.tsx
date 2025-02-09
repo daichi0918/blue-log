@@ -5,61 +5,40 @@
  *
  * @package templates
  */
-import { useCallback, useEffect, useState } from "react";
-import { fetchArticleListApi } from "@/apis/articleApi";
+import { useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { Footer } from "@/components/molecules/Footer";
 import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { useAuth } from "@/hooks/useAuth";
-import { type ArticleCardType } from "@/type/ArticleCard";
-import { type EventType } from "@/type/Event";
 
 import style from "./styles.module.css";
+import { useHomeTemplate } from "./useHomeTemplate";
 
 /**
  * HomeTemplate
  * @returns {JSX.Element}
  */
 export const HomeTemplate = () => {
+  // 認証情報を取得
   const { isAuth, user } = useAuth();
-  /* state定義 */
-  const [articleDisplayLength, setArticleDisplayLength] = useState<number>(10);
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [articleListAll, setArticleListAll] = useState<Array<ArticleCardType>>(
-    [],
-  );
-
-  /* action定義 */
-
-  /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
-  /**
-   * もっと見るボタン押下時の処理
-   */
-  const handleShowMoreArticles = () => {
-    setArticleDisplayLength((prev) => prev + 10);
-  };
-
-  const fetchArticleCardList = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleListApi();
-    console.log("res");
-    console.log(res);
-    setArticleListAll(
-      res?.data && typeof res.data === "object" ? res.data : [],
-    );
-  }, []);
+  // HomeTemplateのカスタムフックを使用
+  const {
+    articleDisplayLength,
+    inputArticleSearch,
+    articleListAll,
+    handleInputSearch,
+    handleShowMoreArticles,
+    fetchArticleCardList,
+  } = useHomeTemplate();
+  // 初回レンダリング時に記事一覧を取得
   useEffect(() => {
     void fetchArticleCardList();
   }, [fetchArticleCardList]);
 
   return (
     <>
+      {/* ヘッダー */}
       <NotLoginHeader
         user={user}
         isAuth={isAuth}
@@ -101,6 +80,7 @@ export const HomeTemplate = () => {
           </section>
         )}
       </main>
+      {/* フッター */}
       <Footer />
     </>
   );
