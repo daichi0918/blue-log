@@ -29,6 +29,18 @@ describe("useSignInTemplate, Hooksテスト", () => {
     const { result } = renderHook(() => useSignInTemplate());
     act(() => result.current.handleInputEmail(eventObject));
 
-    expect(result.current.email).toBe(""); // 更新されないことを確認
+    expect(result.current.email).toBe("");
+  });
+  test("【異常系】undefinedを入力した場合、emailが更新されないこと", () => {
+    const eventObject = {
+      target: {
+        value: undefined,
+      },
+    } as unknown as React.ChangeEvent<HTMLInputElement>;
+
+    const { result } = renderHook(() => useSignInTemplate());
+    act(() => result.current.handleInputEmail(eventObject));
+
+    expect(result.current.email).toBe("");
   });
 });
