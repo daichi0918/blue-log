@@ -19,4 +19,16 @@ describe("useSignInTemplate, Hooksテスト", () => {
       expect(result.current.email).toBe(expectValue);
     });
   });
+  test("【異常系】nullを入力した場合、emailが更新されないこと", () => {
+    const eventObject = {
+      target: {
+        value: null,
+      },
+    } as unknown as React.ChangeEvent<HTMLInputElement>;
+
+    const { result } = renderHook(() => useSignInTemplate());
+    act(() => result.current.handleInputEmail(eventObject));
+
+    expect(result.current.email).toBe(""); // 更新されないことを確認
+  });
 });
