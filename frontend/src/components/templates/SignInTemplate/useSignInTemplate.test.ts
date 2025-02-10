@@ -1,5 +1,7 @@
 import { act } from "react";
+import { useRouter } from "next/navigation";
 import { renderHook } from "@testing-library/react";
+import { mockUseRouter } from "jest.setup";
 
 import { useSignInTemplate } from "./useSignInTemplate";
 
@@ -80,6 +82,29 @@ describe("useSignInTemplate, Hooksテスト", () => {
       act(() => result.current.handleInputPassword(eventObject));
 
       expect(result.current.password).toBe("");
+    });
+  });
+
+  jest.mock("next/navigation");
+
+  describe("【関数テスト】navigateToSignUp", () => {
+    test("【正常系】/signup に遷移できること", () => {
+      const mockRouter = mockUseRouter();
+      const pushMock = jest.fn();
+
+      (useRouter as jest.Mock).mockReturnValue({
+        ...mockRouter,
+        push: pushMock,
+      });
+
+      const { result } = renderHook(() => useSignInTemplate());
+
+      act(() => {
+        result.current.navigateToSignUp();
+      });
+
+      expect(pushMock).toHaveBeenCalledTimes(1);
+      expect(pushMock).toHaveBeenCalledWith("/signup");
     });
   });
 });
