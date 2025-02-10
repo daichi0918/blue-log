@@ -28,14 +28,16 @@ export const useSignInTemplate = () => {
    * @param {e}
    */
   const handleInputEmail: EventType["onChangeInput"] = useCallback((e) => {
-    setEmail(e.target.value);
+    const value = e.target.value ?? "";
+    setEmail(value);
   }, []);
   /**
    * emailのインプット
    * @param {e}
    */
   const handleInputPassword: EventType["onChangeInput"] = useCallback((e) => {
-    setPassword(e.target.value);
+    const value = e.target.value ?? "";
+    setPassword(value);
   }, []);
   /**
    * パスワードの表示切り替え
