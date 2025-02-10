@@ -18,29 +18,68 @@ describe("useSignInTemplate, Hooksテスト", () => {
       act(() => result.current.handleInputEmail(eventObject));
       expect(result.current.email).toBe(expectValue);
     });
+    test("【異常系】nullを入力した場合、emailが更新されないこと", () => {
+      const eventObject = {
+        target: {
+          value: null,
+        },
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
+
+      const { result } = renderHook(() => useSignInTemplate());
+      act(() => result.current.handleInputEmail(eventObject));
+
+      expect(result.current.email).toBe("");
+    });
+    test("【異常系】undefinedを入力した場合、emailが更新されないこと", () => {
+      const eventObject = {
+        target: {
+          value: undefined,
+        },
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
+
+      const { result } = renderHook(() => useSignInTemplate());
+      act(() => result.current.handleInputEmail(eventObject));
+
+      expect(result.current.email).toBe("");
+    });
   });
-  test("【異常系】nullを入力した場合、emailが更新されないこと", () => {
-    const eventObject = {
-      target: {
-        value: null,
-      },
-    } as unknown as React.ChangeEvent<HTMLInputElement>;
+  describe("【関数テスト】handleInputPassword", () => {
+    test("【正常系】passwordを更新できること", () => {
+      const expectValue = "test";
 
-    const { result } = renderHook(() => useSignInTemplate());
-    act(() => result.current.handleInputEmail(eventObject));
+      const eventObject = {
+        target: {
+          value: expectValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useSignInTemplate());
+      expect(result.current.password).toBe("");
+      act(() => result.current.handleInputPassword(eventObject));
+      expect(result.current.password).toBe(expectValue);
+    });
+    test("【異常系】nullを入力した場合、passwordが更新されないこと", () => {
+      const eventObject = {
+        target: {
+          value: null,
+        },
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-    expect(result.current.email).toBe("");
-  });
-  test("【異常系】undefinedを入力した場合、emailが更新されないこと", () => {
-    const eventObject = {
-      target: {
-        value: undefined,
-      },
-    } as unknown as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useSignInTemplate());
+      act(() => result.current.handleInputPassword(eventObject));
 
-    const { result } = renderHook(() => useSignInTemplate());
-    act(() => result.current.handleInputEmail(eventObject));
+      expect(result.current.password).toBe("");
+    });
+    test("【異常系】undefinedを入力した場合、passwordが更新されないこと", () => {
+      const eventObject = {
+        target: {
+          value: undefined,
+        },
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-    expect(result.current.email).toBe("");
+      const { result } = renderHook(() => useSignInTemplate());
+      act(() => result.current.handleInputPassword(eventObject));
+
+      expect(result.current.password).toBe("");
+    });
   });
 });
