@@ -21,11 +21,18 @@ export const fetchArticleListApi = async () => {
       message: "",
     };
     if (isAxiosError(err)) {
-      const axiosError = err as IErrorResponse;
-      console.log("axiosError");
-      console.log(axiosError);
-      res.code = axiosError.response.status;
-      res.message = axiosError.response.data.message;
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
     }
     return res;
   }
