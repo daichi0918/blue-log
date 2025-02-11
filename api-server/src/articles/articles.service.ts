@@ -59,6 +59,7 @@ export class ArticlesService {
       select: {
         id: true,
         title: true,
+        text: true,
         tags: true,
         createdAt: true,
         updatedAt: true,

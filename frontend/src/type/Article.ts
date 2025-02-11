@@ -10,6 +10,7 @@
 export type ArticleType = {
   id: number;
   title: string;
+  text: string;
   tags: Array<string>;
   createdAt: string;
   updatedAt: string;
@@ -19,6 +20,7 @@ export type ArticleType = {
     image: string | null;
   };
   likeCount: number;
-  liked: boolean;
-  bookmark: boolean;
+  isLiked: boolean;
+  isBookmarked: boolean;
+  isAuthro: boolean;
 };
