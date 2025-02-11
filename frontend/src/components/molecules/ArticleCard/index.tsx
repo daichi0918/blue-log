@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { formatDate } from "@/utils/getFormatDate";
-import { getRandomColor } from "@/utils/getRandomColor";
+import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -28,6 +28,7 @@ type ArticleCardProps = {
  */
 export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
   const router = useRouter();
+  const randomColor = useRandomColor();
   const { article } = props;
 
   /**
@@ -64,7 +65,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
               <Image src={article.user.image} alt={article.user.name} />
             ) : (
               <span
-                style={{ background: getRandomColor() }}
+                style={{ background: randomColor ?? "#ddd" }}
                 className={style.noUserImg}
               >
                 {article.user.name.charAt(0)}

@@ -12,7 +12,7 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
-import { getRandomColor } from "@/utils/getRandomColor";
+import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -30,6 +30,7 @@ type NotLoginHeaderProps = {
 export const NotLoginHeader = memo((props: NotLoginHeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
+  const randomColor = useRandomColor();
 
   /**
    * 新規登録画面への遷移
@@ -70,7 +71,7 @@ export const NotLoginHeader = memo((props: NotLoginHeaderProps) => {
                 <Image src={user?.image} alt={user?.name} />
               ) : (
                 <span
-                  style={{ background: getRandomColor() }}
+                  style={{ background: randomColor ?? "#ddd" }}
                   className={style.noUserImg}
                 >
                   {user?.name.charAt(0)}
