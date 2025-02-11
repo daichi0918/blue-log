@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { useParams } from "next/navigation";
 import { Footer } from "@/components/layouts/Footer";
-import { NotLoginHeader } from "@/components/layouts/NotLoginHeader";
+import { Header } from "@/components/layouts/Header";
 import { useAuth } from "@/hooks/useAuth";
 import { type EventType } from "@/type/Event";
 
@@ -35,7 +35,7 @@ export const ArticleTemplate = () => {
   }, []);
   return (
     <>
-      <NotLoginHeader
+      <Header
         user={user}
         isAuth={isAuth}
         searchInputValue={inputArticleSearch}

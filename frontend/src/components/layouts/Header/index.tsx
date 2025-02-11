@@ -27,7 +27,7 @@ type NotLoginHeaderProps = {
  * HomeTemplate
  * @returns {JSX.Element}
  */
-export const NotLoginHeader = memo((props: NotLoginHeaderProps) => {
+export const Header = memo((props: NotLoginHeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
   const randomColor = useRandomColor();

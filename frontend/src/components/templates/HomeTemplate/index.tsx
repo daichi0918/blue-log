@@ -8,7 +8,7 @@
 import { useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
-import { NotLoginHeader } from "@/components/layouts/NotLoginHeader";
+import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -39,7 +39,7 @@ export const HomeTemplate = () => {
   return (
     <>
       {/* ヘッダー */}
-      <NotLoginHeader
+      <Header
         user={user}
         isAuth={isAuth}
         searchInputValue={inputArticleSearch}
