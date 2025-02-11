@@ -1,7 +1,7 @@
-import { SignUpTemplate } from "@/components/templates/SignUpTemplate";
+import { ArticleTemplate } from "@/components/templates/ArticleTemplate";
 
 const Article = () => {
-  return <div>aaa</div>;
+  return <ArticleTemplate />;
 };
 
 export default Article;
