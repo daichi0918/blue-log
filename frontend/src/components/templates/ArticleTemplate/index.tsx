@@ -2,8 +2,8 @@
 
 import { useCallback, useState } from "react";
 import { useParams } from "next/navigation";
-import { Footer } from "@/components/molecules/Footer";
-import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
+import { Footer } from "@/components/layouts/Footer";
+import { NotLoginHeader } from "@/components/layouts/NotLoginHeader";
 import { useAuth } from "@/hooks/useAuth";
 import { type EventType } from "@/type/Event";
 

@@ -7,9 +7,9 @@
  */
 import { useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { Footer } from "@/components/layouts/Footer";
+import { NotLoginHeader } from "@/components/layouts/NotLoginHeader";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
-import { Footer } from "@/components/molecules/Footer";
-import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
 import { useAuth } from "@/hooks/useAuth";
 
 import style from "./styles.module.css";
