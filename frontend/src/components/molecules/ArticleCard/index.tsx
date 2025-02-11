@@ -1,6 +1,10 @@
+"use client";
+
 import type { FC } from "react";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { formatDate } from "@/utils/getFormatDate";
 import { getRandomColor } from "@/utils/getRandomColor";
@@ -23,10 +27,25 @@ type ArticleCardProps = {
  * @returns {JSX.Element}
  */
 export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
+  const router = useRouter();
   const { article } = props;
 
+  /**
+   * 記事ページに遷移する処理
+   * @param {*} id
+   * @type {function(*): void}
+   */
+  const handleMoveDetailPage = useCallback(
+    (id: number) => router.push(`${NAVIGATION_PATH.ARTICLE}${id}`),
+    [router],
+  );
+
   return (
-    <article key={article.id} className={style.articleItem}>
+    <article
+      key={article.id}
+      className={style.articleItem}
+      onClick={() => handleMoveDetailPage(article.id)}
+    >
       <section className={style.articleTitle}>
         <h1>{article.title}</h1>
       </section>
