@@ -61,7 +61,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
         <div className={style.userInfo}>
           <div className={style.userImg}>
             {article.user.image ? (
-              <img src={article.user.image} alt={article.user.name} />
+              <Image src={article.user.image} alt={article.user.name} />
             ) : (
               <span
                 style={{ background: getRandomColor() }}
