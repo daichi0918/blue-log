@@ -37,8 +37,6 @@ export const useHomeTemplate = () => {
 
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListApi();
-    console.log("res");
-    console.log(res);
     setArticleListAll(
       res?.data && typeof res.data === "object" ? res.data : [],
     );

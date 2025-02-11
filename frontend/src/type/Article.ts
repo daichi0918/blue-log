@@ -1,13 +1,13 @@
 /**
- * ArticleCard
+ * Article
  *
  * @package type
  */
 
 /**
- * ArticleCardType
+ * ArticleType
  */
-export type ArticleCardType = {
+export type ArticleType = {
   id: number;
   title: string;
   tags: Array<string>;
