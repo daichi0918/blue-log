@@ -84,16 +84,13 @@ export class ArticlesService {
           : false,
       },
     });
-    console.log('found.user.id');
-    console.log(found.user.id);
-    console.log('userId');
-    console.log(userId);
 
     if (!found) throw new NotFoundException();
 
     return {
       id: found.id,
       title: found.title,
+      text: found.text,
       tags: found.tags,
       createdAt: found.createdAt,
       updatedAt: found.updatedAt,
