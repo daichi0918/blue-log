@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class OptionalAuthGuard extends AuthGuard('jwt') {
-  canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
 
@@ -11,6 +11,14 @@ export class OptionalAuthGuard extends AuthGuard('jwt') {
     if (!authHeader) {
       return true;
     }
-    return super.canActivate(context);
+
+    try {
+      // `AuthGuard('jwt')` のロジックを手動で呼び出し、認証に失敗した場合はエラーをスローしない
+      await super.canActivate(context); // JWT が有効なら通常通り認証処理
+      return true;
+    } catch (error) {
+      // JWT トークンが無効な場合でもエラーを返さず、リクエストを通す
+      return true;
+    }
   }
 }

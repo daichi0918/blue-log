@@ -22,5 +22,5 @@ export type ArticleType = {
   likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
-  isAuthro: boolean;
+  isAuthor: boolean;
 };

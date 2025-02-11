@@ -9,6 +9,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
 
+import style from "./styles.module.css";
+
 /**
  * ArticleTemplate
  *
@@ -24,7 +26,7 @@ export const ArticleTemplate = () => {
   // 認証情報を取得
   const { isAuth, user } = useAuth();
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [articleValue, setArticleValue] = useState<ArticleType>();
+  const [article, setArticle] = useState<ArticleType>();
   /* action定義 */
 
   /**
@@ -41,7 +43,7 @@ export const ArticleTemplate = () => {
     const res = await fetchArticleAPI(String(param.id));
     console.log("res");
     console.log(res);
-    setArticleValue(
+    setArticle(
       res?.data && typeof res.data === "object" ? res.data : undefined,
     );
   }, [param]);
@@ -57,7 +59,19 @@ export const ArticleTemplate = () => {
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
-
+      <div className={style.container}>
+        <div className={style.actionContainer}>aaa</div>
+        <div className={style.contentContainer}>
+          <div className={style.titleContainer}>
+            <h1>{article?.title}</h1>
+            {article?.isAuthor && (
+              <div className={style.threePoint}>3点リーダー</div>
+            )}
+            <div></div>
+          </div>
+        </div>
+        <div className={style.sidebarContainer}>ccc</div>
+      </div>
       <Footer />
     </>
   );
