@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useContext, useEffect, useState } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
@@ -69,6 +70,28 @@ export const ArticleTemplate = () => {
             {article?.isAuthor && (
               <div className={style.meatballMenu}>
                 <span className={style.actionDots}></span>
+                <div className={style.actionMenu}>
+                  <ul className={style.menuList}>
+                    <li className={style.menuItem}>
+                      <Image
+                        src="/edit.svg"
+                        alt="edit"
+                        width={16}
+                        height={16}
+                      />
+                      <p>編集</p>
+                    </li>
+                    <li className={style.menuItem}>
+                      <Image
+                        src="/delete.svg"
+                        alt="delete"
+                        width={16}
+                        height={16}
+                      />
+                      <p>削除</p>
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
           </div>
