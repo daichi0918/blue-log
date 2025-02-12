@@ -65,7 +65,9 @@ export const ArticleTemplate = () => {
           <div className={style.titleContainer}>
             <h1>{article?.title}</h1>
             {article?.isAuthor && (
-              <div className={style.threePoint}>3点リーダー</div>
+              <div className={style.meatballMenu}>
+                <span className={style.actionDots}></span>
+              </div>
             )}
             <div></div>
           </div>
