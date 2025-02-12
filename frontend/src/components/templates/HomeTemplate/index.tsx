@@ -11,7 +11,6 @@ import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { AuthContext } from "@/contexts/AuthContext";
-import { useAuth } from "@/hooks/useAuth";
 
 import style from "./styles.module.css";
 import { useHomeTemplate } from "./useHomeTemplate";

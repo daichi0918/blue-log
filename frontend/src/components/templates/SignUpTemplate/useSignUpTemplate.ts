@@ -3,11 +3,11 @@
  *
  * @package templates
  */
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUpApi } from "@/apis/authApi";
 import { NAVIGATION_PATH } from "@/constants/navigation";
-import { useAuth } from "@/hooks/useAuth";
+import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
 import crypto from "crypto-js";
 
@@ -16,7 +16,7 @@ import crypto from "crypto-js";
  */
 export const useSignUpTemplate = () => {
   const router = useRouter();
-  const { signIn } = useAuth();
+  const { signIn } = useContext(AuthContext);
   /* state定義 */
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

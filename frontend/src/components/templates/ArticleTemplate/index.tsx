@@ -6,7 +6,6 @@ import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { AuthContext } from "@/contexts/AuthContext";
-import { useAuth } from "@/hooks/useAuth";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
 
