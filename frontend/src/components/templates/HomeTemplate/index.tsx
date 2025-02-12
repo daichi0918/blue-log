@@ -5,11 +5,12 @@
  *
  * @package templates
  */
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
+import { AuthContext } from "@/contexts/AuthContext";
 import { useAuth } from "@/hooks/useAuth";
 
 import style from "./styles.module.css";
@@ -21,7 +22,7 @@ import { useHomeTemplate } from "./useHomeTemplate";
  */
 export const HomeTemplate = () => {
   // 認証情報を取得
-  const { isAuth, user } = useAuth();
+  const { isAuth, user } = useContext(AuthContext);
   // HomeTemplateのカスタムフックを使用
   const {
     articleDisplayLength,

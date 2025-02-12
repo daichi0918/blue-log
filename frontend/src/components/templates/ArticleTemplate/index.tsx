@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { AuthContext } from "@/contexts/AuthContext";
 import { useAuth } from "@/hooks/useAuth";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
@@ -24,7 +25,7 @@ import style from "./styles.module.css";
 export const ArticleTemplate = () => {
   const param = useParams();
   // 認証情報を取得
-  const { isAuth, user } = useAuth();
+  const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
   /* action定義 */
