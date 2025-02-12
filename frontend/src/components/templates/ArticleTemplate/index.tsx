@@ -63,13 +63,14 @@ export const ArticleTemplate = () => {
         <div className={style.actionContainer}>aaa</div>
         <div className={style.contentContainer}>
           <div className={style.titleContainer}>
-            <h1>{article?.title}</h1>
+            <div className={style.titleWrapper}>
+              <h1 className={style.title}>{article?.title}</h1>
+            </div>
             {article?.isAuthor && (
               <div className={style.meatballMenu}>
                 <span className={style.actionDots}></span>
               </div>
             )}
-            <div></div>
           </div>
         </div>
         <div className={style.sidebarContainer}>ccc</div>
