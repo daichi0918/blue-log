@@ -19,6 +19,6 @@ export type ArticleCardType = {
     image: string | null;
   };
   likeCount: number;
-  liked: boolean;
-  bookmark: boolean;
+  isLiked: boolean;
+  isBookmarked: boolean;
 };
