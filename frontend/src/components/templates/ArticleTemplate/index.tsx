@@ -9,6 +9,8 @@ import { Header } from "@/components/layouts/Header";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
+import { formatDate } from "@/utils/getFormatDate";
+import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -24,6 +26,7 @@ import style from "./styles.module.css";
  */
 export const ArticleTemplate = () => {
   const param = useParams();
+  const randomColor = useRandomColor();
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
@@ -104,6 +107,26 @@ export const ArticleTemplate = () => {
                 </div>
               </div>
             )}
+          </div>
+          <div className={style.userInfo}>
+            <div className={style.userImg}>
+              {article?.user.image ? (
+                <Image src={article.user.image} alt={article.user.name} />
+              ) : (
+                <span
+                  style={{ background: randomColor ?? "#ddd" }}
+                  className={style.noUserImg}
+                >
+                  {article?.user.name.charAt(0)}
+                </span>
+              )}
+            </div>
+            <div className={style.nameDateWrapper}>
+              <p className={style.userName}>{article?.user.name}</p>
+              <p className={style.date}>
+                {formatDate(String(article?.createdAt))}
+              </p>
+            </div>
           </div>
         </div>
         <div className={style.sidebarContainer}>ccc</div>
