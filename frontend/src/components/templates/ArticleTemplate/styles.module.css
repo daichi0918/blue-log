@@ -45,6 +45,7 @@
 .meatballMenu {
   position: relative;
   width: 5%;
+  padding-left: 20px;
 }
 
 .meatballMenu:hover {
@@ -112,6 +113,28 @@
 .menuItem:hover {
   background: var(--blue_01);
 }
+
+.articleTagsWrapper {
+  margin-top: 10px;
+}
+
+.articleTagsAll {
+  display: flex;
+}
+
+.articleTag {
+  background: var(--blue_01);
+  color: var(--gray_06);
+  border: 2px;
+  padding: 3px 8px;
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.articleInfoWrapper {
+  margin-top: 10px;
+}
+
 /* プロフィール・目次エリア */
 .sidebarContainer {
   grid-area: sidebar;

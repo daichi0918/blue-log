@@ -73,8 +73,8 @@ export const ArticleTemplate = () => {
         handleInputSearch={handleInputSearch}
       />
       <div className={style.container}>
-        <div className={style.actionContainer}>aaa</div>
-        <div className={style.contentContainer}>
+        <section className={style.actionContainer}>aaa</section>
+        <section className={style.contentContainer}>
           {article ? (
             <>
               <div className={style.titleContainer}>
@@ -82,11 +82,8 @@ export const ArticleTemplate = () => {
                   <h1 className={style.title}>{article?.title}</h1>
                 </div>
                 {article?.isAuthor && (
-                  <div className={style.meatballMenu}>
-                    <span
-                      className={style.actionDots}
-                      onClick={toggleMenu}
-                    ></span>
+                  <div className={style.meatballMenu} onClick={toggleMenu}>
+                    <span className={style.actionDots}></span>
                     <div className={style.actionMenu}>
                       <ul
                         className={`${style.menuList} ${isOpen ? style.show : ""}`}
@@ -114,17 +111,29 @@ export const ArticleTemplate = () => {
                   </div>
                 )}
               </div>
-              <ArticleInfo
-                userName={article.user.name}
-                image={article.user.image}
-                createdAt={article.createdAt}
-              />
+              <div className={style.articleTagsWrapper}>
+                <div className={style.articleTagsAll}>
+                  {article.tags.length > 0 &&
+                    article.tags.map((tag, index) => (
+                      <div key={`tag_${index}`} className={style.articleTag}>
+                        #{tag}
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className={style.articleInfoWrapper}>
+                <ArticleInfo
+                  userName={article.user.name}
+                  image={article.user.image}
+                  createdAt={article.createdAt}
+                />
+              </div>
             </>
           ) : (
             <div>もう一度読み込んでください</div>
           )}
-        </div>
-        <div className={style.sidebarContainer}>ccc</div>
+        </section>
+        <section className={style.sidebarContainer}>ccc</section>
       </div>
       <Footer />
     </>

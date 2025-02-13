@@ -60,24 +60,6 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
           ))}
       </section>
       <section className={style.articleInfoWrapper}>
-        {/* <div className={style.userInfo}>
-          <div className={style.userImg}>
-            {article.user.image ? (
-              <Image src={article.user.image} alt={article.user.name} />
-            ) : (
-              <span
-                style={{ background: randomColor ?? "#ddd" }}
-                className={style.noUserImg}
-              >
-                {article.user.name.charAt(0)}
-              </span>
-            )}
-          </div>
-          <div className={style.nameDateWrapper}>
-            <p className={style.userName}>{article.user.name}</p>
-            <p className={style.date}>{formatDate(article.createdAt)}</p>
-          </div>
-        </div> */}
         <ArticleInfo
           userName={article.user.name}
           image={article.user.image}
