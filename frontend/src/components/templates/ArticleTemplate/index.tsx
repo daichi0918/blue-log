@@ -11,8 +11,6 @@ import { Tags } from "@/components/molecules/Tags";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
-import { formatDate } from "@/utils/getFormatDate";
-import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -28,7 +26,6 @@ import style from "./styles.module.css";
  */
 export const ArticleTemplate = () => {
   const param = useParams();
-  const randomColor = useRandomColor();
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
