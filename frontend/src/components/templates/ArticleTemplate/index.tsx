@@ -11,6 +11,7 @@ import { Tags } from "@/components/molecules/Tags";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
+import ReactMarkdown from "react-markdown";
 
 import style from "./styles.module.css";
 
@@ -123,6 +124,9 @@ export const ArticleTemplate = () => {
           ) : (
             <div>もう一度読み込んでください</div>
           )}
+          <ReactMarkdown className={style.markdown}>
+            {article?.text}
+          </ReactMarkdown>
         </section>
         <section className={style.sidebarContainer}>ccc</section>
       </div>
