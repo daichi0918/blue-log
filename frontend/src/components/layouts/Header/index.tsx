@@ -43,7 +43,7 @@ export const Header = memo((props: NotLoginHeaderProps) => {
    * 新規登録画面への遷移
    */
   const navigateToSignIn = useCallback(() => {
-    void router.push("/signup");
+    void router.push("/signin");
   }, [router]);
   return (
     <header className={style.header}>
