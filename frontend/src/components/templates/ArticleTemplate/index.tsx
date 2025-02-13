@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { ArticleInfo } from "@/components/molecules/ArticleInfo";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
@@ -74,60 +75,54 @@ export const ArticleTemplate = () => {
       <div className={style.container}>
         <div className={style.actionContainer}>aaa</div>
         <div className={style.contentContainer}>
-          <div className={style.titleContainer}>
-            <div className={style.titleWrapper}>
-              <h1 className={style.title}>{article?.title}</h1>
-            </div>
-            {article?.isAuthor && (
-              <div className={style.meatballMenu}>
-                <span className={style.actionDots} onClick={toggleMenu}></span>
-                <div className={style.actionMenu}>
-                  <ul
-                    className={`${style.menuList} ${isOpen ? style.show : ""}`}
-                  >
-                    <li className={style.menuItem}>
-                      <Image
-                        src="/edit.svg"
-                        alt="edit"
-                        width={16}
-                        height={16}
-                      />
-                      <p>編集</p>
-                    </li>
-                    <li className={style.menuItem}>
-                      <Image
-                        src="/delete.svg"
-                        alt="delete"
-                        width={16}
-                        height={16}
-                      />
-                      <p>削除</p>
-                    </li>
-                  </ul>
+          {article ? (
+            <>
+              <div className={style.titleContainer}>
+                <div className={style.titleWrapper}>
+                  <h1 className={style.title}>{article?.title}</h1>
                 </div>
+                {article?.isAuthor && (
+                  <div className={style.meatballMenu}>
+                    <span
+                      className={style.actionDots}
+                      onClick={toggleMenu}
+                    ></span>
+                    <div className={style.actionMenu}>
+                      <ul
+                        className={`${style.menuList} ${isOpen ? style.show : ""}`}
+                      >
+                        <li className={style.menuItem}>
+                          <Image
+                            src="/edit.svg"
+                            alt="edit"
+                            width={16}
+                            height={16}
+                          />
+                          <p>編集</p>
+                        </li>
+                        <li className={style.menuItem}>
+                          <Image
+                            src="/delete.svg"
+                            alt="delete"
+                            width={16}
+                            height={16}
+                          />
+                          <p>削除</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div className={style.userInfo}>
-            <div className={style.userImg}>
-              {article?.user.image ? (
-                <Image src={article.user.image} alt={article.user.name} />
-              ) : (
-                <span
-                  style={{ background: randomColor ?? "#ddd" }}
-                  className={style.noUserImg}
-                >
-                  {article?.user.name.charAt(0)}
-                </span>
-              )}
-            </div>
-            <div className={style.nameDateWrapper}>
-              <p className={style.userName}>{article?.user.name}</p>
-              <p className={style.date}>
-                {formatDate(String(article?.createdAt))}
-              </p>
-            </div>
-          </div>
+              <ArticleInfo
+                userName={article.user.name}
+                image={article.user.image}
+                createdAt={article.createdAt}
+              />
+            </>
+          ) : (
+            <div>もう一度読み込んでください</div>
+          )}
         </div>
         <div className={style.sidebarContainer}>ccc</div>
       </div>

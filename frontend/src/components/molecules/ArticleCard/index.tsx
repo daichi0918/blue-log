@@ -9,6 +9,7 @@ import { type ArticleCardType } from "@/type/ArticleCard";
 import { formatDate } from "@/utils/getFormatDate";
 import { useRandomColor } from "@/utils/getRandomColor";
 
+import { ArticleInfo } from "../ArticleInfo";
 import style from "./styles.module.css";
 
 /**
@@ -58,8 +59,8 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
             </div>
           ))}
       </section>
-      <section className={style.articleInfo}>
-        <div className={style.userInfo}>
+      <section className={style.articleInfoWrapper}>
+        {/* <div className={style.userInfo}>
           <div className={style.userImg}>
             {article.user.image ? (
               <Image src={article.user.image} alt={article.user.name} />
@@ -76,7 +77,12 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
             <p className={style.userName}>{article.user.name}</p>
             <p className={style.date}>{formatDate(article.createdAt)}</p>
           </div>
-        </div>
+        </div> */}
+        <ArticleInfo
+          userName={article.user.name}
+          image={article.user.image}
+          createdAt={article.createdAt}
+        />
         <div className={style.likeBookmarkWrapper}>
           <div className={style.like}>
             {article.liked ? (

@@ -44,54 +44,10 @@
   margin-right: 5px;
 }
 
-.articleInfo {
+.articleInfoWrapper {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-}
-
-.articleInfo .userInfo {
-  display: flex;
-  align-items: center;
-}
-
-.userInfo .userImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-top: 10px;
-}
-
-.noUserImg {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.6rem;
-}
-
-.nameDateWrapper {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-  margin-left: 10px;
-}
-
-.nameDateWrapper > p {
-  margin: 0;
-  padding: 0;
-}
-
-.userName {
-  font-size: 1.2rem;
-  color: var(--gray_06);
-}
-
-.date {
-  font-size: 1.2rem;
-  color: var(--gray_05);
 }
 
 .likeBookmarkWrapper {
