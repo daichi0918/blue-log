@@ -28,6 +28,8 @@ export const ArticleTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
+  const [isOpen, setIsOpen] = useState(false);
+
   /* action定義 */
 
   /**
@@ -48,6 +50,12 @@ export const ArticleTemplate = () => {
       res?.data && typeof res.data === "object" ? res.data : undefined,
     );
   }, [param]);
+  /**
+   * 編集・削除トグル制御
+   */
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     void fetchArticleById();
@@ -69,9 +77,11 @@ export const ArticleTemplate = () => {
             </div>
             {article?.isAuthor && (
               <div className={style.meatballMenu}>
-                <span className={style.actionDots}></span>
+                <span className={style.actionDots} onClick={toggleMenu}></span>
                 <div className={style.actionMenu}>
-                  <ul className={style.menuList}>
+                  <ul
+                    className={`${style.menuList} ${isOpen ? style.show : ""}`}
+                  >
                     <li className={style.menuItem}>
                       <Image
                         src="/edit.svg"
