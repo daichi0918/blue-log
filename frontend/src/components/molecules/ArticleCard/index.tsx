@@ -6,10 +6,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type ArticleCardType } from "@/type/ArticleCard";
-import { formatDate } from "@/utils/getFormatDate";
-import { useRandomColor } from "@/utils/getRandomColor";
 
 import { ArticleInfo } from "../ArticleInfo";
+import { Tags } from "../Tags";
 import style from "./styles.module.css";
 
 /**
@@ -29,7 +28,6 @@ type ArticleCardProps = {
  */
 export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
   const router = useRouter();
-  const randomColor = useRandomColor();
   const { article } = props;
 
   /**
@@ -52,12 +50,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
         <h1>{article.title}</h1>
       </section>
       <section className={style.articleTagsWrapper}>
-        {article.tags.length > 0 &&
-          article.tags.map((tag, index) => (
-            <div key={`tag_${index}`} className={style.articleTag}>
-              #{tag}
-            </div>
-          ))}
+        <Tags contents={article.tags} />
       </section>
       <section className={style.articleInfoWrapper}>
         <ArticleInfo

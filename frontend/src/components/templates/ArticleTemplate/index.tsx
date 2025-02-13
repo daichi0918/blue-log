@@ -7,6 +7,7 @@ import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
+import { Tags } from "@/components/molecules/Tags";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
@@ -112,14 +113,7 @@ export const ArticleTemplate = () => {
                 )}
               </div>
               <div className={style.articleTagsWrapper}>
-                <div className={style.articleTagsAll}>
-                  {article.tags.length > 0 &&
-                    article.tags.map((tag, index) => (
-                      <div key={`tag_${index}`} className={style.articleTag}>
-                        #{tag}
-                      </div>
-                    ))}
-                </div>
+                <Tags contents={article.tags} />
               </div>
               <div className={style.articleInfoWrapper}>
                 <ArticleInfo

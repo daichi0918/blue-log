@@ -32,16 +32,7 @@
 }
 
 .articleTagsWrapper {
-  display: flex;
-}
-
-.articleTag {
-  background: var(--blue_01);
-  color: var(--gray_06);
-  border: 2px;
-  padding: 3px 8px;
-  font-size: 1.2rem;
-  margin-right: 5px;
+  margin-top: 10px;
 }
 
 .articleInfoWrapper {

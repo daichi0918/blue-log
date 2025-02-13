@@ -1,6 +1,5 @@
 "use client";
 
-import { ExecFileOptionsWithStringEncoding } from "child_process";
 import type { FC } from "react";
 import { memo } from "react";
 import Image from "next/image";
