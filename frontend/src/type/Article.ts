@@ -1,15 +1,16 @@
 /**
- * ArticleCard
+ * Article
  *
  * @package type
  */
 
 /**
- * ArticleCardType
+ * ArticleType
  */
-export type ArticleCardType = {
+export type ArticleType = {
   id: number;
   title: string;
+  text: string;
   tags: Array<string>;
   createdAt: string;
   updatedAt: string;
@@ -17,8 +18,12 @@ export type ArticleCardType = {
     id: number;
     name: string;
     image: string | null;
+    twitter: string | null;
+    github: string | null;
+    facebook: string | null;
   };
   likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
+  isAuthor: boolean;
 };

@@ -25,7 +25,7 @@ export class ArticlesService {
   async findAll(): Promise<Array<any>> {
     const articles = await this.prismaService.article.findMany({
       orderBy: {
-        createdAt: 'asc', // 昇順（古いものから新しいものへ）
+        createdAt: 'desc',
       },
       select: {
         id: true,
@@ -53,14 +53,52 @@ export class ArticlesService {
     }));
   }
 
-  async findById(id: number): Promise<Article> {
+  async findById(id: number, userId: number | null): Promise<any> {
     const found = await this.prismaService.article.findUnique({
-      where: {
-        id,
+      where: { id },
+      select: {
+        id: true,
+        title: true,
+        text: true,
+        tags: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            twitter: true,
+            facebook: true,
+            github: true,
+          }, // ユーザー情報
+        },
+        _count: {
+          select: { likes: true }, // いいねの数
+        },
+        likes: userId
+          ? {
+              where: { userId }, // ログインユーザーがいいねしているかどうか
+              select: { userId: true },
+            }
+          : false,
       },
     });
+
     if (!found) throw new NotFoundException();
-    return found;
+
+    return {
+      id: found.id,
+      title: found.title,
+      text: found.text,
+      tags: found.tags,
+      createdAt: found.createdAt,
+      updatedAt: found.updatedAt,
+      user: found.user,
+      likeCount: found._count.likes,
+      isLiked: userId ? found.likes.length > 0 : false,
+      isAuthor: userId ? found.user.id === userId : false,
+    };
   }
 
   async update(

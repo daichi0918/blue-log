@@ -27,10 +27,10 @@ export const NAVIGATION_LIST = {
  * @type {{TOP: string, CREATE: string, EDIT: string, DETAIL: string}}
  */
 export const NAVIGATION_PATH = {
+  TOP: `/`,
   SIGNIN: `/signin`,
   SIGNUP: `/signup`,
-  TOP: `/`,
-  // DETAIL: `/todo/detail/`,
+  ARTICLE: `/article/`,
   // CREATE: `/todo/create`,
   // EDIT: `/todo/edit/`,
 };

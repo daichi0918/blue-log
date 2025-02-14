@@ -36,7 +36,7 @@ export const SignUpTemplate = () => {
           <h1 className={style.title}>新規登録</h1>
           <form onSubmit={handleSignUp}>
             <div className={style.inputWrapper}>
-              <p className={style.inputLabel}>名前</p>
+              <p className={style.inputLabel}>ユーザー名</p>
               <InputForm
                 value={name}
                 onChange={handleInputName}

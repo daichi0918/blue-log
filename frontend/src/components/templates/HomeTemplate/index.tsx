@@ -5,12 +5,12 @@
  *
  * @package templates
  */
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { Footer } from "@/components/layouts/Footer";
+import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
-import { Footer } from "@/components/molecules/Footer";
-import { NotLoginHeader } from "@/components/molecules/NotLoginHeader";
-import { useAuth } from "@/hooks/useAuth";
+import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";
 import { useHomeTemplate } from "./useHomeTemplate";
@@ -21,7 +21,7 @@ import { useHomeTemplate } from "./useHomeTemplate";
  */
 export const HomeTemplate = () => {
   // 認証情報を取得
-  const { isAuth, user } = useAuth();
+  const { isAuth, user } = useContext(AuthContext);
   // HomeTemplateのカスタムフックを使用
   const {
     articleDisplayLength,
@@ -39,7 +39,7 @@ export const HomeTemplate = () => {
   return (
     <>
       {/* ヘッダー */}
-      <NotLoginHeader
+      <Header
         user={user}
         isAuth={isAuth}
         searchInputValue={inputArticleSearch}

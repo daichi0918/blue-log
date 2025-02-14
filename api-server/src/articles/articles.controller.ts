@@ -21,6 +21,7 @@ import { LikeService } from 'src/like/like.service';
 import { BookmarkService } from 'src/bookmark/bookmark.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { findAllOkSample } from './constants/findAllSample';
+import { OptionalAuthGuard } from 'src/auth/optional-auth.guard';
 
 @ApiTags('articles')
 @Controller('articles')
@@ -54,9 +55,13 @@ export class ArticlesController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard('jwt'))
-  async findById(@Param('id') id: string): Promise<Article> {
-    return await this.articlesService.findById(+id);
+  @UseGuards(OptionalAuthGuard)
+  async findById(
+    @Param('id') id: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ): Promise<Article> {
+    const userId = req.user?.userId ?? null;
+    return await this.articlesService.findById(+id, userId);
   }
 
   @Patch(':id')
