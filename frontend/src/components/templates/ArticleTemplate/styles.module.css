@@ -188,6 +188,16 @@
   margin-left: 10px;
 }
 
+.userProfile .profileText {
+  font-size: 1.2rem;
+}
+
+.userSnsInfo {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
 /* プロフィール・目次エリア */
 .sidebarContainer {
   grid-area: sidebar;

@@ -14,6 +14,9 @@ import { Tags } from "@/components/molecules/Tags";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
+import { IconContext } from "react-icons";
+import { FaFacebook, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import ReactMarkdown from "react-markdown";
 
 import style from "./styles.module.css";
@@ -152,8 +155,31 @@ export const ArticleTemplate = () => {
                     />
                   </div>
                 </div>
-                <div className={style.userProfile}></div>
-                <div className={style.userSnsInfo}></div>
+                <div className={style.userProfile}>
+                  <p className={style.profileText}>
+                    プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。
+                  </p>
+                </div>
+                <div className={style.userSnsInfo}>
+                  <IconContext.Provider
+                    value={{ size: "20px", style: { marginRight: "15px" } }}
+                  >
+                    <FaXTwitter />
+                  </IconContext.Provider>
+                  <IconContext.Provider
+                    value={{ size: "20px", style: { marginRight: "15px" } }}
+                  >
+                    <FaGithub />
+                  </IconContext.Provider>
+                  <IconContext.Provider
+                    value={{
+                      size: "20px",
+                      style: { marginRight: "15px", color: "#0966ff" },
+                    }}
+                  >
+                    <FaFacebook />
+                  </IconContext.Provider>
+                </div>
               </section>
             </>
           ) : (
