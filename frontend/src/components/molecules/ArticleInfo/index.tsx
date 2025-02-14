@@ -2,10 +2,8 @@
 
 import type { FC } from "react";
 import { memo } from "react";
-import Image from "next/image";
 import { UserImage } from "@/components/atoms/UserImage";
 import { formatDate } from "@/utils/getFormatDate";
-import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 

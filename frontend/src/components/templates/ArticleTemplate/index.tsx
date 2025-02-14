@@ -225,7 +225,57 @@ export const ArticleTemplate = () => {
                 </div>
               </section>
             </section>
-            <section className={style.sidebarContainer}>ccc</section>
+            <section className={style.sidebarContainer}>
+              <div className={style.userProfileWrapper}>
+                <div className={style.userInfo}>
+                  <UserImage
+                    image={article.user.image}
+                    userName={article.user.name}
+                  />
+                  <p className={style.userName}>{article.user.name}</p>
+                </div>
+                <div className={style.followWrapper}>
+                  <p>114フォロワー 34フォロー中</p>
+                </div>
+                <div className={style.userProfile}>
+                  <p className={style.profileText}>
+                    プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。
+                  </p>
+                </div>
+                <BaseButton
+                  color={"secondary"}
+                  size={"small"}
+                  text={"フォロー"}
+                  additionalStyle={{ width: "100%", margin: "15px 0" }}
+                />
+                <div className={style.userSnsInfo}>
+                  <IconContext.Provider
+                    value={{ size: "20px", style: { marginRight: "15px" } }}
+                  >
+                    <FaXTwitter
+                      onClick={() => navigateToX(article.user.twitter)}
+                    />
+                  </IconContext.Provider>
+                  <IconContext.Provider
+                    value={{ size: "20px", style: { marginRight: "15px" } }}
+                  >
+                    <FaGithub
+                      onClick={() => navigateToGithub(article.user.github)}
+                    />
+                  </IconContext.Provider>
+                  <IconContext.Provider
+                    value={{
+                      size: "20px",
+                      style: { marginRight: "15px", color: "#0966ff" },
+                    }}
+                  >
+                    <FaFacebook
+                      onClick={() => navigateToFacebook(article.user.facebook)}
+                    />
+                  </IconContext.Provider>
+                </div>
+              </div>
+            </section>
           </div>
         </>
       ) : (
