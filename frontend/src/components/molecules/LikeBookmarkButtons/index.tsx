@@ -3,6 +3,7 @@
 import type { FC } from "react";
 import { memo } from "react";
 import Image from "next/image";
+import { LikeIcon } from "@/components/atoms/LikeIcon";
 
 import style from "./styles.module.css";
 
@@ -24,23 +25,7 @@ export const LikeBookmarkButtons: FC<LikeBookarkButtonsProps> = memo(
     return (
       <div className={style.likeBookmarkWrapper}>
         <div className={style.like}>
-          {isliked ? (
-            <Image
-              src="/liked.svg"
-              alt={"Liked"}
-              className={style.liked}
-              width={20}
-              height={24}
-            />
-          ) : (
-            <Image
-              src="/notLiked.svg"
-              alt={"Not Liked"}
-              className={style.notLiked}
-              width={20}
-              height={24}
-            />
-          )}
+          <LikeIcon isliked={isliked} width={20} height={24} />
           <div className={style.likeCount}>{likeCount}</div>
         </div>
         <div className={style.bookmark}>

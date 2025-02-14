@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -95,28 +96,29 @@ export const ArticleTemplate = () => {
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
-      <div className={style.container}>
-        <section className={style.actionContainer}>
-          <div className={style.action}>
-            <div className={style.actionBackground}>
-              <Image src="/liked.svg" alt={"like"} width={"20"} height={"20"} />
-            </div>
-            <p className={style.likeCount}>{article?.likeCount}</p>
-          </div>
-          <div className={style.action}>
-            <div className={style.actionBackground}>
-              <Image
-                src="/notBookmarked.svg"
-                alt="bookmark"
-                width={"20"}
-                height={"20"}
-              />
-            </div>
-          </div>
-        </section>
-        <section className={style.contentContainer}>
-          {article ? (
-            <>
+
+      {article ? (
+        <>
+          <div className={style.container}>
+            <section className={style.actionContainer}>
+              <div className={style.actionWrapper}>
+                <div className={style.actionBackground}>
+                  <LikeIcon isliked={article.isLiked} width={20} height={20} />
+                </div>
+                <p className={style.likeCount}>{article?.likeCount}</p>
+              </div>
+              <div className={style.actionWrapper}>
+                <div className={style.actionBackground}>
+                  <Image
+                    src="/notBookmarked.svg"
+                    alt="bookmark"
+                    width={"20"}
+                    height={"20"}
+                  />
+                </div>
+              </div>
+            </section>
+            <section className={style.contentContainer}>
               <main className={style.contentSection}>
                 <div className={style.titleContainer}>
                   <div className={style.titleWrapper}>
@@ -222,13 +224,14 @@ export const ArticleTemplate = () => {
                   </IconContext.Provider>
                 </div>
               </section>
-            </>
-          ) : (
-            <div>もう一度読み込んでください</div>
-          )}
-        </section>
-        <section className={style.sidebarContainer}>ccc</section>
-      </div>
+            </section>
+            <section className={style.sidebarContainer}>ccc</section>
+          </div>
+        </>
+      ) : (
+        <div>もう一度読み込んでください</div>
+      )}
+
       <Footer />
     </>
   );

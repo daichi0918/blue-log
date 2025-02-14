@@ -16,6 +16,10 @@
   padding-top: 10px;
 }
 
+.actionContainer .actionWrapper {
+  margin-bottom: 10px;
+}
+
 .actionContainer .likeCount {
   text-align: center;
   font-weight: bold;
