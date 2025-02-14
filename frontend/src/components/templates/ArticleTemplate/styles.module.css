@@ -198,6 +198,10 @@
   align-items: center;
 }
 
+.userSnsInfo svg:hover {
+  cursor: pointer;
+}
+
 /* プロフィール・目次エリア */
 .sidebarContainer {
   grid-area: sidebar;

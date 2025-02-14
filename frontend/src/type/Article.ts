@@ -18,6 +18,9 @@ export type ArticleType = {
     id: number;
     name: string;
     image: string | null;
+    twitter: string | null;
+    github: string | null;
+    facebook: string | null;
   };
   likeCount: number;
   isLiked: boolean;

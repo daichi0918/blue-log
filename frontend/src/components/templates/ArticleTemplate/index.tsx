@@ -65,6 +65,24 @@ export const ArticleTemplate = () => {
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
+  /**
+   * Xへ遷移
+   */
+  const navigateToX = (url: string | null) => {
+    window.open(url ?? "https://twitter.com", "_blank");
+  };
+  /**
+   * GitHubへ遷移
+   */
+  const navigateToGithub = (url: string | null) => {
+    window.open(url ?? "https://github.com", "_blank");
+  };
+  /**
+   * Facebookへ遷移
+   */
+  const navigateToFacebook = (url: string | null) => {
+    window.open(url ?? "https://facebook.com", "_blank");
+  };
 
   useEffect(() => {
     void fetchArticleById();
@@ -164,12 +182,16 @@ export const ArticleTemplate = () => {
                   <IconContext.Provider
                     value={{ size: "20px", style: { marginRight: "15px" } }}
                   >
-                    <FaXTwitter />
+                    <FaXTwitter
+                      onClick={() => navigateToX(article.user.twitter)}
+                    />
                   </IconContext.Provider>
                   <IconContext.Provider
                     value={{ size: "20px", style: { marginRight: "15px" } }}
                   >
-                    <FaGithub />
+                    <FaGithub
+                      onClick={() => navigateToGithub(article.user.github)}
+                    />
                   </IconContext.Provider>
                   <IconContext.Provider
                     value={{
@@ -177,7 +199,9 @@ export const ArticleTemplate = () => {
                       style: { marginRight: "15px", color: "#0966ff" },
                     }}
                   >
-                    <FaFacebook />
+                    <FaFacebook
+                      onClick={() => navigateToFacebook(article.user.facebook)}
+                    />
                   </IconContext.Provider>
                 </div>
               </section>
