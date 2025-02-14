@@ -9,7 +9,7 @@ import style from "./styles.module.css";
  * @package atoms
  */
 
-type InputFormProps = {
+type BaseButtonProps = {
   additionalStyle?: CSSProperties;
 } & JSX.IntrinsicElements["input"];
 
@@ -17,7 +17,7 @@ type InputFormProps = {
  * InputForm
  * @returns {JSX.Element}
  */
-export const InputForm: FC<InputFormProps> = memo((props) => {
+export const InputForm: FC<BaseButtonProps> = memo((props) => {
   const {
     type = "text",
     placeholder,
