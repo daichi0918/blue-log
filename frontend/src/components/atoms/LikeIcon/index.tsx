@@ -24,13 +24,20 @@ export const LikeIcon = memo((props: LikeIconProps) => {
   return (
     <>
       {isliked ? (
-        <Image src="/liked.svg" alt={"Liked"} width={width} height={height} />
+        <Image
+          src="/liked.svg"
+          alt={"Liked"}
+          width={width}
+          height={height}
+          className={style.like}
+        />
       ) : (
         <Image
           src="/notLiked.svg"
           alt={"Not Liked"}
           width={width}
           height={height}
+          className={style.like}
         />
       )}
     </>

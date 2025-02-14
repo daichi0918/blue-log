@@ -2,7 +2,7 @@
 
 import type { FC } from "react";
 import { memo } from "react";
-import Image from "next/image";
+import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
 
 import style from "./styles.module.css";
@@ -15,13 +15,13 @@ import style from "./styles.module.css";
 
 type LikeBookarkButtonsProps = {
   isliked: boolean;
-  isBookmarked: boolean;
+  isbookmarked: boolean;
   likeCount: number;
 };
 
 export const LikeBookmarkButtons: FC<LikeBookarkButtonsProps> = memo(
   (props) => {
-    const { isliked, isBookmarked, likeCount } = props;
+    const { isliked, isbookmarked, likeCount } = props;
     return (
       <div className={style.likeBookmarkWrapper}>
         <div className={style.like}>
@@ -29,21 +29,7 @@ export const LikeBookmarkButtons: FC<LikeBookarkButtonsProps> = memo(
           <div className={style.likeCount}>{likeCount}</div>
         </div>
         <div className={style.bookmark}>
-          {isBookmarked ? (
-            <Image
-              src="/bookmarked.svg"
-              alt={"Bookmarked"}
-              width={14}
-              height={24}
-            />
-          ) : (
-            <Image
-              src="/notBookmarked.svg"
-              alt={"Not Bookmarked"}
-              width={14}
-              height={24}
-            />
-          )}
+          <BookmarkIcon isbookmarked={isbookmarked} width={20} height={24} />
         </div>
       </div>
     );

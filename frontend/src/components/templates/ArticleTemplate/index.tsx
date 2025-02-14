@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { Footer } from "@/components/layouts/Footer";
@@ -109,11 +110,10 @@ export const ArticleTemplate = () => {
               </div>
               <div className={style.actionWrapper}>
                 <div className={style.actionBackground}>
-                  <Image
-                    src="/notBookmarked.svg"
-                    alt="bookmark"
-                    width={"20"}
-                    height={"20"}
+                  <BookmarkIcon
+                    isbookmarked={article.isBookmarked}
+                    width={20}
+                    height={20}
                   />
                 </div>
               </div>
@@ -170,7 +170,7 @@ export const ArticleTemplate = () => {
                 <div className={style.likeBookmarkContainer}>
                   <LikeBookmarkButtons
                     isliked={article.isLiked}
-                    isBookmarked={article.isBookmarked}
+                    isbookmarked={article.isBookmarked}
                     likeCount={article.likeCount}
                   />
                 </div>
