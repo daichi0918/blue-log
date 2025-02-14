@@ -1,38 +1,39 @@
-import type { CSSProperties, FC, JSX } from "react";
 import { memo } from "react";
+import Image from "next/image";
+import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
 /**
- * InputForm
+ * UserImage
  *
  * @package atoms
  */
 
-type BaseButtonProps = {
-  additionalStyle?: CSSProperties;
-} & JSX.IntrinsicElements["input"];
+type UserImageProps = {
+  image: string | null;
+  userName: string;
+};
 
 /**
- * InputForm
+ * UserImage
  * @returns {JSX.Element}
  */
-export const InputForm: FC<BaseButtonProps> = memo((props) => {
-  const {
-    type = "text",
-    placeholder,
-    value,
-    onChange,
-    additionalStyle,
-  } = props;
+export const UserImage = memo((props: UserImageProps) => {
+  const randomColor = useRandomColor();
+  const { image, userName } = props;
   return (
-    <input
-      className={style.input}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      style={{ ...style, ...additionalStyle }}
-    />
+    <div className={style.userImg}>
+      {image ? (
+        <Image src={image} alt={userName} />
+      ) : (
+        <span
+          style={{ background: randomColor ?? "#FFD700" }}
+          className={style.noUserImg}
+        >
+          {userName.charAt(0)}
+        </span>
+      )}
+    </div>
   );
 });
