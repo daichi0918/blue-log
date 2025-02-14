@@ -9,7 +9,7 @@ import { UserImage } from "@/components/atoms/UserImage";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
-import { LikeBookarkButtons } from "@/components/molecules/LikeBookmarkButtons";
+import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
 import { Tags } from "@/components/molecules/Tags";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
@@ -96,7 +96,24 @@ export const ArticleTemplate = () => {
         handleInputSearch={handleInputSearch}
       />
       <div className={style.container}>
-        <section className={style.actionContainer}>aaa</section>
+        <section className={style.actionContainer}>
+          <div className={style.action}>
+            <div className={style.actionBackground}>
+              <Image src="/liked.svg" alt={"like"} width={"20"} height={"20"} />
+            </div>
+            <p className={style.likeCount}>{article?.likeCount}</p>
+          </div>
+          <div className={style.action}>
+            <div className={style.actionBackground}>
+              <Image
+                src="/notBookmarked.svg"
+                alt="bookmark"
+                width={"20"}
+                height={"20"}
+              />
+            </div>
+          </div>
+        </section>
         <section className={style.contentContainer}>
           {article ? (
             <>
@@ -149,7 +166,7 @@ export const ArticleTemplate = () => {
                   {article.text}
                 </ReactMarkdown>
                 <div className={style.likeBookmarkContainer}>
-                  <LikeBookarkButtons
+                  <LikeBookmarkButtons
                     isliked={article.isLiked}
                     isBookmarked={article.isBookmarked}
                     likeCount={article.likeCount}

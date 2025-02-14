@@ -7,7 +7,7 @@ import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type ArticleCardType } from "@/type/ArticleCard";
 
 import { ArticleInfo } from "../ArticleInfo";
-import { LikeBookarkButtons } from "../LikeBookmarkButtons";
+import { LikeBookmarkButtons } from "../LikeBookmarkButtons";
 import { Tags } from "../Tags";
 import style from "./styles.module.css";
 
@@ -58,7 +58,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
           image={article.user.image}
           createdAt={article.createdAt}
         />
-        <LikeBookarkButtons
+        <LikeBookmarkButtons
           isliked={article.isLiked}
           isBookmarked={article.isBookmarked}
           likeCount={article.likeCount}
