@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
+import { UserImage } from "@/components/atoms/UserImage";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
@@ -77,60 +78,75 @@ export const ArticleTemplate = () => {
         <section className={style.contentContainer}>
           {article ? (
             <>
-              <div className={style.titleContainer}>
-                <div className={style.titleWrapper}>
-                  <h1 className={style.title}>{article?.title}</h1>
-                </div>
-                {article?.isAuthor && (
-                  <div className={style.meatballMenu} onClick={toggleMenu}>
-                    <span className={style.actionDots}></span>
-                    <div className={style.actionMenu}>
-                      <ul
-                        className={`${style.menuList} ${isOpen ? style.show : ""}`}
-                      >
-                        <li className={style.menuItem}>
-                          <Image
-                            src="/edit.svg"
-                            alt="edit"
-                            width={16}
-                            height={16}
-                          />
-                          <p>編集</p>
-                        </li>
-                        <li className={style.menuItem}>
-                          <Image
-                            src="/delete.svg"
-                            alt="delete"
-                            width={16}
-                            height={16}
-                          />
-                          <p>削除</p>
-                        </li>
-                      </ul>
-                    </div>
+              <main className={style.contentSection}>
+                <div className={style.titleContainer}>
+                  <div className={style.titleWrapper}>
+                    <h1 className={style.title}>{article?.title}</h1>
                   </div>
-                )}
-              </div>
-              <div className={style.articleTagsWrapper}>
-                <Tags contents={article.tags} />
-              </div>
-              <div className={style.articleInfoWrapper}>
-                <ArticleInfo
-                  userName={article.user.name}
-                  image={article.user.image}
-                  createdAt={article.createdAt}
-                />
-              </div>
-              <ReactMarkdown className={style.markdown}>
-                {article.text}
-              </ReactMarkdown>
-              <div className={style.likeBookmarkContainer}>
-                <LikeBookarkButtons
-                  isliked={article.isLiked}
-                  isBookmarked={article.isBookmarked}
-                  likeCount={article.likeCount}
-                />
-              </div>
+                  {article?.isAuthor && (
+                    <div className={style.meatballMenu} onClick={toggleMenu}>
+                      <span className={style.actionDots}></span>
+                      <div className={style.actionMenu}>
+                        <ul
+                          className={`${style.menuList} ${isOpen ? style.show : ""}`}
+                        >
+                          <li className={style.menuItem}>
+                            <Image
+                              src="/edit.svg"
+                              alt="edit"
+                              width={16}
+                              height={16}
+                            />
+                            <p>編集</p>
+                          </li>
+                          <li className={style.menuItem}>
+                            <Image
+                              src="/delete.svg"
+                              alt="delete"
+                              width={16}
+                              height={16}
+                            />
+                            <p>削除</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className={style.articleTagsWrapper}>
+                  <Tags contents={article.tags} />
+                </div>
+                <div className={style.articleInfoWrapper}>
+                  <ArticleInfo
+                    userName={article.user.name}
+                    image={article.user.image}
+                    createdAt={article.createdAt}
+                  />
+                </div>
+                <ReactMarkdown className={style.markdown}>
+                  {article.text}
+                </ReactMarkdown>
+                <div className={style.likeBookmarkContainer}>
+                  <LikeBookarkButtons
+                    isliked={article.isLiked}
+                    isBookmarked={article.isBookmarked}
+                    likeCount={article.likeCount}
+                  />
+                </div>
+              </main>
+              <section className={style.contentSection}>
+                <div className={style.userInfoFollowButtonWrapper}>
+                  <div className={style.userInfo}>
+                    <UserImage
+                      image={article.user.image}
+                      userName={article.user.name}
+                    />
+                    <p className={style.userName}>{article.user.name}</p>
+                  </div>
+                </div>
+                <div className={style.userProfile}></div>
+                <div className={style.userSnsInfo}></div>
+              </section>
             </>
           ) : (
             <div>もう一度読み込んでください</div>
