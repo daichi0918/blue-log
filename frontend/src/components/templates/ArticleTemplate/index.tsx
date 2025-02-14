@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
+import { BaseButton } from "@/components/atoms/BaseButton";
 import { UserImage } from "@/components/atoms/UserImage";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -142,6 +143,13 @@ export const ArticleTemplate = () => {
                       userName={article.user.name}
                     />
                     <p className={style.userName}>{article.user.name}</p>
+                  </div>
+                  <div className={style.followButtonWrapper}>
+                    <BaseButton
+                      color={"secondary"}
+                      size={"medium"}
+                      text={"フォロー"}
+                    />
                   </div>
                 </div>
                 <div className={style.userProfile}></div>
