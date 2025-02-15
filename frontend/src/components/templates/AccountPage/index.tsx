@@ -72,6 +72,17 @@ export const AccountTemplate = () => {
               mainButtonText={"マイページを編集"}
             />
           </aside>
+          <main className={style.mainContainer}>
+            <div className={style.mainContentWrapper}>
+              <nav className={style.navContent}>
+                <ul className={style.articleSelectList}>
+                  <li className={style.select}>投稿した記事</li>
+                  <li>いいねした記事</li>
+                  <li>保存した記事</li>
+                </ul>
+              </nav>
+            </div>
+          </main>
         </div>
       )}
 
