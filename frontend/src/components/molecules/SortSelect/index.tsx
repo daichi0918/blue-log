@@ -1,9 +1,6 @@
 "use client";
 
-import type { FC } from "react";
 import { memo } from "react";
-import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
-import { LikeIcon } from "@/components/atoms/LikeIcon";
 
 import style from "./styles.module.css";
 
@@ -30,6 +27,7 @@ const defaultOptions: SortOption[] = [
 ];
 /**
  * SortSelect
+ * @param {SortSelectProps}
  * @returns {JSX.Element}
  */
 export const SortSelect = memo((props: SortSelectProps) => {

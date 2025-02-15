@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { SortSelect } from "@/components/molecules/SortSelect";
 import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
@@ -90,6 +91,9 @@ export const AccountTemplate = () => {
                   ))}
                 </ul>
               </nav>
+              <section className={style.articleCardSort}>
+                <SortSelect />
+              </section>
             </div>
           </main>
         </div>
