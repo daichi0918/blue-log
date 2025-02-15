@@ -27,6 +27,9 @@ export const AccountTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
+  const [selectedIndex, setSelectedIndex] = useState(0); // 最初の項目を選択
+
+  const menuItems = ["投稿した記事", "いいねした記事", "保存した記事"];
 
   /**
    * 記事データ取得
@@ -76,9 +79,15 @@ export const AccountTemplate = () => {
             <div className={style.mainContentWrapper}>
               <nav className={style.navContent}>
                 <ul className={style.articleSelectList}>
-                  <li className={style.select}>投稿した記事</li>
-                  <li>いいねした記事</li>
-                  <li>保存した記事</li>
+                  {menuItems.map((item, index) => (
+                    <li
+                      key={index}
+                      className={index === selectedIndex ? style.select : ""}
+                      onClick={() => setSelectedIndex(index)}
+                    >
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
