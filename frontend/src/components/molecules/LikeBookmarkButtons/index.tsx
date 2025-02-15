@@ -8,7 +8,7 @@ import { LikeIcon } from "@/components/atoms/LikeIcon";
 import style from "./styles.module.css";
 
 /**
- * LikeBookarkButtonsProps
+ * LikeBookarkButtons
  *
  * @package molecules
  */

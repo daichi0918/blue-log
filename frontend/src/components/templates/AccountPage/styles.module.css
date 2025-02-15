@@ -45,6 +45,10 @@
   box-sizing: content-box;
 }
 
+.articleSelectList li:hover {
+  cursor: pointer;
+}
+
 .select {
   color: var(--blue_04) !important;
   position: relative;

@@ -10,6 +10,7 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
+import { SortSelect } from "@/components/molecules/SortSelect";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";
@@ -48,16 +49,7 @@ export const HomeTemplate = () => {
       <main className={style.articlesContainer}>
         {/* 並び替え */}
         <section className={style.articleCardSort}>
-          <div className={style.sortTitleWrapper}>
-            <p className={style.sortTitle}>並び順</p>
-          </div>
-          <div className={style.selectWrapper}>
-            <select className={style.select}>
-              <option value="newest">新しい順</option>
-              <option value="oldest">古い順</option>
-              <option value="likes">いいね順</option>
-            </select>
-          </div>
+          <SortSelect />
         </section>
         {/* 記事一覧リスト */}
         <section>
