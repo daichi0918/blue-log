@@ -13,6 +13,7 @@ import { Header } from "@/components/layouts/Header";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
 import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
 import { Tags } from "@/components/molecules/Tags";
+import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
@@ -227,55 +228,15 @@ export const ArticleTemplate = () => {
               </section>
             </section>
             <section className={style.sidebarContainer}>
-              <div className={style.userProfileWrapper}>
-                <div className={style.userInfo}>
-                  <UserImage
-                    image={article.user.image}
-                    userName={article.user.name}
-                  />
-                  <p className={style.userName}>{article.user.name}</p>
-                </div>
-                <div className={style.followWrapper}>
-                  <p>114フォロワー 34フォロー中</p>
-                </div>
-                {article.user.profile && (
-                  <div className={style.userProfile}>
-                    <p className={style.profileText}>{article.user.profile}</p>
-                  </div>
-                )}
-                <BaseButton
-                  color={"secondary"}
-                  size={"small"}
-                  text={"フォロー"}
-                  additionalStyle={{ width: "100%", margin: "15px 0" }}
-                />
-                <div className={style.userSnsInfo}>
-                  <IconContext.Provider
-                    value={{ size: "20px", style: { marginRight: "15px" } }}
-                  >
-                    <FaXTwitter
-                      onClick={() => navigateToX(article.user.twitter)}
-                    />
-                  </IconContext.Provider>
-                  <IconContext.Provider
-                    value={{ size: "20px", style: { marginRight: "15px" } }}
-                  >
-                    <FaGithub
-                      onClick={() => navigateToGithub(article.user.github)}
-                    />
-                  </IconContext.Provider>
-                  <IconContext.Provider
-                    value={{
-                      size: "20px",
-                      style: { marginRight: "15px", color: "#0966ff" },
-                    }}
-                  >
-                    <FaFacebook
-                      onClick={() => navigateToFacebook(article.user.facebook)}
-                    />
-                  </IconContext.Provider>
-                </div>
-              </div>
+              <UserCard
+                userName={article.user.name}
+                userImage={article.user.image}
+                userProfile={article.user.profile}
+                twitterURL={article.user.twitter}
+                githubURL={article.user.github}
+                facebookURL={article.user.facebook}
+                mainButtonText={"フォロー"}
+              />
             </section>
           </div>
         </>

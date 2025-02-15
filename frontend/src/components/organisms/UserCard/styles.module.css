@@ -1,0 +1,23 @@
+.userProfileWrapper {
+  background: var(--gray_00);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  margin-left: 15px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo .userName {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.userSnsInfo svg:hover {
+  cursor: pointer;
+}
