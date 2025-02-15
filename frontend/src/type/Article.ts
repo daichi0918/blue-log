@@ -21,6 +21,7 @@ export type ArticleType = {
     twitter: string | null;
     github: string | null;
     facebook: string | null;
+    profile: string | null;
   };
   likeCount: number;
   isLiked: boolean;
