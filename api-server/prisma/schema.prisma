@@ -36,6 +36,7 @@ model User {
   twitter   String?    @db.VarChar(255)
   facebook  String?    @db.VarChar(255)
   github    String?    @db.VarChar(255)
+  profile   String?    @db.Text
   createdAt DateTime   @default(now()) @db.Timestamp(0)
   updateAt  DateTime   @updatedAt @db.Timestamp(0)
   articles  Article[]
