@@ -1,0 +1,35 @@
+.container {
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  grid-template-rows: 100%;
+  grid-template-areas: "sidebar content";
+  margin-top: 130px;
+  gap: 10px;
+}
+
+/* プロフィール・目次エリア */
+.sidebarContainer {
+  grid-area: sidebar;
+  display: flex;
+  justify-content: end;
+}
+
+.sidebarContainer .userProfileWrapper {
+  background: var(--gray_00);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  margin-left: 15px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo .userName {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-left: 10px;
+}
