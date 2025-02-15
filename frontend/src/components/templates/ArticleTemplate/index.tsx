@@ -192,11 +192,12 @@ export const ArticleTemplate = () => {
                     />
                   </div>
                 </div>
-                <div className={style.userProfile}>
-                  <p className={style.profileText}>
-                    プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。
-                  </p>
-                </div>
+                {/* プロフィール文章がnullでなければ表示 */}
+                {article.user.profile && (
+                  <div className={style.userProfile}>
+                    <p className={style.profileText}>{article.user.profile}</p>
+                  </div>
+                )}
                 <div className={style.userSnsInfo}>
                   <IconContext.Provider
                     value={{ size: "20px", style: { marginRight: "15px" } }}
@@ -237,11 +238,11 @@ export const ArticleTemplate = () => {
                 <div className={style.followWrapper}>
                   <p>114フォロワー 34フォロー中</p>
                 </div>
-                <div className={style.userProfile}>
-                  <p className={style.profileText}>
-                    プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。プロフィールの文章です。
-                  </p>
-                </div>
+                {article.user.profile && (
+                  <div className={style.userProfile}>
+                    <p className={style.profileText}>{article.user.profile}</p>
+                  </div>
+                )}
                 <BaseButton
                   color={"secondary"}
                   size={"small"}
