@@ -73,3 +73,10 @@
   padding: 10px 20px;
   margin-top: 5px;
 }
+
+/* もっとみる */
+.showMore {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

@@ -2,13 +2,15 @@
 
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { fetchArticleAPI } from "@/apis/articleApi";
+import { fetchArticleListApi } from "@/apis/articleApi";
+import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
 import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
-import { type ArticleType } from "@/type/Article";
+import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 
 import style from "./styles.module.css";
@@ -27,25 +29,19 @@ export const AccountTemplate = () => {
   const param = useParams();
   const { isAuth, user } = useContext(AuthContext);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [article, setArticle] = useState<ArticleType>();
+  const [article, setArticle] = useState<Array<ArticleCardType>>();
   const [selectedIndex, setSelectedIndex] = useState(0); // 最初の項目を選択
+  const [articleDisplayLength, setArticleDisplayLength] = useState<number>(5);
 
   const menuItems = ["投稿した記事", "いいねした記事", "保存した記事"];
 
-  /**
-   * 記事データ取得
-   */
-  const fetchArticleById = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleAPI(String(param.id));
-    console.log("res");
-    console.log(res);
-    setArticle(
-      res?.data && typeof res.data === "object" ? res.data : undefined,
-    );
-  }, [param]);
+  const fetchArticleCardList = useCallback(async (): Promise<void> => {
+    const res = await fetchArticleListApi();
+    setArticle(res?.data && typeof res.data === "object" ? res.data : []);
+  }, []);
   useEffect(() => {
-    void fetchArticleById();
-  }, [param, fetchArticleById]);
+    void fetchArticleCardList();
+  }, [param, fetchArticleCardList]);
 
   /**
    * キーワード検索Input
@@ -54,52 +50,81 @@ export const AccountTemplate = () => {
   const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
     setInputArticleSearch(e.target.value);
   }, []);
+  /**
+   * もっと見るボタン押下時の処理
+   */
+  const handleShowMoreArticles = () => {
+    setArticleDisplayLength((prev) => prev + 10);
+  };
 
   return (
     <>
-      <Header
-        user={user}
-        isAuth={isAuth}
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
-      {article && (
-        <div className={style.container}>
-          <aside className={style.sidebarContainer}>
-            <UserCard
-              userName={article.user.name}
-              userImage={article.user.image}
-              userProfile={article.user.profile}
-              twitterURL={article.user.twitter}
-              githubURL={article.user.github}
-              facebookURL={article.user.facebook}
-              mainButtonText={"マイページを編集"}
-            />
-          </aside>
-          <main className={style.mainContainer}>
-            <div className={style.mainContentWrapper}>
-              <nav className={style.navContent}>
-                <ul className={style.articleSelectList}>
-                  {menuItems.map((item, index) => (
-                    <li
-                      key={index}
-                      className={index === selectedIndex ? style.select : ""}
-                      onClick={() => setSelectedIndex(index)}
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              <section className={style.articleCardSort}>
-                <SortSelect />
-              </section>
-            </div>
-          </main>
-        </div>
-      )}
+      <>
+        <Header
+          user={user}
+          isAuth={isAuth}
+          searchInputValue={inputArticleSearch}
+          handleInputSearch={handleInputSearch}
+        />
+        {article && (
+          <div className={style.container}>
+            <aside className={style.sidebarContainer}>
+              {user && (
+                <UserCard
+                  userName={user.name}
+                  userImage={user.image ?? null}
+                  userProfile={user.profile ?? null}
+                  twitterURL={user.twitter ?? null}
+                  githubURL={user.github ?? null}
+                  facebookURL={user.facebook ?? null}
+                  mainButtonText={"マイページを編集"}
+                />
+              )}
+            </aside>
+            <main className={style.mainContainer}>
+              <div className={style.mainContentWrapper}>
+                <nav className={style.navContent}>
+                  <ul className={style.articleSelectList}>
+                    {menuItems.map((item, index) => (
+                      <li
+                        key={index}
+                        className={index === selectedIndex ? style.select : ""}
+                        onClick={() => setSelectedIndex(index)}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <section className={style.articleCardSort}>
+                  <SortSelect />
+                </section>
+                <section className={style.articleCardDisplay}>
+                  {article?.length > 0 &&
+                    article
+                      .slice(0, articleDisplayLength)
+                      .map((article) => (
+                        <ArticleCard key={article.id} article={article} />
+                      ))}
+                </section>
+                {/* もっと見るボタン */}
+                {article.length > articleDisplayLength && (
+                  <section className={style.showMore}>
+                    <BaseButton
+                      color={"secondary"}
+                      size={"medium"}
+                      text={"もっと見る"}
+                      onClick={handleShowMoreArticles}
+                    />
+                  </section>
+                )}
+              </div>
+            </main>
+          </div>
+        )}
 
-      <Footer />
+        <Footer />
+      </>
     </>
   );
 };

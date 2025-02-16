@@ -8,4 +8,8 @@ export type UserType = {
   name: string;
   email: string;
   image?: string;
+  profile?: string;
+  twitter?: string;
+  github?: string;
+  facebook?: string;
 };
