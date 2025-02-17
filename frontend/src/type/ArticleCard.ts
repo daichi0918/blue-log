@@ -17,6 +17,10 @@ export type ArticleCardType = {
     id: number;
     name: string;
     image: string | null;
+    profile: string | null;
+    twitter: string | null;
+    github: string | null;
+    facebook: string | null;
   };
   likeCount: number;
   isLiked: boolean;

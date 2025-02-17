@@ -1,15 +1,14 @@
 "use client";
 
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { fetchArticleListApi } from "@/apis/articleApi";
+import { useParams } from "next/navigation";
+import { fetchArticleListByUserIdAPI } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
 import { UserCard } from "@/components/organisms/UserCard";
-import { NAVIGATION_LIST } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
@@ -44,9 +43,9 @@ export const AccountTemplate = () => {
   const menuItems = ["投稿した記事", "いいねした記事", "保存した記事"];
 
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleListApi();
+    const res = await fetchArticleListByUserIdAPI(String(param.id));
     setArticle(res?.data && typeof res.data === "object" ? res.data : []);
-  }, []);
+  }, [param.id]);
   useEffect(() => {
     void fetchArticleCardList();
   }, [param, fetchArticleCardList]);
@@ -77,14 +76,14 @@ export const AccountTemplate = () => {
         {article && (
           <div className={style.container}>
             <aside className={style.sidebarContainer}>
-              {user && (
+              {article[0]?.user && (
                 <UserCard
-                  userName={user.name}
-                  userImage={user.image ?? null}
-                  userProfile={user.profile ?? null}
-                  twitterURL={user.twitter ?? null}
-                  githubURL={user.github ?? null}
-                  facebookURL={user.facebook ?? null}
+                  userName={article[0].user.name}
+                  userImage={article[0].user.image ?? null}
+                  userProfile={article[0].user.profile ?? null}
+                  twitterURL={article[0].user.twitter ?? null}
+                  githubURL={article[0].user.github ?? null}
+                  facebookURL={article[0].user.facebook ?? null}
                   mainButtonText={"マイページを編集"}
                 />
               )}
