@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { fetchArticleListApi } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
@@ -9,6 +9,7 @@ import { Header } from "@/components/layouts/Header";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
 import { UserCard } from "@/components/organisms/UserCard";
+import { NAVIGATION_LIST } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
@@ -26,8 +27,15 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const AccountTemplate = () => {
+  // const router = useRouter();
   const param = useParams();
+
   const { isAuth, user } = useContext(AuthContext);
+  /* ログインしていなかったらhomeに戻る */
+  // if (!isAuth) {
+  //   router.push(NAVIGATION_LIST.TOP);
+  // }
+
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<Array<ArticleCardType>>();
   const [selectedIndex, setSelectedIndex] = useState(0); // 最初の項目を選択

@@ -101,6 +101,40 @@ export class ArticlesService {
     };
   }
 
+  async findByUserId(userId: number) {
+    const articles = await this.prismaService.article.findMany({
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        title: true,
+        tags: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: { id: true, name: true, image: true }, // ユーザー情報
+        },
+        _count: {
+          select: { likes: true }, // いいねの数
+        },
+      },
+    });
+
+    return articles.map((article) => ({
+      id: article.id,
+      title: article.title,
+      tags: article.tags,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      user: article.user,
+      likeCount: article._count.likes,
+    }));
+  }
+
   async update(
     id: number,
     updateArticleDto: UpdateArticleDto,

@@ -54,6 +54,11 @@ export class ArticlesController {
     return await this.articlesService.findAll();
   }
 
+  @Get('user/:userId')
+  async findByUserId(@Param('userId') userId: string) {
+    return await this.articlesService.findByUserId(+userId);
+  }
+
   @Get(':id')
   @UseGuards(OptionalAuthGuard)
   async findById(
