@@ -54,11 +54,6 @@ export class ArticlesController {
     return await this.articlesService.findAll();
   }
 
-  @Get('user/:userId')
-  async findByUserId(@Param('userId') userId: string) {
-    return await this.articlesService.findByUserId(+userId);
-  }
-
   @Get(':id')
   @UseGuards(OptionalAuthGuard)
   async findById(
@@ -67,6 +62,21 @@ export class ArticlesController {
   ): Promise<Article> {
     const userId = req.user?.userId ?? null;
     return await this.articlesService.findById(+id, userId);
+  }
+
+  @Get('user/:userId')
+  async findByUserId(@Param('userId') userId: string) {
+    return await this.articlesService.findByUserId(+userId);
+  }
+
+  @Get('user/:userId/like')
+  async findLikedByUserId(@Param('userId') userId: string) {
+    return await this.articlesService.findLikedArticlesByUserId(+userId);
+  }
+
+  @Get('user/:userId/like')
+  async findBookmarkedByUserId(@Param('userId') userId: string) {
+    return await this.articlesService.findBookmarkedArticlesByUserId(+userId);
   }
 
   @Patch(':id')

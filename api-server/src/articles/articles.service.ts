@@ -135,6 +135,82 @@ export class ArticlesService {
     }));
   }
 
+  async findLikedArticlesByUserId(userId: number) {
+    const likedArticles = await this.prismaService.article.findMany({
+      where: {
+        likes: {
+          some: {
+            userId: userId,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        title: true,
+        tags: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: { id: true, name: true, image: true },
+        },
+        _count: {
+          select: { likes: true },
+        },
+      },
+    });
+
+    return likedArticles.map((article) => ({
+      id: article.id,
+      title: article.title,
+      tags: article.tags,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      user: article.user,
+      likeCount: article._count.likes,
+    }));
+  }
+
+  async findBookmarkedArticlesByUserId(userId: number) {
+    const likedArticles = await this.prismaService.article.findMany({
+      where: {
+        bookmarks: {
+          some: {
+            userId: userId,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        title: true,
+        tags: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: { id: true, name: true, image: true },
+        },
+        _count: {
+          select: { likes: true },
+        },
+      },
+    });
+
+    return likedArticles.map((article) => ({
+      id: article.id,
+      title: article.title,
+      tags: article.tags,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      user: article.user,
+      likeCount: article._count.likes,
+    }));
+  }
+
   async update(
     id: number,
     updateArticleDto: UpdateArticleDto,
