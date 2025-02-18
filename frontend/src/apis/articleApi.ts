@@ -77,6 +77,80 @@ export const fetchArticleListByUserIdAPI = async (userId: string) => {
 };
 
 /**
+ * 対象ユーザーがいいねした記事を取得
+ * @param {string} userId
+ * @returns {ResponseType<Array<ArticleCardType>>}
+ */
+export const fetchLikedArticleListByUserIdAPI = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<Array<ArticleCardType>> =
+      await globalAxios.get(`/articles/user/${userId}/like`);
+    const res: ResponseType<Array<ArticleCardType>> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * 対象ユーザーがいいねした記事を取得
+ * @param {string} userId
+ * @returns {ResponseType<Array<ArticleCardType>>}
+ */
+export const fetchBookmarkedArticleListByUserIdAPI = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<Array<ArticleCardType>> =
+      await globalAxios.get(`/articles/user/${userId}/bookmark`);
+    const res: ResponseType<Array<ArticleCardType>> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
  * 記事取得のAPI
  * @param {string} id
  * @returns {ResponseType<ArticleType>}

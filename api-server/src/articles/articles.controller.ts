@@ -74,7 +74,7 @@ export class ArticlesController {
     return await this.articlesService.findLikedArticlesByUserId(+userId);
   }
 
-  @Get('user/:userId/like')
+  @Get('user/:userId/bookmark')
   async findBookmarkedByUserId(@Param('userId') userId: string) {
     return await this.articlesService.findBookmarkedArticlesByUserId(+userId);
   }

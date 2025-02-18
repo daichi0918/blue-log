@@ -42,6 +42,7 @@ export const AccountTemplate = () => {
 
   const menuItems = ["投稿した記事", "いいねした記事", "保存した記事"];
 
+  /* action定義 */
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListByUserIdAPI(String(param.id));
     setArticle(res?.data && typeof res.data === "object" ? res.data : []);
