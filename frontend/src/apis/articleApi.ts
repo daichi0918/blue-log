@@ -44,7 +44,7 @@ export const fetchArticleListApi = async () => {
  * @param {string} userId
  * @returns {ResponseType<Array<ArticleCardType>>}
  */
-export const fetchArticleListByUserIdAPI = async (userId: string) => {
+export const fetchArticlesByUserId = async (userId: string) => {
   try {
     const { data }: AxiosResponse<Array<ArticleCardType>> =
       await globalAxios.get(`/articles/user/${userId}`);
@@ -81,7 +81,7 @@ export const fetchArticleListByUserIdAPI = async (userId: string) => {
  * @param {string} userId
  * @returns {ResponseType<Array<ArticleCardType>>}
  */
-export const fetchLikedArticleListByUserIdAPI = async (userId: string) => {
+export const fetchLikedArticlesByUserIdAPI = async (userId: string) => {
   try {
     const { data }: AxiosResponse<Array<ArticleCardType>> =
       await globalAxios.get(`/articles/user/${userId}/like`);
@@ -118,7 +118,7 @@ export const fetchLikedArticleListByUserIdAPI = async (userId: string) => {
  * @param {string} userId
  * @returns {ResponseType<Array<ArticleCardType>>}
  */
-export const fetchBookmarkedArticleListByUserIdAPI = async (userId: string) => {
+export const fetchBookmarkedArticlesByUserIdAPI = async (userId: string) => {
   try {
     const { data }: AxiosResponse<Array<ArticleCardType>> =
       await globalAxios.get(`/articles/user/${userId}/bookmark`);

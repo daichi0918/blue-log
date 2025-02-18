@@ -2,7 +2,11 @@
 
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { fetchArticleListByUserIdAPI } from "@/apis/articleApi";
+import {
+  fetchArticlesByUserId,
+  fetchBookmarkedArticlesByUserIdAPI,
+  fetchLikedArticlesByUserIdAPI,
+} from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -26,30 +30,28 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const AccountTemplate = () => {
-  // const router = useRouter();
   const param = useParams();
+  const MENU_ITEMS = ["投稿した記事", "いいねした記事", "保存した記事"];
 
   const { isAuth, user } = useContext(AuthContext);
-  /* ログインしていなかったらhomeに戻る */
-  // if (!isAuth) {
-  //   router.push(NAVIGATION_LIST.TOP);
-  // }
-
+  /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [article, setArticle] = useState<Array<ArticleCardType>>();
-  const [selectedIndex, setSelectedIndex] = useState(0); // 最初の項目を選択
-  const [articleDisplayLength, setArticleDisplayLength] = useState<number>(5);
-
-  const menuItems = ["投稿した記事", "いいねした記事", "保存した記事"];
+  const [displayArticles, setDisplayArticles] = useState<
+    Array<ArticleCardType>
+  >([]);
+  const [postedArticles, setPostedArticles] = useState<Array<ArticleCardType>>(
+    [],
+  );
+  const [likedArticles, setLikedArticles] = useState<Array<ArticleCardType>>(
+    [],
+  );
+  const [savedArticles, setSavedArticles] = useState<Array<ArticleCardType>>(
+    [],
+  );
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [displayCount, setDisplayCount] = useState<number>(5);
 
   /* action定義 */
-  const fetchArticleCardList = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleListByUserIdAPI(String(param.id));
-    setArticle(res?.data && typeof res.data === "object" ? res.data : []);
-  }, [param.id]);
-  useEffect(() => {
-    void fetchArticleCardList();
-  }, [param, fetchArticleCardList]);
 
   /**
    * キーワード検索Input
@@ -61,9 +63,67 @@ export const AccountTemplate = () => {
   /**
    * もっと見るボタン押下時の処理
    */
-  const handleShowMoreArticles = () => {
-    setArticleDisplayLength((prev) => prev + 10);
+  const handleLoadMore = () => {
+    setDisplayCount((prev) => prev + 10);
   };
+  /**
+   * 特定のユーザーが投稿した記事を取得・反映
+   */
+  const fetchUserPostedArticles = useCallback(async (): Promise<void> => {
+    if (postedArticles.length === 0) {
+      const res = await fetchArticlesByUserId(String(param.id));
+      const data = res?.data && typeof res.data === "object" ? res.data : [];
+      setPostedArticles(data);
+      setDisplayArticles(data);
+    } else {
+      setDisplayArticles(postedArticles);
+    }
+  }, [param.id, postedArticles]);
+  /**
+   * 特定のユーザーがいいねした記事を取得・反映
+   */
+  const fetchUserLikedArticles = useCallback(async (): Promise<void> => {
+    if (likedArticles.length === 0) {
+      const res = await fetchLikedArticlesByUserIdAPI(String(param.id));
+      const data = res?.data && typeof res.data === "object" ? res.data : [];
+      setLikedArticles(data);
+      setDisplayArticles(data);
+    } else {
+      setDisplayArticles(likedArticles);
+    }
+  }, [param.id, likedArticles]);
+  /**
+   * 特定のユーザーが保存した記事を取得・反映
+   */
+  const fetchUserSavedArticles = useCallback(async (): Promise<void> => {
+    if (savedArticles.length === 0) {
+      const res = await fetchBookmarkedArticlesByUserIdAPI(String(param.id));
+      const data = res?.data && typeof res.data === "object" ? res.data : [];
+      setSavedArticles(data);
+      setDisplayArticles(data);
+    } else {
+      setDisplayArticles(savedArticles);
+    }
+  }, [param.id, savedArticles]);
+
+  useEffect(() => {
+    switch (selectedIndex) {
+      case 0:
+        void fetchUserPostedArticles();
+        break;
+      case 1:
+        void fetchUserLikedArticles();
+        break;
+      case 2:
+        void fetchUserSavedArticles();
+        break;
+    }
+  }, [
+    selectedIndex,
+    fetchUserPostedArticles,
+    fetchUserLikedArticles,
+    fetchUserSavedArticles,
+  ]);
 
   return (
     <>
@@ -74,17 +134,17 @@ export const AccountTemplate = () => {
           searchInputValue={inputArticleSearch}
           handleInputSearch={handleInputSearch}
         />
-        {article && (
+        {postedArticles && (
           <div className={style.container}>
             <aside className={style.sidebarContainer}>
-              {article[0]?.user && (
+              {postedArticles[0]?.user && (
                 <UserCard
-                  userName={article[0].user.name}
-                  userImage={article[0].user.image ?? null}
-                  userProfile={article[0].user.profile ?? null}
-                  twitterURL={article[0].user.twitter ?? null}
-                  githubURL={article[0].user.github ?? null}
-                  facebookURL={article[0].user.facebook ?? null}
+                  userName={postedArticles[0].user.name}
+                  userImage={postedArticles[0].user.image ?? null}
+                  userProfile={postedArticles[0].user.profile ?? null}
+                  twitterURL={postedArticles[0].user.twitter ?? null}
+                  githubURL={postedArticles[0].user.github ?? null}
+                  facebookURL={postedArticles[0].user.facebook ?? null}
                   mainButtonText={"マイページを編集"}
                 />
               )}
@@ -93,7 +153,7 @@ export const AccountTemplate = () => {
               <div className={style.mainContentWrapper}>
                 <nav className={style.navContent}>
                   <ul className={style.articleSelectList}>
-                    {menuItems.map((item, index) => (
+                    {MENU_ITEMS.map((item, index) => (
                       <li
                         key={index}
                         className={index === selectedIndex ? style.select : ""}
@@ -108,21 +168,21 @@ export const AccountTemplate = () => {
                   <SortSelect />
                 </section>
                 <section className={style.articleCardDisplay}>
-                  {article?.length > 0 &&
-                    article
-                      .slice(0, articleDisplayLength)
+                  {displayArticles.length > 0 &&
+                    displayArticles
+                      .slice(0, displayCount)
                       .map((article) => (
                         <ArticleCard key={article.id} article={article} />
                       ))}
                 </section>
                 {/* もっと見るボタン */}
-                {article.length > articleDisplayLength && (
+                {displayArticles.length > displayCount && (
                   <section className={style.showMore}>
                     <BaseButton
                       color={"secondary"}
                       size={"medium"}
                       text={"もっと見る"}
-                      onClick={handleShowMoreArticles}
+                      onClick={handleLoadMore}
                     />
                   </section>
                 )}
@@ -130,7 +190,6 @@ export const AccountTemplate = () => {
             </main>
           </div>
         )}
-
         <Footer />
       </>
     </>
