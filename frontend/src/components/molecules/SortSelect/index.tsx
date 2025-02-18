@@ -18,6 +18,7 @@ type SortSelectProps = {
   // value: string;
   // onChange: (value: string) => void;
   options?: SortOption[];
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const defaultOptions: SortOption[] = [
@@ -31,14 +32,14 @@ const defaultOptions: SortOption[] = [
  * @returns {JSX.Element}
  */
 export const SortSelect = memo((props: SortSelectProps) => {
-  const { options = defaultOptions } = props;
+  const { options = defaultOptions, onChange } = props;
   return (
     <>
       <div className={style.sortTitleWrapper}>
         <p className={style.sortTitle}>並び順</p>
       </div>
       <div className={style.selectWrapper}>
-        <select className={style.select}>
+        <select className={style.select} onChange={onChange}>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

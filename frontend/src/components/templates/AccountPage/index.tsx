@@ -50,6 +50,7 @@ export const AccountTemplate = () => {
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [displayCount, setDisplayCount] = useState<number>(5);
+  const [sortKey, setSortKey] = useState<string>("newest");
 
   /* action定義 */
 
@@ -67,6 +68,33 @@ export const AccountTemplate = () => {
     setDisplayCount((prev) => prev + 10);
   };
   /**
+   * 記事並べ替え関数
+   */
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortKey(e.target.value);
+  };
+  const sortArticles = useCallback(
+    (articles: ArticleCardType[]) => {
+      return [...articles].sort((a, b) => {
+        switch (sortKey) {
+          case "newest":
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          case "oldest":
+            return (
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+          case "likes":
+            return (b.likeCount ?? 0) - (a.likeCount ?? 0);
+          default:
+            return 0;
+        }
+      });
+    },
+    [sortKey],
+  );
+  /**
    * 特定のユーザーが投稿した記事を取得・反映
    */
   const fetchUserPostedArticles = useCallback(async (): Promise<void> => {
@@ -74,11 +102,11 @@ export const AccountTemplate = () => {
       const res = await fetchArticlesByUserId(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setPostedArticles(data);
-      setDisplayArticles(data);
+      setDisplayArticles(sortArticles(data));
     } else {
-      setDisplayArticles(postedArticles);
+      setDisplayArticles(sortArticles(postedArticles));
     }
-  }, [param.id, postedArticles]);
+  }, [param.id, postedArticles, sortArticles]);
   /**
    * 特定のユーザーがいいねした記事を取得・反映
    */
@@ -87,11 +115,11 @@ export const AccountTemplate = () => {
       const res = await fetchLikedArticlesByUserIdAPI(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setLikedArticles(data);
-      setDisplayArticles(data);
+      setDisplayArticles(sortArticles(data));
     } else {
-      setDisplayArticles(likedArticles);
+      setDisplayArticles(sortArticles(likedArticles));
     }
-  }, [param.id, likedArticles]);
+  }, [param.id, likedArticles, sortArticles]);
   /**
    * 特定のユーザーが保存した記事を取得・反映
    */
@@ -100,11 +128,11 @@ export const AccountTemplate = () => {
       const res = await fetchBookmarkedArticlesByUserIdAPI(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setSavedArticles(data);
-      setDisplayArticles(data);
+      setDisplayArticles(sortArticles(data));
     } else {
-      setDisplayArticles(savedArticles);
+      setDisplayArticles(sortArticles(savedArticles));
     }
-  }, [param.id, savedArticles]);
+  }, [param.id, savedArticles, sortArticles]);
 
   useEffect(() => {
     switch (selectedIndex) {
@@ -123,6 +151,7 @@ export const AccountTemplate = () => {
     fetchUserPostedArticles,
     fetchUserLikedArticles,
     fetchUserSavedArticles,
+    sortKey,
   ]);
 
   return (
@@ -165,7 +194,7 @@ export const AccountTemplate = () => {
                   </ul>
                 </nav>
                 <section className={style.articleCardSort}>
-                  <SortSelect />
+                  <SortSelect onChange={handleSortChange} />
                 </section>
                 <section className={style.articleCardDisplay}>
                   {displayArticles.length > 0 &&
