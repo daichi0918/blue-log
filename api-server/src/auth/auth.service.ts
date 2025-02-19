@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserType } from 'src/interfaces/User';
@@ -6,6 +10,7 @@ import { CredentialsDto } from './dto/credentials.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from 'src/types/jwtPayload';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +18,36 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
   ) {}
+
+  /**
+   * @param {string} id
+   * @returns {User}
+   */
+  async fetchUserProfile(
+    id: number,
+  ): Promise<{ user: User; followerCount: number; followingCount: number }> {
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    const followerCount = await this.prismaService.follow.count({
+      where: { followingId: id },
+    });
+
+    const followingCount = await this.prismaService.follow.count({
+      where: { followerId: id },
+    });
+
+    return {
+      user,
+      followerCount,
+      followingCount,
+    };
+  }
 
   /**
    * 新規ユーザー作成
