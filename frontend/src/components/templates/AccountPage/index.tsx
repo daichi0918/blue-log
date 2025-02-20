@@ -7,6 +7,7 @@ import {
   fetchBookmarkedArticlesByUserIdAPI,
   fetchLikedArticlesByUserIdAPI,
 } from "@/apis/articleApi";
+import { fetchUserById } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -16,6 +17,7 @@ import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
+import { type UserType } from "@/type/User";
 
 import style from "./styles.module.css";
 
@@ -51,6 +53,9 @@ export const AccountTemplate = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [displayCount, setDisplayCount] = useState<number>(5);
   const [sortKey, setSortKey] = useState<string>("newest");
+  const [currentUser, setCurrentUser] = useState<UserType | undefined>(
+    undefined,
+  );
 
   /* action定義 */
 
@@ -120,6 +125,17 @@ export const AccountTemplate = () => {
       setDisplayArticles(sortArticles(likedArticles));
     }
   }, [param.id, likedArticles, sortArticles]);
+
+  /**
+   * 特定のユーザー取得
+   */
+  const fetchUser = useCallback(async (): Promise<void> => {
+    const res = await fetchUserById(String(param.id));
+    setCurrentUser(
+      res?.data && typeof res.data === "object" ? res.data : undefined,
+    );
+  }, [param]);
+
   /**
    * 特定のユーザーが保存した記事を取得・反映
    */
@@ -135,6 +151,9 @@ export const AccountTemplate = () => {
   }, [param.id, savedArticles, sortArticles]);
 
   useEffect(() => {
+    // ユーザー取得
+    void fetchUser();
+    // 記事一覧取得
     switch (selectedIndex) {
       case 0:
         void fetchUserPostedArticles();
@@ -151,7 +170,9 @@ export const AccountTemplate = () => {
     fetchUserPostedArticles,
     fetchUserLikedArticles,
     fetchUserSavedArticles,
+    fetchUser,
     sortKey,
+    param.id,
   ]);
 
   return (
@@ -163,17 +184,17 @@ export const AccountTemplate = () => {
           searchInputValue={inputArticleSearch}
           handleInputSearch={handleInputSearch}
         />
-        {postedArticles && (
+        {postedArticles && currentUser && (
           <div className={style.container}>
             <aside className={style.sidebarContainer}>
-              {postedArticles[0]?.user && (
+              {currentUser && (
                 <UserCard
-                  userName={postedArticles[0].user.name}
-                  userImage={postedArticles[0].user.image ?? null}
-                  userProfile={postedArticles[0].user.profile ?? null}
-                  twitterURL={postedArticles[0].user.twitter ?? null}
-                  githubURL={postedArticles[0].user.github ?? null}
-                  facebookURL={postedArticles[0].user.facebook ?? null}
+                  userName={currentUser.name}
+                  userImage={currentUser.image ?? null}
+                  userProfile={currentUser.profile ?? null}
+                  twitterURL={currentUser.twitter ?? null}
+                  githubURL={currentUser.github ?? null}
+                  facebookURL={currentUser.facebook ?? null}
                   mainButtonText={"マイページを編集"}
                 />
               )}

@@ -1,6 +1,6 @@
 import type { IErrorResponse, ResponseType } from "@/apis/config";
 import globalAxios, { isAxiosError } from "@/apis/config";
-import { type AuthResponseType } from "@/type/User";
+import { type AuthResponseType, type UserType } from "@/type/User";
 import { type AxiosResponse } from "axios";
 
 /**
@@ -81,6 +81,44 @@ export const signUpApi = async (
       // const axiosError = err as IErrorResponse;
       // res.code = axiosError.response.status;
       // res.message = axiosError.response.data.message;
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * ユーザー情報取得
+ * @param {string}userId
+ */
+export const fetchUserById = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<UserType> = await globalAxios.get(
+      `auth/${userId}`,
+    );
+
+    const res: ResponseType<UserType> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
       const res: ResponseType = { code: 500, message: "An error occurred" };
       if (isAxiosError(err)) {
         console.error("Axios Error:", err);
