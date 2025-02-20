@@ -32,6 +32,7 @@ export const HomeTemplate = () => {
     handleInputSearch,
     handleShowMoreArticles,
     fetchArticleCardList,
+    handleSortChange,
   } = useHomeTemplate();
   // 初回レンダリング時に記事一覧を取得
   useEffect(() => {
@@ -51,7 +52,7 @@ export const HomeTemplate = () => {
         <main className={style.articlesContainer}>
           {/* 並び替え */}
           <section className={style.articleCardSort}>
-            <SortSelect />
+            <SortSelect onChange={handleSortChange} />
           </section>
           {/* 記事一覧リスト */}
           <section>

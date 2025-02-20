@@ -18,6 +18,7 @@ export const useHomeTemplate = () => {
   const [articleListAll, setArticleListAll] = useState<Array<ArticleCardType>>(
     [],
   );
+  const [sortKey, setSortKey] = useState<string>("newest");
 
   /* action定義 */
 
@@ -35,6 +36,13 @@ export const useHomeTemplate = () => {
     setArticleDisplayLength((prev) => prev + 10);
   };
 
+  /**
+   * 記事並べ替え関数
+   */
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortKey(e.target.value);
+  };
+
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListApi();
     setArticleListAll(
@@ -46,8 +54,10 @@ export const useHomeTemplate = () => {
     articleDisplayLength,
     inputArticleSearch,
     articleListAll,
+    sortKey,
     handleInputSearch,
     handleShowMoreArticles,
     fetchArticleCardList,
+    handleSortChange,
   };
 };
