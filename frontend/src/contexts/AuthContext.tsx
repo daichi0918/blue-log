@@ -17,7 +17,6 @@ type Props = {
 type ContextInterface = {
   user: UserType | undefined;
   isAuth: boolean;
-  // why: なぜ引数を入れてる？
   signIn: (user: UserType) => Promise<void>;
   signOut: () => Promise<void>;
 };

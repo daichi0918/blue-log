@@ -184,65 +184,69 @@ export const AccountTemplate = () => {
           searchInputValue={inputArticleSearch}
           handleInputSearch={handleInputSearch}
         />
-        {postedArticles && currentUser && (
-          <div className={style.container}>
-            <aside className={style.sidebarContainer}>
-              {currentUser && (
-                <UserCard
-                  userName={currentUser.name}
-                  userImage={currentUser.image ?? null}
-                  userProfile={currentUser.profile ?? null}
-                  twitterURL={currentUser.twitter ?? null}
-                  githubURL={currentUser.github ?? null}
-                  facebookURL={currentUser.facebook ?? null}
-                  profile={currentUser.profile ?? null}
-                  follower={currentUser.followerCount}
-                  following={currentUser.followingCount}
-                  isAuth={isAuth}
-                />
-              )}
-            </aside>
-            <main className={style.mainContainer}>
-              <div className={style.mainContentWrapper}>
-                <nav className={style.navContent}>
-                  <ul className={style.articleSelectList}>
-                    {MENU_ITEMS.map((item, index) => (
-                      <li
-                        key={index}
-                        className={index === selectedIndex ? style.select : ""}
-                        onClick={() => setSelectedIndex(index)}
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-                <section className={style.articleCardSort}>
-                  <SortSelect onChange={handleSortChange} />
-                </section>
-                <section className={style.articleCardDisplay}>
-                  {displayArticles.length > 0 &&
-                    displayArticles
-                      .slice(0, displayCount)
-                      .map((article) => (
-                        <ArticleCard key={article.id} article={article} />
-                      ))}
-                </section>
-                {/* もっと見るボタン */}
-                {displayArticles.length > displayCount && (
-                  <section className={style.showMore}>
-                    <BaseButton
-                      color={"secondary"}
-                      size={"medium"}
-                      text={"もっと見る"}
-                      onClick={handleLoadMore}
-                    />
-                  </section>
+        <div className={style.pageContainer}>
+          {postedArticles && currentUser && (
+            <div className={style.container}>
+              <aside className={style.sidebarContainer}>
+                {currentUser && (
+                  <UserCard
+                    userName={currentUser.name}
+                    userImage={currentUser.image ?? null}
+                    userProfile={currentUser.profile ?? null}
+                    twitterURL={currentUser.twitter ?? null}
+                    githubURL={currentUser.github ?? null}
+                    facebookURL={currentUser.facebook ?? null}
+                    profile={currentUser.profile ?? null}
+                    follower={currentUser.followerCount}
+                    following={currentUser.followingCount}
+                    isAuth={isAuth}
+                  />
                 )}
-              </div>
-            </main>
-          </div>
-        )}
+              </aside>
+              <main className={style.mainContainer}>
+                <div className={style.mainContentWrapper}>
+                  <nav className={style.navContent}>
+                    <ul className={style.articleSelectList}>
+                      {MENU_ITEMS.map((item, index) => (
+                        <li
+                          key={index}
+                          className={
+                            index === selectedIndex ? style.select : ""
+                          }
+                          onClick={() => setSelectedIndex(index)}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                  <section className={style.articleCardSort}>
+                    <SortSelect onChange={handleSortChange} />
+                  </section>
+                  <section className={style.articleCardDisplay}>
+                    {displayArticles.length > 0 &&
+                      displayArticles
+                        .slice(0, displayCount)
+                        .map((article) => (
+                          <ArticleCard key={article.id} article={article} />
+                        ))}
+                  </section>
+                  {/* もっと見るボタン */}
+                  {displayArticles.length > displayCount && (
+                    <section className={style.showMore}>
+                      <BaseButton
+                        color={"secondary"}
+                        size={"medium"}
+                        text={"もっと見る"}
+                        onClick={handleLoadMore}
+                      />
+                    </section>
+                  )}
+                </div>
+              </main>
+            </div>
+          )}
+        </div>
         <Footer />
       </>
     </>

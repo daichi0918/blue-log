@@ -1,4 +1,4 @@
-import type { IErrorResponse, ResponseType } from "@/apis/config";
+import type { ResponseType } from "@/apis/config";
 import globalAxios, { isAxiosError } from "@/apis/config";
 import { type AuthResponseType, type UserType } from "@/type/User";
 import { type AxiosResponse } from "axios";
