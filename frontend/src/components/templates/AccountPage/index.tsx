@@ -11,6 +11,7 @@ import { fetchUserById } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
 import { UserCard } from "@/components/organisms/UserCard";
@@ -184,7 +185,7 @@ export const AccountTemplate = () => {
           searchInputValue={inputArticleSearch}
           handleInputSearch={handleInputSearch}
         />
-        <div className={style.pageContainer}>
+        <PageContainer>
           {postedArticles && currentUser && (
             <div className={style.container}>
               <aside className={style.sidebarContainer}>
@@ -246,7 +247,7 @@ export const AccountTemplate = () => {
               </main>
             </div>
           )}
-        </div>
+        </PageContainer>
         <Footer />
       </>
     </>

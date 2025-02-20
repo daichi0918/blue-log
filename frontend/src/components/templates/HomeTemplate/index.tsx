@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -46,32 +47,35 @@ export const HomeTemplate = () => {
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
-      <main className={style.articlesContainer}>
-        {/* 並び替え */}
-        <section className={style.articleCardSort}>
-          <SortSelect />
-        </section>
-        {/* 記事一覧リスト */}
-        <section>
-          {articleListAll.length > 0 &&
-            articleListAll
-              .slice(0, articleDisplayLength)
-              .map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-        </section>
-        {/* もっと見るボタン */}
-        {articleListAll.length > articleDisplayLength && (
-          <section className={style.showMore}>
-            <BaseButton
-              color={"secondary"}
-              size={"medium"}
-              text={"もっと見る"}
-              onClick={handleShowMoreArticles}
-            />
+      <PageContainer>
+        <main className={style.articlesContainer}>
+          {/* 並び替え */}
+          <section className={style.articleCardSort}>
+            <SortSelect />
           </section>
-        )}
-      </main>
+          {/* 記事一覧リスト */}
+          <section>
+            {articleListAll.length > 0 &&
+              articleListAll
+                .slice(0, articleDisplayLength)
+                .map((article) => (
+                  <ArticleCard key={article.id} article={article} />
+                ))}
+          </section>
+          {/* もっと見るボタン */}
+          {articleListAll.length > articleDisplayLength && (
+            <section className={style.showMore}>
+              <BaseButton
+                color={"secondary"}
+                size={"medium"}
+                text={"もっと見る"}
+                onClick={handleShowMoreArticles}
+              />
+            </section>
+          )}
+        </main>
+      </PageContainer>
+
       {/* フッター */}
       <Footer />
     </>

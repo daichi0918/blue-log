@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * NotLoginHeader
+ * Header
  *
  * @package molecules
  */
@@ -16,7 +16,7 @@ import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
-type NotLoginHeaderProps = {
+type HeaderProps = {
   user: UserType | undefined;
   isAuth: boolean;
   searchInputValue: string;
@@ -27,7 +27,7 @@ type NotLoginHeaderProps = {
  * HomeTemplate
  * @returns {JSX.Element}
  */
-export const Header = memo((props: NotLoginHeaderProps) => {
+export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
   const randomColor = useRandomColor();
