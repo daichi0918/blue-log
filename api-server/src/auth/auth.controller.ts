@@ -22,7 +22,7 @@ export class AuthController {
   @Get(':id')
   async getUserById(
     @Param('id') id: string,
-  ): Promise<{ user: User; followerCount: number; followingCount: number }> {
+  ): Promise<User & { followerCount: number; followingCount: number }> {
     return await this.authService.fetchUserProfile(+id);
   }
 

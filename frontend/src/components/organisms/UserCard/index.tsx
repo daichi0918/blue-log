@@ -22,7 +22,10 @@ type UserCardProps = {
   twitterURL: string | null;
   githubURL: string | null;
   facebookURL: string | null;
-  mainButtonText: string;
+  profile: string | null;
+  follower?: number;
+  following?: number;
+  isAuth: boolean;
 };
 
 /**
@@ -38,7 +41,9 @@ export const UserCard = memo((props: UserCardProps) => {
     twitterURL,
     githubURL,
     facebookURL,
-    mainButtonText,
+    follower,
+    following,
+    isAuth,
   } = props;
   /**
    * Xへ遷移
@@ -65,7 +70,9 @@ export const UserCard = memo((props: UserCardProps) => {
         <p className={style.userName}>{userName}</p>
       </div>
       <div className={style.followWrapper}>
-        <p>114フォロワー 34フォロー中</p>
+        <p>
+          <span>{follower}</span>フォロワー <span>{following}</span>フォロー中
+        </p>
       </div>
       {userProfile && (
         <div className={style.userProfile}>
@@ -75,7 +82,7 @@ export const UserCard = memo((props: UserCardProps) => {
       <BaseButton
         color={"secondary"}
         size={"small"}
-        text={mainButtonText}
+        text={isAuth ? "プロフィールを編集" : "フォロー"}
         additionalStyle={{ width: "100%", margin: "15px 0" }}
       />
       <div className={style.userSnsInfo}>

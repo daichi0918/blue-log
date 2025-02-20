@@ -20,12 +20,13 @@ export class AuthService {
   ) {}
 
   /**
+   * 特定ユーザー取得
    * @param {string} id
    * @returns {User}
    */
   async fetchUserProfile(
     id: number,
-  ): Promise<{ user: User; followerCount: number; followingCount: number }> {
+  ): Promise<User & { followerCount: number; followingCount: number }> {
     const user = await this.prismaService.user.findUnique({
       where: { id },
     });
@@ -43,7 +44,7 @@ export class AuthService {
     });
 
     return {
-      user,
+      ...user,
       followerCount,
       followingCount,
     };

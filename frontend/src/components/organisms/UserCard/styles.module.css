@@ -19,6 +19,18 @@
   margin-left: 10px;
 }
 
+.followWrapper {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  color: var(--gray_06);
+}
+
+.followWrapper span {
+  font-weight: bold;
+  margin: 0 5px;
+}
+
 .userSnsInfo svg:hover {
   cursor: pointer;
 }

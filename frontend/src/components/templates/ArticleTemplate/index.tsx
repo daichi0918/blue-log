@@ -235,7 +235,8 @@ export const ArticleTemplate = () => {
                 twitterURL={article.user.twitter}
                 githubURL={article.user.github}
                 facebookURL={article.user.facebook}
-                mainButtonText={"フォロー"}
+                profile={article.user.profile}
+                isAuth={isAuth}
               />
             </section>
           </div>

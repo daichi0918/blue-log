@@ -195,7 +195,10 @@ export const AccountTemplate = () => {
                   twitterURL={currentUser.twitter ?? null}
                   githubURL={currentUser.github ?? null}
                   facebookURL={currentUser.facebook ?? null}
-                  mainButtonText={"マイページを編集"}
+                  profile={currentUser.profile ?? null}
+                  follower={currentUser.followerCount}
+                  following={currentUser.followingCount}
+                  isAuth={isAuth}
                 />
               )}
             </aside>
