@@ -1,4 +1,4 @@
-import type { IErrorResponse, ResponseType } from "@/apis/config";
+import type { ResponseType } from "@/apis/config";
 import { globalAxios, isAxiosError } from "@/apis/config";
 import { type ArticleType } from "@/type/Article";
 import { type ArticleCardType } from "@/type/ArticleCard";
@@ -40,7 +40,120 @@ export const fetchArticleListApi = async () => {
 };
 
 /**
+ * ユーザーIDで記事取得のAPI
+ * @param {string} userId
+ * @returns {ResponseType<Array<ArticleCardType>>}
+ */
+export const fetchArticlesByUserId = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<Array<ArticleCardType>> =
+      await globalAxios.get(`/articles/user/${userId}`);
+    const res: ResponseType<Array<ArticleCardType>> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * 対象ユーザーがいいねした記事を取得
+ * @param {string} userId
+ * @returns {ResponseType<Array<ArticleCardType>>}
+ */
+export const fetchLikedArticlesByUserIdAPI = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<Array<ArticleCardType>> =
+      await globalAxios.get(`/articles/user/${userId}/like`);
+    const res: ResponseType<Array<ArticleCardType>> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * 対象ユーザーがいいねした記事を取得
+ * @param {string} userId
+ * @returns {ResponseType<Array<ArticleCardType>>}
+ */
+export const fetchBookmarkedArticlesByUserIdAPI = async (userId: string) => {
+  try {
+    const { data }: AxiosResponse<Array<ArticleCardType>> =
+      await globalAxios.get(`/articles/user/${userId}/bookmark`);
+    const res: ResponseType<Array<ArticleCardType>> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
  * 記事取得のAPI
+ * @param {string} id
+ * @returns {ResponseType<ArticleType>}
  */
 export const fetchArticleAPI = async (id: string) => {
   try {

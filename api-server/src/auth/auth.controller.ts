@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CredentialsDto } from './dto/credentials.dto';
@@ -10,6 +18,13 @@ import { RequestUser } from '../types/requestUser';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Get(':id')
+  async getUserById(
+    @Param('id') id: string,
+  ): Promise<User & { followerCount: number; followingCount: number }> {
+    return await this.authService.fetchUserProfile(+id);
+  }
 
   @Post('signup')
   async signUp(@Body() createUserDto: CreateUserDto): Promise<User> {

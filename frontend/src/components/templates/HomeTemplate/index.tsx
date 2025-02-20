@@ -9,7 +9,9 @@ import { useContext, useEffect } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
+import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleCard } from "@/components/molecules/ArticleCard";
+import { SortSelect } from "@/components/molecules/SortSelect";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";
@@ -30,6 +32,7 @@ export const HomeTemplate = () => {
     handleInputSearch,
     handleShowMoreArticles,
     fetchArticleCardList,
+    handleSortChange,
   } = useHomeTemplate();
   // 初回レンダリング時に記事一覧を取得
   useEffect(() => {
@@ -45,41 +48,35 @@ export const HomeTemplate = () => {
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
-      <main className={style.articlesContainer}>
-        {/* 並び替え */}
-        <section className={style.articleCardSort}>
-          <div className={style.sortTitleWrapper}>
-            <p className={style.sortTitle}>並び順</p>
-          </div>
-          <div className={style.selectWrapper}>
-            <select className={style.select}>
-              <option value="newest">新しい順</option>
-              <option value="oldest">古い順</option>
-              <option value="likes">いいね順</option>
-            </select>
-          </div>
-        </section>
-        {/* 記事一覧リスト */}
-        <section>
-          {articleListAll.length > 0 &&
-            articleListAll
-              .slice(0, articleDisplayLength)
-              .map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-        </section>
-        {/* もっと見るボタン */}
-        {articleListAll.length > articleDisplayLength && (
-          <section className={style.showMore}>
-            <BaseButton
-              color={"secondary"}
-              size={"medium"}
-              text={"もっと見る"}
-              onClick={handleShowMoreArticles}
-            />
+      <PageContainer>
+        <main className={style.articlesContainer}>
+          {/* 並び替え */}
+          <section className={style.articleCardSort}>
+            <SortSelect onChange={handleSortChange} />
           </section>
-        )}
-      </main>
+          {/* 記事一覧リスト */}
+          <section>
+            {articleListAll.length > 0 &&
+              articleListAll
+                .slice(0, articleDisplayLength)
+                .map((article) => (
+                  <ArticleCard key={article.id} article={article} />
+                ))}
+          </section>
+          {/* もっと見るボタン */}
+          {articleListAll.length > articleDisplayLength && (
+            <section className={style.showMore}>
+              <BaseButton
+                color={"secondary"}
+                size={"medium"}
+                text={"もっと見る"}
+                onClick={handleShowMoreArticles}
+              />
+            </section>
+          )}
+        </main>
+      </PageContainer>
+
       {/* フッター */}
       <Footer />
     </>
