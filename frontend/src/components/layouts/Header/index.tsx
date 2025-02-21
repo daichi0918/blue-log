@@ -45,9 +45,16 @@ export const Header = memo((props: HeaderProps) => {
   const navigateToSignIn = useCallback(() => {
     void router.push("/signin");
   }, [router]);
+
+  /**
+   * Home画面への遷移
+   */
+  const navigateToHome = useCallback(() => {
+    void router.push("/");
+  }, [router]);
   return (
     <header className={style.header}>
-      <div>
+      <div className={style.titleWrapper} onClick={navigateToHome}>
         <p className={style.title}>Blue Log</p>
       </div>
       <div className={style.inputContainer}>

@@ -3,6 +3,7 @@
 import { memo } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { UserImage } from "@/components/atoms/UserImage";
+import { UserLink } from "@/components/atoms/UserLink";
 import { IconContext } from "react-icons";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -16,6 +17,7 @@ import style from "./styles.module.css";
  */
 
 type UserCardProps = {
+  userId: number;
   userName: string;
   userImage: string | null;
   userProfile: string | null;
@@ -35,6 +37,7 @@ type UserCardProps = {
  */
 export const UserCard = memo((props: UserCardProps) => {
   const {
+    userId,
     userName,
     userImage,
     userProfile,
@@ -65,10 +68,13 @@ export const UserCard = memo((props: UserCardProps) => {
   };
   return (
     <div className={style.userProfileWrapper}>
-      <div className={style.userInfo}>
-        <UserImage image={userImage} userName={userName} />
-        <p className={style.userName}>{userName}</p>
-      </div>
+      <UserLink userId={userId}>
+        <div className={style.userInfo}>
+          <UserImage image={userImage} userName={userName} />
+          <p className={style.userName}>{userName}</p>
+        </div>
+      </UserLink>
+
       <div className={style.followWrapper}>
         <p>
           <span>{follower}</span>フォロワー <span>{following}</span>フォロー中

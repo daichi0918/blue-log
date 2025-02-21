@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type ArticleCardType } from "@/type/ArticleCard";
 
-import { ArticleInfo } from "../ArticleInfo";
-import { LikeBookmarkButtons } from "../LikeBookmarkButtons";
-import { Tags } from "../Tags";
+import { ArticleInfo } from "../../molecules/ArticleInfo";
+import { LikeBookmarkButtons } from "../../molecules/LikeBookmarkButtons";
+import { Tags } from "../../molecules/Tags";
 import style from "./styles.module.css";
 
 /**
@@ -54,6 +54,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
       </section>
       <section className={style.articleInfoWrapper}>
         <ArticleInfo
+          userId={article.user.id}
           userName={article.user.name}
           image={article.user.image}
           createdAt={article.createdAt}

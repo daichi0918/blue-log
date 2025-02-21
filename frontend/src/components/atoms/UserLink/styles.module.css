@@ -1,0 +1,9 @@
+.link:hover {
+  cursor: pointer;
+}
+
+.link {
+  display: block;
+  text-decoration: unset;
+  color: var(--gray_06);
+}

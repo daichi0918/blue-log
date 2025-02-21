@@ -71,7 +71,14 @@ export class ArticlesService {
             twitter: true,
             facebook: true,
             github: true,
-          }, // ユーザー情報
+            profile: true,
+            _count: {
+              select: {
+                followers: true, // フォロワー数
+                following: true, // フォロー数
+              },
+            },
+          },
         },
         _count: {
           select: { likes: true }, // いいねの数
@@ -94,7 +101,11 @@ export class ArticlesService {
       tags: found.tags,
       createdAt: found.createdAt,
       updatedAt: found.updatedAt,
-      user: found.user,
+      user: {
+        ...found.user,
+        followerCount: found.user._count.followers, // フォロワー数
+        followingCount: found.user._count.following, // フォロー数
+      },
       likeCount: found._count.likes,
       isLiked: userId ? found.likes.length > 0 : false,
       isAuthor: userId ? found.user.id === userId : false,

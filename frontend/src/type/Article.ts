@@ -22,6 +22,8 @@ export type ArticleType = {
     github: string | null;
     facebook: string | null;
     profile: string | null;
+    followerCount: number;
+    followingCount: number;
   };
   likeCount: number;
   isLiked: boolean;
