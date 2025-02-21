@@ -57,8 +57,6 @@ export const ArticleTemplate = () => {
    */
   const fetchArticleById = useCallback(async (): Promise<void> => {
     const res = await fetchArticleAPI(String(param.id));
-    console.log("res");
-    console.log(res);
     setArticle(
       res?.data && typeof res.data === "object" ? res.data : undefined,
     );
@@ -245,6 +243,8 @@ export const ArticleTemplate = () => {
                   githubURL={article.user.github}
                   facebookURL={article.user.facebook}
                   profile={article.user.profile}
+                  follower={article.user.followerCount}
+                  following={article.user.followingCount}
                   isAuth={isAuth}
                 />
               </section>
