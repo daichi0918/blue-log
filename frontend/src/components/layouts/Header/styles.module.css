@@ -16,6 +16,10 @@
   margin: 0 auto;
 }
 
+.titleWrapper:hover {
+  cursor: pointer;
+}
+
 .title {
   font-size: 2rem;
 }
