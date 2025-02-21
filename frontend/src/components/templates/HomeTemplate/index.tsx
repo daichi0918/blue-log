@@ -10,8 +10,8 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
+import { ArticleCard } from "@/components/organisms/ArticleCard";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";

@@ -8,6 +8,7 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { UserImage } from "@/components/atoms/UserImage";
+import { UserLink } from "@/components/atoms/UserLink";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -163,6 +164,7 @@ export const ArticleTemplate = () => {
                   </div>
                   <div className={style.articleInfoWrapper}>
                     <ArticleInfo
+                      userId={article.user.id}
                       userName={article.user.name}
                       image={article.user.image}
                       createdAt={article.createdAt}
@@ -181,13 +183,15 @@ export const ArticleTemplate = () => {
                 </main>
                 <section className={style.contentSection}>
                   <div className={style.userInfoFollowButtonWrapper}>
-                    <div className={style.userInfo}>
-                      <UserImage
-                        image={article.user.image}
-                        userName={article.user.name}
-                      />
-                      <p className={style.userName}>{article.user.name}</p>
-                    </div>
+                    <UserLink userId={article.user.id}>
+                      <div className={style.userInfo}>
+                        <UserImage
+                          image={article.user.image}
+                          userName={article.user.name}
+                        />
+                        <p className={style.userName}>{article.user.name}</p>
+                      </div>
+                    </UserLink>
                     <div className={style.followButtonWrapper}>
                       <BaseButton
                         color={"secondary"}
@@ -236,6 +240,7 @@ export const ArticleTemplate = () => {
               </section>
               <section className={style.sidebarContainer}>
                 <UserCard
+                  userId={article.user.id}
                   userName={article.user.name}
                   userImage={article.user.image}
                   userProfile={article.user.profile}

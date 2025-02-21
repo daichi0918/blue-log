@@ -12,8 +12,8 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import { ArticleCard } from "@/components/molecules/ArticleCard";
 import { SortSelect } from "@/components/molecules/SortSelect";
+import { ArticleCard } from "@/components/organisms/ArticleCard";
 import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleCardType } from "@/type/ArticleCard";
@@ -191,6 +191,7 @@ export const AccountTemplate = () => {
               <aside className={style.sidebarContainer}>
                 {currentUser && (
                   <UserCard
+                    userId={currentUser.id}
                     userName={currentUser.name}
                     userImage={currentUser.image ?? null}
                     userProfile={currentUser.profile ?? null}
