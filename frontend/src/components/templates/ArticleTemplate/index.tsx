@@ -196,7 +196,13 @@ export const ArticleTemplate = () => {
                       <BaseButton
                         color={"secondary"}
                         size={"medium"}
-                        text={"フォロー"}
+                        text={
+                          !isAuth
+                            ? "フォロー"
+                            : article.user.id === user?.id
+                              ? "プロフィールを編集"
+                              : "フォロー"
+                        }
                       />
                     </div>
                   </div>
@@ -250,7 +256,6 @@ export const ArticleTemplate = () => {
                   profile={article.user.profile}
                   follower={article.user.followerCount}
                   following={article.user.followingCount}
-                  isAuth={isAuth}
                 />
               </section>
             </div>

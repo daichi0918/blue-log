@@ -1,9 +1,10 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
+import { AuthContext } from "@/contexts/AuthContext";
 import { IconContext } from "react-icons";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -27,7 +28,6 @@ type UserCardProps = {
   profile: string | null;
   follower?: number;
   following?: number;
-  isAuth: boolean;
 };
 
 /**
@@ -36,6 +36,7 @@ type UserCardProps = {
  * @returns {JSX.Element}
  */
 export const UserCard = memo((props: UserCardProps) => {
+  const { user, isAuth } = useContext(AuthContext);
   const {
     userId,
     userName,
@@ -46,7 +47,6 @@ export const UserCard = memo((props: UserCardProps) => {
     facebookURL,
     follower,
     following,
-    isAuth,
   } = props;
   /**
    * Xへ遷移
@@ -88,7 +88,13 @@ export const UserCard = memo((props: UserCardProps) => {
       <BaseButton
         color={"secondary"}
         size={"small"}
-        text={isAuth ? "プロフィールを編集" : "フォロー"}
+        text={
+          !isAuth
+            ? "フォロー"
+            : userId === user?.id
+              ? "プロフィールを編集"
+              : "フォロー"
+        }
         additionalStyle={{ width: "100%", margin: "15px 0" }}
       />
       <div className={style.userSnsInfo}>

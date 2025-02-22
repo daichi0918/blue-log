@@ -201,7 +201,6 @@ export const AccountTemplate = () => {
                     profile={currentUser.profile ?? null}
                     follower={currentUser.followerCount}
                     following={currentUser.followingCount}
-                    isAuth={isAuth}
                   />
                 )}
               </aside>
