@@ -199,8 +199,8 @@ export const AccountTemplate = () => {
                     githubURL={currentUser.github ?? null}
                     facebookURL={currentUser.facebook ?? null}
                     profile={currentUser.profile ?? null}
-                    follower={currentUser.followerCount}
-                    following={currentUser.followingCount}
+                    followerCount={currentUser.followerCount}
+                    followingCount={currentUser.followingCount}
                   />
                 )}
               </aside>

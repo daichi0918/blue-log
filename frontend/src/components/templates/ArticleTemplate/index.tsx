@@ -201,7 +201,9 @@ export const ArticleTemplate = () => {
                             ? "フォロー"
                             : article.user.id === user?.id
                               ? "プロフィールを編集"
-                              : "フォロー"
+                              : article.user.followers.includes(user?.id ?? -1)
+                                ? "フォローを外す"
+                                : "フォロー"
                         }
                       />
                     </div>
@@ -254,8 +256,9 @@ export const ArticleTemplate = () => {
                   githubURL={article.user.github}
                   facebookURL={article.user.facebook}
                   profile={article.user.profile}
-                  follower={article.user.followerCount}
-                  following={article.user.followingCount}
+                  followers={article.user.followers}
+                  followerCount={article.user.followerCount}
+                  followingCount={article.user.followingCount}
                 />
               </section>
             </div>

@@ -72,6 +72,26 @@ export class ArticlesService {
             facebook: true,
             github: true,
             profile: true,
+            followers: {
+              select: {
+                follower: {
+                  select: {
+                    id: true,
+                  },
+                },
+              },
+            },
+            following: {
+              select: {
+                following: {
+                  // Follow モデルの `following` を参照
+                  select: {
+                    id: true,
+                  },
+                },
+              },
+            },
+
             _count: {
               select: {
                 followers: true, // フォロワー数

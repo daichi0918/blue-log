@@ -26,8 +26,9 @@ type UserCardProps = {
   githubURL: string | null;
   facebookURL: string | null;
   profile: string | null;
-  follower?: number;
-  following?: number;
+  followers?: Array<number>;
+  followerCount?: number;
+  followingCount?: number;
 };
 
 /**
@@ -45,8 +46,9 @@ export const UserCard = memo((props: UserCardProps) => {
     twitterURL,
     githubURL,
     facebookURL,
-    follower,
-    following,
+    followers,
+    followerCount,
+    followingCount,
   } = props;
   /**
    * Xへ遷移
@@ -77,7 +79,8 @@ export const UserCard = memo((props: UserCardProps) => {
 
       <div className={style.followWrapper}>
         <p>
-          <span>{follower}</span>フォロワー <span>{following}</span>フォロー中
+          <span>{followerCount}</span>フォロワー <span>{followingCount}</span>
+          フォロー中
         </p>
       </div>
       {userProfile && (
@@ -93,7 +96,9 @@ export const UserCard = memo((props: UserCardProps) => {
             ? "フォロー"
             : userId === user?.id
               ? "プロフィールを編集"
-              : "フォロー"
+              : followers?.includes(user?.id ?? -1)
+                ? "フォローを外す"
+                : "フォロー"
         }
         additionalStyle={{ width: "100%", margin: "15px 0" }}
       />
