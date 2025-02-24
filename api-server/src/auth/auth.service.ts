@@ -11,6 +11,7 @@ import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from 'src/types/jwtPayload';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -48,6 +49,35 @@ export class AuthService {
       followerCount,
       followingCount,
     };
+  }
+
+  /**
+   * 特定ユーザー更新機能
+   * @param {string} id
+   * @returns {User}
+   */
+  async updateUserProfile(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    // ユーザーが存在するか確認
+    const existingUser = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    // ユーザー情報を更新
+    const updatedUser = await this.prismaService.user.update({
+      where: { id },
+      data: {
+        ...updateUserDto, // 渡されたデータのみを更新
+      },
+    });
+
+    return updatedUser;
   }
 
   /**

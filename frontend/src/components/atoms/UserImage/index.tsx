@@ -23,9 +23,15 @@ export const UserImage = memo((props: UserImageProps) => {
   const randomColor = useRandomColor();
   const { image, userName } = props;
   return (
-    <div className={style.userImg}>
+    <div className={style.userIcon}>
       {image ? (
-        <Image src={image} alt={userName} />
+        <Image
+          src={image}
+          alt={userName}
+          className={style.userImg}
+          width={"32"}
+          height={"32"}
+        />
       ) : (
         <span
           style={{ background: randomColor ?? "#FFD700" }}
