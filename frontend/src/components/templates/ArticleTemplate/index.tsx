@@ -201,7 +201,7 @@ export const ArticleTemplate = () => {
                             ? "フォロー"
                             : article.user.id === user?.id
                               ? "プロフィールを編集"
-                              : article.user.followers.includes(user?.id ?? -1)
+                              : article.user.followers?.includes(user?.id ?? -1)
                                 ? "フォローを外す"
                                 : "フォロー"
                         }
