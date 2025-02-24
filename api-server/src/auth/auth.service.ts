@@ -113,6 +113,7 @@ export class AuthService {
       id: createdUser.id,
       name: createdUser.name,
       email: createdUser.email,
+      image: createdUser.image,
       createdAt: createdUser.createdAt,
       updateAt: createdUser.updateAt,
     };
@@ -172,6 +173,7 @@ export class AuthService {
       id: user.id,
       name: user.name,
       email: user.email,
+      image: user.image,
       createdAt: user.createdAt,
       updateAt: user.updateAt,
     };

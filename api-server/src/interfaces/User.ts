@@ -2,5 +2,5 @@ import { User } from '@prisma/client';
 
 export type ResponseUserType = Omit<
   User,
-  'password' | 'image' | 'twitter' | 'facebook' | 'github' | 'profile'
+  'password' | 'twitter' | 'facebook' | 'github' | 'profile'
 >;

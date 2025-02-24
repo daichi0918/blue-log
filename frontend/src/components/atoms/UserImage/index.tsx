@@ -11,7 +11,7 @@ import style from "./styles.module.css";
  */
 
 type UserImageProps = {
-  image: string | null;
+  image: string | null | undefined;
   userName: string;
 };
 

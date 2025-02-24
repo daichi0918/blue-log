@@ -6,13 +6,12 @@
  * @package molecules
  */
 import { memo, useCallback } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
+import { UserImage } from "@/components/atoms/UserImage";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
-import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -30,7 +29,8 @@ type HeaderProps = {
 export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
-  const randomColor = useRandomColor();
+
+  console.log(user);
 
   /**
    * 新規登録画面への遷移
@@ -70,21 +70,9 @@ export const Header = memo((props: HeaderProps) => {
         />
       </div>
       <div className={style.authSection}>
-        {isAuth ? (
+        {isAuth && user ? (
           <>
-            <div className={style.userImg}>
-              {user?.image ? (
-                // <img src={user?.image} alt={user?.name} />
-                <Image src={user?.image} alt={user?.name} />
-              ) : (
-                <span
-                  style={{ background: randomColor ?? "#ddd" }}
-                  className={style.noUserImg}
-                >
-                  {user?.name.charAt(0)}
-                </span>
-              )}
-            </div>
+            <UserImage image={user?.image} userName={user?.name} />
             <BaseButton
               color={"primary"}
               size={"medium"}
