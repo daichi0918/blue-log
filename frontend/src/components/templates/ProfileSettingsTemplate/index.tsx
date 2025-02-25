@@ -27,6 +27,12 @@ export const ProfilesSettingsTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
+  const [imageIcon, setImageIcon] = useState<string | undefined>(user?.image);
+  const [userName, setUserName] = useState<string | undefined>(user?.name);
+  const [profile, setProfile] = useState<string | undefined>(user?.profile);
+  const [twitter, setTwitter] = useState<string | undefined>(user?.twitter);
+  const [github, setGithub] = useState<string | undefined>(user?.github);
+  const [facebook, setFacebook] = useState<string | undefined>(user?.facebook);
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   /* action定義 */
@@ -36,6 +42,46 @@ export const ProfilesSettingsTemplate = () => {
    */
   const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
     setInputArticleSearch(e.target.value);
+  }, []);
+  /**
+   * ユーザー名のインプット
+   * @param {e}
+   */
+  const handleInputUserName: EventType["onChangeInput"] = useCallback((e) => {
+    setUserName(e.target.value);
+  }, []);
+  /**
+   * 自己紹介文のインプット
+   * @param {e}
+   */
+  const handleTextAreaProfile: EventType["onChangeTextArea"] = useCallback(
+    (e) => {
+      setProfile(e.target.value);
+    },
+    [],
+  );
+
+  /**
+   * twitterのインプット
+   * @param {e}
+   */
+  const handleInputTwitter: EventType["onChangeInput"] = useCallback((e) => {
+    setTwitter(e.target.value);
+  }, []);
+  /**
+   * githubのインプット
+   * @param {e}
+   */
+  const handleInputGithub: EventType["onChangeInput"] = useCallback((e) => {
+    setGithub(e.target.value);
+  }, []);
+
+  /**
+   * facebookのインプット
+   * @param {e}
+   */
+  const handleInputFacebook: EventType["onChangeInput"] = useCallback((e) => {
+    setFacebook(e.target.value);
   }, []);
 
   // const handleImageUpload = async (
@@ -107,7 +153,12 @@ export const ProfilesSettingsTemplate = () => {
               <label htmlFor="username" className={style.contentTitle}>
                 ユーザー名
               </label>
-              <InputForm id={"username"} additionalStyle={{ width: "360px" }} />
+              <InputForm
+                id={"username"}
+                additionalStyle={{ width: "360px" }}
+                value={userName ?? ""}
+                onChange={handleInputUserName}
+              />
             </fieldset>
             <fieldset className={style.contentWrapper}>
               <label htmlFor="profile" className={style.contentTitle}>
@@ -117,6 +168,8 @@ export const ProfilesSettingsTemplate = () => {
                 id="profile"
                 className={style.textarea}
                 rows={5}
+                value={profile ?? ""}
+                onChange={handleTextAreaProfile}
               ></textarea>
             </fieldset>
             <h3 className={style.socialLinkTitle}>ソーシャルリンク</h3>
@@ -124,19 +177,34 @@ export const ProfilesSettingsTemplate = () => {
               <label htmlFor="twitter" className={style.contentTitle}>
                 X
               </label>
-              <InputForm id={"twitter"} additionalStyle={{ width: "360px" }} />
+              <InputForm
+                id={"twitter"}
+                additionalStyle={{ width: "360px" }}
+                value={twitter ?? ""}
+                onChange={handleInputTwitter}
+              />
             </fieldset>
             <fieldset className={style.contentWrapper}>
               <label htmlFor="github" className={style.contentTitle}>
                 Github
               </label>
-              <InputForm id={"github"} additionalStyle={{ width: "360px" }} />
+              <InputForm
+                id={"github"}
+                additionalStyle={{ width: "360px" }}
+                value={github ?? ""}
+                onChange={handleInputGithub}
+              />
             </fieldset>
             <fieldset className={style.contentWrapper}>
               <label htmlFor="facebook" className={style.contentTitle}>
                 Facebook
               </label>
-              <InputForm id={"facebook"} additionalStyle={{ width: "360px" }} />
+              <InputForm
+                id={"facebook"}
+                additionalStyle={{ width: "360px" }}
+                value={facebook ?? ""}
+                onChange={handleInputFacebook}
+              />
             </fieldset>
           </section>
           <section className={style.section}>

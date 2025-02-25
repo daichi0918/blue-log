@@ -32,7 +32,7 @@ export const useSignInTemplate = () => {
     setEmail(value);
   }, []);
   /**
-   * emailのインプット
+   * passwordのインプット
    * @param {e}
    */
   const handleInputPassword: EventType["onChangeInput"] = useCallback((e) => {
