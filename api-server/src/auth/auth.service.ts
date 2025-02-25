@@ -114,6 +114,10 @@ export class AuthService {
       name: createdUser.name,
       email: createdUser.email,
       image: createdUser.image,
+      profile: createdUser.profile,
+      twitter: createdUser.twitter,
+      github: createdUser.github,
+      facebook: createdUser.facebook,
       createdAt: createdUser.createdAt,
       updateAt: createdUser.updateAt,
     };
@@ -174,6 +178,10 @@ export class AuthService {
       name: user.name,
       email: user.email,
       image: user.image,
+      profile: user.profile,
+      twitter: user.twitter,
+      github: user.github,
+      facebook: user.facebook,
       createdAt: user.createdAt,
       updateAt: user.updateAt,
     };

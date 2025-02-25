@@ -2,6 +2,7 @@
 
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { updateUser } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { Footer } from "@/components/layouts/Footer";
@@ -27,12 +28,12 @@ export const ProfilesSettingsTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [imageIcon, setImageIcon] = useState<string | undefined>(user?.image);
-  const [userName, setUserName] = useState<string | undefined>(user?.name);
-  const [profile, setProfile] = useState<string | undefined>(user?.profile);
-  const [twitter, setTwitter] = useState<string | undefined>(user?.twitter);
-  const [github, setGithub] = useState<string | undefined>(user?.github);
-  const [facebook, setFacebook] = useState<string | undefined>(user?.facebook);
+  const [imageIcon, setImageIcon] = useState<string | undefined>("");
+  const [userName, setUserName] = useState<string | undefined>("");
+  const [profile, setProfile] = useState<string | undefined>("");
+  const [twitter, setTwitter] = useState<string | undefined>("");
+  const [github, setGithub] = useState<string | undefined>("");
+  const [facebook, setFacebook] = useState<string | undefined>("");
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   /* action定義 */
@@ -84,6 +85,37 @@ export const ProfilesSettingsTemplate = () => {
     setFacebook(e.target.value);
   }, []);
 
+  /**
+   *
+   */
+  const handleUpdateUser = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const res = await updateUser(
+        String(user?.id),
+        imageIcon,
+        userName,
+        profile,
+        twitter,
+        github,
+        facebook,
+      );
+      if (res?.code >= 400) {
+        alert(res.message);
+        return;
+      }
+      if (res?.data) {
+        setImageIcon(res?.data.image);
+        setUserName(res?.data.name);
+        setProfile(res?.data.profile);
+        setTwitter(res?.data.twitter);
+        setGithub(res?.data.github);
+        setFacebook(res?.data.facebook);
+      }
+    },
+    [user?.id, imageIcon, userName, profile, twitter, github, facebook],
+  );
+
   // const handleImageUpload = async (
   //   event: React.ChangeEvent<HTMLInputElement>,
   // ) => {
@@ -111,10 +143,6 @@ export const ProfilesSettingsTemplate = () => {
   //     console.error("アップロード中にエラーが発生しました", error);
   //   }
   // };
-  console.log("isAuth");
-  console.log(isAuth);
-  console.log("user");
-  console.log(user);
   useEffect(() => {
     if (isAuth === null || user === undefined) {
       return; // 初回レンダリングでまだ値が設定されていない場合は何もしない
@@ -122,6 +150,15 @@ export const ProfilesSettingsTemplate = () => {
 
     if (!isAuth || Object.keys(user).length === 0) {
       void router.push("/");
+    }
+
+    if (user) {
+      setImageIcon(user.image);
+      setUserName(user.name);
+      setProfile(user.profile);
+      setTwitter(user.twitter);
+      setGithub(user.github);
+      setFacebook(user.facebook);
     }
   }, [isAuth, user, router]);
 
@@ -143,80 +180,81 @@ export const ProfilesSettingsTemplate = () => {
             </nav>
           </section>
           <section className={style.section}>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="icon-upload" className={style.contentTitle}>
-                アイコン
-              </label>
-              <input type="file" />
-            </fieldset>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="username" className={style.contentTitle}>
-                ユーザー名
-              </label>
-              <InputForm
-                id={"username"}
-                additionalStyle={{ width: "360px" }}
-                value={userName ?? ""}
-                onChange={handleInputUserName}
+            <form onSubmit={handleUpdateUser}>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="icon-upload" className={style.contentTitle}>
+                  アイコン
+                </label>
+                <input type="file" />
+              </fieldset>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="username" className={style.contentTitle}>
+                  ユーザー名
+                </label>
+                <InputForm
+                  id={"username"}
+                  additionalStyle={{ width: "360px" }}
+                  value={userName ?? ""}
+                  onChange={handleInputUserName}
+                />
+              </fieldset>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="profile" className={style.contentTitle}>
+                  自己紹介文
+                </label>
+                <textarea
+                  id="profile"
+                  className={style.textarea}
+                  rows={5}
+                  value={profile ?? ""}
+                  onChange={handleTextAreaProfile}
+                ></textarea>
+              </fieldset>
+              <h3 className={style.socialLinkTitle}>ソーシャルリンク</h3>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="twitter" className={style.contentTitle}>
+                  X
+                </label>
+                <InputForm
+                  id={"twitter"}
+                  additionalStyle={{ width: "360px" }}
+                  value={twitter ?? ""}
+                  onChange={handleInputTwitter}
+                />
+              </fieldset>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="github" className={style.contentTitle}>
+                  Github
+                </label>
+                <InputForm
+                  id={"github"}
+                  additionalStyle={{ width: "360px" }}
+                  value={github ?? ""}
+                  onChange={handleInputGithub}
+                />
+              </fieldset>
+              <fieldset className={style.contentWrapper}>
+                <label htmlFor="facebook" className={style.contentTitle}>
+                  Facebook
+                </label>
+                <InputForm
+                  id={"facebook"}
+                  additionalStyle={{ width: "360px" }}
+                  value={facebook ?? ""}
+                  onChange={handleInputFacebook}
+                />
+              </fieldset>
+              <BaseButton
+                type={"submit"}
+                color={"primary"}
+                size={"small"}
+                text={"保存"}
+                additionalStyle={{
+                  paddingBlock: "0.35em 0.625em",
+                  paddingInline: "0.75em",
+                }}
               />
-            </fieldset>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="profile" className={style.contentTitle}>
-                自己紹介文
-              </label>
-              <textarea
-                id="profile"
-                className={style.textarea}
-                rows={5}
-                value={profile ?? ""}
-                onChange={handleTextAreaProfile}
-              ></textarea>
-            </fieldset>
-            <h3 className={style.socialLinkTitle}>ソーシャルリンク</h3>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="twitter" className={style.contentTitle}>
-                X
-              </label>
-              <InputForm
-                id={"twitter"}
-                additionalStyle={{ width: "360px" }}
-                value={twitter ?? ""}
-                onChange={handleInputTwitter}
-              />
-            </fieldset>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="github" className={style.contentTitle}>
-                Github
-              </label>
-              <InputForm
-                id={"github"}
-                additionalStyle={{ width: "360px" }}
-                value={github ?? ""}
-                onChange={handleInputGithub}
-              />
-            </fieldset>
-            <fieldset className={style.contentWrapper}>
-              <label htmlFor="facebook" className={style.contentTitle}>
-                Facebook
-              </label>
-              <InputForm
-                id={"facebook"}
-                additionalStyle={{ width: "360px" }}
-                value={facebook ?? ""}
-                onChange={handleInputFacebook}
-              />
-            </fieldset>
-          </section>
-          <section className={style.section}>
-            <BaseButton
-              color={"primary"}
-              size={"small"}
-              text={"保存"}
-              additionalStyle={{
-                paddingBlock: "0.35em 0.625em",
-                paddingInline: "0.75em",
-              }}
-            />
+            </form>
           </section>
         </main>
       </PageContainer>
