@@ -2,6 +2,8 @@
 
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { BaseButton } from "@/components/atoms/BaseButton";
+import { InputForm } from "@/components/atoms/InputForm";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -95,10 +97,58 @@ export const ProfilesSettingsTemplate = () => {
             </nav>
           </section>
           <section className={style.section}>
-            <div>
-              <p className={style.contentTitle}>アイコン</p>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="icon-upload" className={style.contentTitle}>
+                アイコン
+              </label>
               <input type="file" />
-            </div>
+            </fieldset>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="username" className={style.contentTitle}>
+                ユーザー名
+              </label>
+              <InputForm id={"username"} additionalStyle={{ width: "360px" }} />
+            </fieldset>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="profile" className={style.contentTitle}>
+                自己紹介文
+              </label>
+              <textarea
+                id="profile"
+                className={style.textarea}
+                rows={5}
+              ></textarea>
+            </fieldset>
+            <h3 className={style.socialLinkTitle}>ソーシャルリンク</h3>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="twitter" className={style.contentTitle}>
+                X
+              </label>
+              <InputForm id={"twitter"} additionalStyle={{ width: "360px" }} />
+            </fieldset>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="github" className={style.contentTitle}>
+                Github
+              </label>
+              <InputForm id={"github"} additionalStyle={{ width: "360px" }} />
+            </fieldset>
+            <fieldset className={style.contentWrapper}>
+              <label htmlFor="facebook" className={style.contentTitle}>
+                Facebook
+              </label>
+              <InputForm id={"facebook"} additionalStyle={{ width: "360px" }} />
+            </fieldset>
+          </section>
+          <section className={style.section}>
+            <BaseButton
+              color={"primary"}
+              size={"small"}
+              text={"保存"}
+              additionalStyle={{
+                paddingBlock: "0.35em 0.625em",
+                paddingInline: "0.75em",
+              }}
+            />
           </section>
         </main>
       </PageContainer>
