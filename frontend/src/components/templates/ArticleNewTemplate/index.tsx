@@ -6,11 +6,14 @@
  * @package templates
  */
 import { useCallback, useContext, useState } from "react";
+import { InputForm } from "@/components/atoms/InputForm";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
+
+import style from "./styles.module.css";
 
 /**
  * AccountNewTemplate
@@ -41,7 +44,21 @@ export const AccountNewTemplate = () => {
         handleInputSearch={handleInputSearch}
       />
       <PageContainer>
-        <main></main>
+        <main className={style.main}>
+          <section className={style.section}>
+            <label className={style.label} htmlFor={"title"}>
+              タイトル
+            </label>
+            <InputForm
+              id={"title"}
+              additionalStyle={{
+                height: "40px",
+                fontSize: "2rem",
+                fontWeight: "bold",
+              }}
+            />
+          </section>
+        </main>
       </PageContainer>
       <Footer />
     </>
