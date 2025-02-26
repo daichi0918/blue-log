@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   width: 65%;
-  margin: 100px auto;
+  margin: 0 auto;
 }
 
 .articlesContainer > section {

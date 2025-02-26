@@ -137,6 +137,59 @@ export const fetchUserById = async (userId: string) => {
 };
 
 /**
+ * ユーザー情報更新
+ */
+export const updateUser = async (
+  userId: string,
+  image?: string,
+  name?: string,
+  profile?: string,
+  twitter?: string,
+  github?: string,
+  facebook?: string,
+) => {
+  try {
+    const { data }: AxiosResponse<UserType> = await globalAxios.patch(
+      `auth/${userId}/`,
+      {
+        image,
+        name,
+        profile,
+        twitter,
+        github,
+        facebook,
+      },
+    );
+
+    const res: ResponseType<UserType> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
  * 認証チェックAPI
  * @returns
  */

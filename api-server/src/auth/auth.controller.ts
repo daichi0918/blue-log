@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Request,
   UseGuards,
@@ -14,6 +15,7 @@ import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { Request as ExpressRequest } from 'express';
 import { RequestUser } from '../types/requestUser';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -24,6 +26,12 @@ export class AuthController {
     @Param('id') id: string,
   ): Promise<User & { followerCount: number; followingCount: number }> {
     return await this.authService.fetchUserProfile(+id);
+  }
+
+  @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
+  async update(@Param('id') id: string, @Body() updateUsereDto: UpdateUserDto) {
+    return await this.authService.updateUserProfile(+id, updateUsereDto);
   }
 
   @Post('signup')

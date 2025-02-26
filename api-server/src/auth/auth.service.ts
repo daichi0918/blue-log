@@ -11,6 +11,7 @@ import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from 'src/types/jwtPayload';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -51,6 +52,35 @@ export class AuthService {
   }
 
   /**
+   * 特定ユーザー更新機能
+   * @param {string} id
+   * @returns {User}
+   */
+  async updateUserProfile(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    // ユーザーが存在するか確認
+    const existingUser = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    // ユーザー情報を更新
+    const updatedUser = await this.prismaService.user.update({
+      where: { id },
+      data: {
+        ...updateUserDto, // 渡されたデータのみを更新
+      },
+    });
+
+    return updatedUser;
+  }
+
+  /**
    * 新規ユーザー作成
    * @param createUserDto
    * @returns
@@ -83,6 +113,11 @@ export class AuthService {
       id: createdUser.id,
       name: createdUser.name,
       email: createdUser.email,
+      image: createdUser.image,
+      profile: createdUser.profile,
+      twitter: createdUser.twitter,
+      github: createdUser.github,
+      facebook: createdUser.facebook,
       createdAt: createdUser.createdAt,
       updateAt: createdUser.updateAt,
     };
@@ -142,6 +177,11 @@ export class AuthService {
       id: user.id,
       name: user.name,
       email: user.email,
+      image: user.image,
+      profile: user.profile,
+      twitter: user.twitter,
+      github: user.github,
+      facebook: user.facebook,
       createdAt: user.createdAt,
       updateAt: user.updateAt,
     };

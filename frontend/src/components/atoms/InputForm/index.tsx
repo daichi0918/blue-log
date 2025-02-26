@@ -19,6 +19,7 @@ type InputFormProps = {
  */
 export const InputForm: FC<InputFormProps> = memo((props) => {
   const {
+    id,
     type = "text",
     placeholder,
     value,
@@ -27,6 +28,7 @@ export const InputForm: FC<InputFormProps> = memo((props) => {
   } = props;
   return (
     <input
+      id={id}
       className={style.input}
       type={type}
       placeholder={placeholder}
