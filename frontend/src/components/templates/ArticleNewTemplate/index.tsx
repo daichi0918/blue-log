@@ -58,6 +58,17 @@ export const AccountNewTemplate = () => {
               }}
             />
           </section>
+          <section className={style.section}>
+            <label className={style.label} htmlFor={"tag"}>
+              タグ
+            </label>
+            <InputForm
+              id={"tag"}
+              additionalStyle={{
+                height: "40px",
+              }}
+            />
+          </section>
         </main>
       </PageContainer>
       <Footer />
