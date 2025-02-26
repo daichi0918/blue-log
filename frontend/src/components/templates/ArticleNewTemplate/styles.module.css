@@ -17,3 +17,33 @@
   padding-left: 5px;
   padding-bottom: 5px;
 }
+
+.textWrapper {
+  display: flex;
+}
+
+.basicTextWrapper,
+.previewTextWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.textarea {
+  border: 1px solid silver;
+  /* border-top: 1px solid silver; */
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  width: 100%;
+  min-height: 520px;
+}
+
+.reactMarkdown {
+  border: 1px solid silver;
+  /* border-top: 1px solid silver; */
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  width: 100%;
+  min-height: 520px;
+  background: var(--gray_00);
+}

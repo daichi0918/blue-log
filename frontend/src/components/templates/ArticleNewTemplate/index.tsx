@@ -12,6 +12,7 @@ import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
+import ReactMarkdown from "react-markdown";
 
 import style from "./styles.module.css";
 
@@ -68,6 +69,21 @@ export const AccountNewTemplate = () => {
                 height: "40px",
               }}
             />
+          </section>
+          <section className={style.section}>
+            <label className={style.label} htmlFor={"text"}>
+              本文
+            </label>
+            <section className={style.textWrapper}>
+              <div className={style.basicTextWrapper}>
+                <p>Markdown形式で入力</p>
+                <textarea className={style.textarea}></textarea>
+              </div>
+              <div className={style.previewTextWrapper}>
+                <p>プレビュー</p>
+                <ReactMarkdown className={style.reactMarkdown}></ReactMarkdown>
+              </div>
+            </section>
           </section>
         </main>
       </PageContainer>
