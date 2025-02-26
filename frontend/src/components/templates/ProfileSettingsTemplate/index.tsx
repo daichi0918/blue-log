@@ -8,6 +8,7 @@ import { InputForm } from "@/components/atoms/InputForm";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
+import { NAVIGATION_PATH } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
 
@@ -111,9 +112,11 @@ export const ProfilesSettingsTemplate = () => {
         setTwitter(res?.data.twitter);
         setGithub(res?.data.github);
         setFacebook(res?.data.facebook);
+
+        router.push(NAVIGATION_PATH.TOP);
       }
     },
-    [user?.id, imageIcon, userName, profile, twitter, github, facebook],
+    [user?.id, imageIcon, userName, profile, twitter, github, facebook, router],
   );
 
   // const handleImageUpload = async (
