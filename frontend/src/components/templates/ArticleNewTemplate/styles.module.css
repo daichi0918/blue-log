@@ -18,6 +18,35 @@
   padding-bottom: 5px;
 }
 
+.tagWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.tag {
+  background: var(--blue_01);
+  color: var(--gray_06);
+  border: 2px;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.tagRemoveButton {
+  background: unset;
+  border: unset;
+  color: var(--gray_06);
+  margin: auto;
+  padding-top: 4px;
+}
+
+.tagRemoveButton:hover {
+  cursor: pointer;
+}
+
 .textWrapper {
   display: flex;
 }

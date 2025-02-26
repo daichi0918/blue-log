@@ -27,7 +27,8 @@ export const AccountNewTemplate = () => {
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-  const [tags, setTags] = useState<string>("");
+  const [tags, setTags] = useState<Array<string>>([]);
+  const [tagInput, setTagInput] = useState<string>("");
   const [text, setText] = useState<string>("");
 
   /* action定義 */
@@ -51,9 +52,41 @@ export const AccountNewTemplate = () => {
    * タグ
    * @param {e}
    */
-  const handleInputTags: EventType["onChangeInput"] = useCallback((e) => {
-    setTags(e.target.value);
-  }, []);
+  const handleInputTags: EventType["onChangeInput"] = useCallback(
+    (e) => {
+      const value = e.target.value;
+
+      // スペースが入力されたら確定
+      if (value.includes(" ")) {
+        const newTag = value.trim(); // 前後の空白を削除
+        if (newTag && !tags.includes(newTag)) {
+          setTags((prev) => [...prev, newTag]); // タグを追加
+        }
+        setTagInput(""); // 入力欄をリセット
+      } else {
+        setTagInput(value); // 入力状態を更新
+      }
+    },
+    [tags],
+  );
+
+  const handleKeyDownTags: React.KeyboardEventHandler<HTMLInputElement> =
+    useCallback(
+      (e) => {
+        if (e.key === " " && tagInput.trim() !== "") {
+          e.preventDefault(); // スペース入力を防ぐ
+          if (!tags.includes(tagInput.trim())) {
+            setTags((prev) => [...prev, tagInput.trim()]); // タグを追加
+          }
+          setTagInput(""); // 入力をクリア
+        }
+      },
+      [tagInput, tags],
+    );
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
   /**
    * 本文
@@ -93,14 +126,29 @@ export const AccountNewTemplate = () => {
             <label className={style.label} htmlFor={"tag"}>
               タグ
             </label>
-            <InputForm
-              id={"tag"}
-              value={tags}
-              onChange={handleInputTags}
-              additionalStyle={{
-                height: "40px",
-              }}
-            />
+            <div className={style.tagsContainer}>
+              {tags.map((tag, index) => (
+                <span key={index} className={style.tag}>
+                  <p>#{tag}</p>
+                  <button
+                    type="button"
+                    className={style.tagRemoveButton}
+                    onClick={() => handleRemoveTag(tag)}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+              <InputForm
+                id={"tag"}
+                value={tagInput}
+                onChange={handleInputTags}
+                additionalStyle={{
+                  height: "40px",
+                  width: "100%",
+                }}
+              />
+            </div>
           </section>
           <section className={style.section}>
             <label className={style.label} htmlFor={"text"}>
