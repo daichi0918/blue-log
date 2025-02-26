@@ -26,6 +26,9 @@ export const AccountNewTemplate = () => {
 
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [text, setText] = useState<string>("");
 
   /* action定義 */
   /**
@@ -35,6 +38,31 @@ export const AccountNewTemplate = () => {
   const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
     setInputArticleSearch(e.target.value);
   }, []);
+
+  /**
+   * タイトル
+   * @param {e}
+   */
+  const handleInputTitle: EventType["onChangeInput"] = useCallback((e) => {
+    setTitle(e.target.value);
+  }, []);
+
+  /**
+   * タグ
+   * @param {e}
+   */
+  const handleInputTags: EventType["onChangeInput"] = useCallback((e) => {
+    setTags(e.target.value);
+  }, []);
+
+  /**
+   * 本文
+   * @param {e}
+   */
+  const handleTextAreaText: EventType["onChangeTextArea"] = useCallback((e) => {
+    setText(e.target.value);
+  }, []);
+
   return (
     <>
       {/* TODO: このページ専用のヘッダーを作成(featured-shared-design使用の際) */}
@@ -52,6 +80,8 @@ export const AccountNewTemplate = () => {
             </label>
             <InputForm
               id={"title"}
+              value={title}
+              onChange={handleInputTitle}
               additionalStyle={{
                 height: "40px",
                 fontSize: "2rem",
@@ -65,6 +95,8 @@ export const AccountNewTemplate = () => {
             </label>
             <InputForm
               id={"tag"}
+              value={tags}
+              onChange={handleInputTags}
               additionalStyle={{
                 height: "40px",
               }}
@@ -77,11 +109,16 @@ export const AccountNewTemplate = () => {
             <section className={style.textWrapper}>
               <div className={style.basicTextWrapper}>
                 <p>Markdown形式で入力</p>
-                <textarea className={style.textarea}></textarea>
+                <textarea
+                  className={style.textarea}
+                  onChange={handleTextAreaText}
+                >
+                  {text}
+                </textarea>
               </div>
               <div className={style.previewTextWrapper}>
                 <p>プレビュー</p>
-                <ReactMarkdown className={style.reactMarkdown}></ReactMarkdown>
+                <ReactMarkdown className={style.markdown}>{text}</ReactMarkdown>
               </div>
             </section>
           </section>
