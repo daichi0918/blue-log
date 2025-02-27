@@ -13,6 +13,7 @@ import { UserImage } from "@/components/atoms/UserImage";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
 
+import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
 
 type HeaderProps = {
@@ -51,7 +52,7 @@ export const Header = memo((props: HeaderProps) => {
     void router.push("/");
   }, [router]);
   return (
-    <header className={style.header}>
+    <HeaderArea>
       <div className={style.titleWrapper} onClick={navigateToHome}>
         <p className={style.title}>Blue Log</p>
       </div>
@@ -97,6 +98,6 @@ export const Header = memo((props: HeaderProps) => {
           </>
         )}
       </div>
-    </header>
+    </HeaderArea>
   );
 });
