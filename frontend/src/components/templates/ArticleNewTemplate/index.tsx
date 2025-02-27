@@ -132,7 +132,11 @@ export const AccountNewTemplate = () => {
                 <InputForm
                   id={"tag"}
                   value={tagInput}
-                  placeholder={"スペース区切りで5つまで作成可能"}
+                  placeholder={
+                    tags.length < 5
+                      ? "スペース区切りで5つまで作成可能"
+                      : "タグは5つまでです"
+                  }
                   onChange={handleInputTags}
                   additionalStyle={{
                     height: "40px",
