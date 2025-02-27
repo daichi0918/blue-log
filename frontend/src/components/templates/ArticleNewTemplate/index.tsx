@@ -5,12 +5,14 @@
  *
  * @package templates
  */
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createArticleApi } from "@/apis/articleApi";
 import { InputForm } from "@/components/atoms/InputForm";
+import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
-import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import { AuthContext } from "@/contexts/AuthContext";
+import { NAVIGATION_PATH } from "@/constants/navigation";
 import { type EventType } from "@/type/Event";
 import ReactMarkdown from "react-markdown";
 
@@ -21,11 +23,8 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const AccountNewTemplate = () => {
-  // 認証情報を取得
-  const { isAuth, user } = useContext(AuthContext);
-
+  const router = useRouter();
   /* state定義 */
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [tagInput, setTagInput] = useState<string>("");
@@ -33,15 +32,7 @@ export const AccountNewTemplate = () => {
 
   /* action定義 */
   /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
-
-  /**
-   * タイトル
+   * タイトルInput
    * @param {e}
    */
   const handleInputTitle: EventType["onChangeInput"] = useCallback((e) => {
@@ -49,7 +40,7 @@ export const AccountNewTemplate = () => {
   }, []);
 
   /**
-   * タグ
+   * タグInput
    * @param {e}
    */
   const handleInputTags: EventType["onChangeInput"] = useCallback(
@@ -75,25 +66,32 @@ export const AccountNewTemplate = () => {
   };
 
   /**
-   * 本文
+   * 本文Input
    * @param {e}
    */
   const handleTextAreaText: EventType["onChangeTextArea"] = useCallback((e) => {
     setText(e.target.value);
   }, []);
 
+  /**
+   * 投稿
+   */
+  const handleCreateArticle = useCallback(async () => {
+    const res = await createArticleApi(title, text, tags);
+    if (res?.code >= 400) {
+      alert(res.message);
+      return;
+    }
+    if (res?.data) {
+      router.push(NAVIGATION_PATH.TOP);
+    }
+  }, [title, text, router, tags]);
   return (
     <>
-      {/* TODO: このページ専用のヘッダーを作成(featured-shared-design使用の際) */}
-      <Header
-        user={user}
-        isAuth={isAuth}
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
+      <ArticleFormHeader onSubmit={handleCreateArticle} />
       <PageContainer>
         <main className={style.main}>
-          <form>
+          <form onSubmit={handleCreateArticle}>
             <section className={style.section}>
               <label className={style.label} htmlFor={"title"}>
                 タイトル

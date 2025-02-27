@@ -10,3 +10,11 @@
   right: 0;
   z-index: 100;
 }
+
+.titleWrapper:hover {
+  cursor: pointer;
+}
+
+.title {
+  font-size: 2rem;
+}

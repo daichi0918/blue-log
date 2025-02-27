@@ -53,9 +53,6 @@ export const Header = memo((props: HeaderProps) => {
   }, [router]);
   return (
     <HeaderArea>
-      <div className={style.titleWrapper} onClick={navigateToHome}>
-        <p className={style.title}>Blue Log</p>
-      </div>
       <div className={style.inputContainer}>
         <InputForm
           placeholder={"キーワード検索"}
