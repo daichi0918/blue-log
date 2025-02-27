@@ -3,7 +3,7 @@
 /**
  * Header
  *
- * @package molecules
+ * @package layouts
  */
 import { memo, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,7 @@ type HeaderProps = {
 };
 
 /**
- * HomeTemplate
+ * Header
  * @returns {JSX.Element}
  */
 export const Header = memo((props: HeaderProps) => {
