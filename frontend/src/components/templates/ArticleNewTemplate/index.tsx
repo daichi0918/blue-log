@@ -74,7 +74,7 @@ export const AccountNewTemplate = () => {
   }, []);
 
   /**
-   * 投稿
+   * 投稿機能実装
    */
   const handleCreateArticle = useCallback(async () => {
     const res = await createArticleApi(title, text, tags);
