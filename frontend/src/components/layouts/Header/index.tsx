@@ -30,8 +30,6 @@ export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
 
-  console.log(user);
-
   /**
    * 新規登録画面への遷移
    */
