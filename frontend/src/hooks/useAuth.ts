@@ -38,11 +38,23 @@ export const useAuth = () => {
   }, []);
 
   /**
-   * 未ログインページにいるか判定処理
+   * 認証されていないと表示されないページの判定処理
    */
-  const isExitBeforeAuthPage = useCallback(() => {
+  const isProtectedPage = useCallback(() => {
     return (
-      pathname == NAVIGATION_PATH.SIGNIN || pathname === NAVIGATION_PATH.SIGNUP
+      pathname == NAVIGATION_LIST.SETTING ||
+      pathname === NAVIGATION_LIST.ARTICLE ||
+      pathname === NAVIGATION_LIST.ARTICLENEW ||
+      pathname === NAVIGATION_LIST.ARTICLEEDIT
+    );
+  }, [pathname]);
+
+  /**
+   * 未ログインページ
+   */
+  const isPublicAuthPage = useCallback(() => {
+    return (
+      pathname === NAVIGATION_LIST.LOGIN || pathname === NAVIGATION_LIST.SIGNUP
     );
   }, [pathname]);
 
@@ -58,11 +70,11 @@ export const useAuth = () => {
       setIsAuth(true);
       auth = true;
     }
-    // // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
-    // if (!auth && !isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
-    // // ログイン済で未ログインのページにいる場合、Todo一覧ページにリダイレクト
-    if (auth && isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.TOP);
-  }, [isExitBeforeAuthPage, router]);
+    // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
+    if (!auth && isProtectedPage()) router.push(NAVIGATION_LIST.LOGIN);
+    // // ログイン済で認証ページにいる場合、Todo一覧ページにリダイレクト
+    if (auth && isPublicAuthPage()) router.push(NAVIGATION_LIST.TOP);
+  }, [isProtectedPage, isPublicAuthPage, router]);
 
   useEffect(() => {
     void authRouting();
