@@ -28,11 +28,16 @@
   color: var(--gray_06);
   border: 2px;
   padding: 5px 10px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 5px;
   display: flex;
   align-items: center;
   width: fit-content;
+}
+
+.tag p {
+  margin: unset;
+  padding: unset;
 }
 
 .tagRemoveButton {
@@ -41,6 +46,7 @@
   color: var(--gray_06);
   margin: auto;
   padding-top: 4px;
+  font-size: 1.6rem;
 }
 
 .tagRemoveButton:hover {

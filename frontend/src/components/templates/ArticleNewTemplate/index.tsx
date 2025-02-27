@@ -70,20 +70,6 @@ export const AccountNewTemplate = () => {
     [tags],
   );
 
-  const handleKeyDownTags: React.KeyboardEventHandler<HTMLInputElement> =
-    useCallback(
-      (e) => {
-        if (e.key === " " && tagInput.trim() !== "") {
-          e.preventDefault(); // スペース入力を防ぐ
-          if (!tags.includes(tagInput.trim())) {
-            setTags((prev) => [...prev, tagInput.trim()]); // タグを追加
-          }
-          setTagInput(""); // 入力をクリア
-        }
-      },
-      [tagInput, tags],
-    );
-
   const handleRemoveTag = (tagToRemove: string) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
@@ -107,69 +93,78 @@ export const AccountNewTemplate = () => {
       />
       <PageContainer>
         <main className={style.main}>
-          <section className={style.section}>
-            <label className={style.label} htmlFor={"title"}>
-              タイトル
-            </label>
-            <InputForm
-              id={"title"}
-              value={title}
-              onChange={handleInputTitle}
-              additionalStyle={{
-                height: "40px",
-                fontSize: "2rem",
-                fontWeight: "bold",
-              }}
-            />
-          </section>
-          <section className={style.section}>
-            <label className={style.label} htmlFor={"tag"}>
-              タグ
-            </label>
-            <div className={style.tagsContainer}>
-              {tags.map((tag, index) => (
-                <span key={index} className={style.tag}>
-                  <p>#{tag}</p>
-                  <button
-                    type="button"
-                    className={style.tagRemoveButton}
-                    onClick={() => handleRemoveTag(tag)}
-                  >
-                    ×
-                  </button>
-                </span>
-              ))}
+          <form>
+            <section className={style.section}>
+              <label className={style.label} htmlFor={"title"}>
+                タイトル
+              </label>
               <InputForm
-                id={"tag"}
-                value={tagInput}
-                onChange={handleInputTags}
+                id={"title"}
+                value={title}
+                onChange={handleInputTitle}
                 additionalStyle={{
                   height: "40px",
-                  width: "100%",
+                  fontSize: "2rem",
+                  fontWeight: "bold",
                 }}
               />
-            </div>
-          </section>
-          <section className={style.section}>
-            <label className={style.label} htmlFor={"text"}>
-              本文
-            </label>
-            <section className={style.textWrapper}>
-              <div className={style.basicTextWrapper}>
-                <p>Markdown形式で入力</p>
-                <textarea
-                  className={style.textarea}
-                  onChange={handleTextAreaText}
-                >
-                  {text}
-                </textarea>
-              </div>
-              <div className={style.previewTextWrapper}>
-                <p>プレビュー</p>
-                <ReactMarkdown className={style.markdown}>{text}</ReactMarkdown>
+            </section>
+            <section className={style.section}>
+              <label className={style.label} htmlFor={"tag"}>
+                タグ
+              </label>
+              <div className={style.tagsContainer}>
+                <div className={style.tagWrapper}>
+                  {tags.map((tag, index) => (
+                    <span key={index} className={style.tag}>
+                      <p>#{tag}</p>
+                      <button
+                        type="button"
+                        className={style.tagRemoveButton}
+                        onClick={() => handleRemoveTag(tag)}
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+
+                <InputForm
+                  id={"tag"}
+                  value={tagInput}
+                  placeholder={"スペース区切りで5つまで作成可能"}
+                  onChange={handleInputTags}
+                  additionalStyle={{
+                    height: "40px",
+                    width: "100%",
+                  }}
+                  disabled={tags.length >= 5}
+                />
               </div>
             </section>
-          </section>
+            <section className={style.section}>
+              <label className={style.label} htmlFor={"text"}>
+                本文
+              </label>
+              <section className={style.textWrapper}>
+                <div className={style.basicTextWrapper}>
+                  <p>Markdown形式で入力</p>
+                  <textarea
+                    className={style.textarea}
+                    onChange={handleTextAreaText}
+                  >
+                    {text}
+                  </textarea>
+                </div>
+                <div className={style.previewTextWrapper}>
+                  <p>プレビュー</p>
+                  <ReactMarkdown className={style.markdown}>
+                    {text}
+                  </ReactMarkdown>
+                </div>
+              </section>
+            </section>
+          </form>
         </main>
       </PageContainer>
       <Footer />
