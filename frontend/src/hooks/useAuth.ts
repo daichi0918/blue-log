@@ -8,7 +8,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { authenticationApi } from "@/apis/authApi";
-import { NAVIGATION_LIST, NAVIGATION_PATH } from "@/constants/navigation";
+import { NAVIGATION_LIST } from "@/constants/navigation";
 import { type UserType } from "@/type/User";
 
 /**
