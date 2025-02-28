@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * AccountNewTemplate
+ * ArticleNewTemplate
  *
  * @package templates
  */
@@ -19,10 +19,10 @@ import ReactMarkdown from "react-markdown";
 import style from "./styles.module.css";
 
 /**
- * AccountNewTemplate
+ * ArticleNewTemplate
  * @returns {JSX.Element}
  */
-export const AccountNewTemplate = () => {
+export const ArticleNewTemplate = () => {
   const router = useRouter();
   /* state定義 */
   const [title, setTitle] = useState<string>("");

@@ -1,7 +1,7 @@
 import { ArticleNewTemplate } from "@/components/templates/ArticleNewTemplate";
 
-const ArticleNewPage = () => {
+const AccountNewPage = () => {
   return <ArticleNewTemplate />;
 };
 
-export default ArticleNewPage;
+export default AccountNewPage;
