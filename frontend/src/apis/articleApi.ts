@@ -220,9 +220,56 @@ export const createArticleApi = async (
       message: "",
     };
     if (isAxiosError(err)) {
-      // const axiosError = err as IErrorResponse;
-      // res.code = axiosError.response.status;
-      // res.message = axiosError.response.data.message;
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * 記事更新のAPI
+ * @param {string} title
+ * @param {string} text
+ * @param {Array<string>} tags
+ * @returns
+ */
+export const updateArticleApi = async (
+  id: string,
+  title: string,
+  text: string,
+  tags: Array<string>,
+) => {
+  try {
+    const { data }: AxiosResponse<ArticleType> = await globalAxios.patch(
+      `articles/${id}`,
+      {
+        title,
+        text,
+        tags,
+      },
+    );
+    const res: ResponseType<ArticleType> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
       const res: ResponseType = { code: 500, message: "An error occurred" };
       if (isAxiosError(err)) {
         console.error("Axios Error:", err);

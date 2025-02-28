@@ -45,12 +45,6 @@ export const Header = memo((props: HeaderProps) => {
     void router.push("/signin");
   }, [router]);
 
-  /**
-   * Home画面への遷移
-   */
-  const navigateToHome = useCallback(() => {
-    void router.push("/");
-  }, [router]);
   return (
     <HeaderArea>
       <div className={style.inputContainer}>

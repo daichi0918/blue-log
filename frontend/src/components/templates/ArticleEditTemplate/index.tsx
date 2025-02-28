@@ -1,29 +1,37 @@
 "use client";
 
 /**
- * ArticleNewTemplate
+ * ArticleEditTemplate
  *
  * @package templates
  */
-import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
-import { createArticleApi } from "@/apis/articleApi";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import {
+  fetchArticleAPI,
+  fetchArticlesByUserId,
+  updateArticleApi,
+} from "@/apis/articleApi";
 import { InputForm } from "@/components/atoms/InputForm";
 import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import { NAVIGATION_PATH } from "@/constants/navigation";
+import { NAVIGATION_LIST, NAVIGATION_PATH } from "@/constants/navigation";
+import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
 import ReactMarkdown from "react-markdown";
 
 import style from "./styles.module.css";
 
 /**
- * ArticleNewTemplate
+ * ArticleEditTemplate
  * @returns {JSX.Element}
  */
-export const ArticleNewTemplate = () => {
+export const ArticleEditTemplate = () => {
   const router = useRouter();
+  const param = useParams();
+  const { isAuth, user } = useContext(AuthContext);
+
   /* state定義 */
   const [title, setTitle] = useState<string>("");
   const [tags, setTags] = useState<Array<string>>([]);
@@ -74,10 +82,26 @@ export const ArticleNewTemplate = () => {
   }, []);
 
   /**
-   * 投稿機能実装
+   * 記事データ取得
+   */
+  const fetchArticleById = useCallback(async (): Promise<void> => {
+    const res = await fetchArticleAPI(String(param.id));
+    if (res?.data && typeof res.data === "object") {
+      if (user?.id !== res?.data?.user.id) {
+        router.push(NAVIGATION_LIST.LOGIN);
+      } else {
+        setTitle(res?.data?.title);
+        setText(res?.data?.text);
+        setTags(res?.data?.tags);
+      }
+    }
+  }, [param, router, user?.id]);
+
+  /**
+   * 記事データ更新
    */
   const handleCreateArticle = useCallback(async () => {
-    const res = await createArticleApi(title, text, tags);
+    const res = await updateArticleApi(String(param.id), title, text, tags);
     if (res?.code >= 400) {
       alert(res.message);
       return;
@@ -85,7 +109,13 @@ export const ArticleNewTemplate = () => {
     if (res?.data) {
       router.push(NAVIGATION_PATH.TOP);
     }
-  }, [title, text, router, tags]);
+  }, [param.id, title, text, router, tags]);
+
+  useEffect(() => {
+    // userない時実行すると、不正アクセスになるため
+    if (user) void fetchArticleById();
+  }, [fetchArticleById, user]);
+
   return (
     <>
       <ArticleFormHeader onSubmit={handleCreateArticle} />
@@ -154,9 +184,8 @@ export const ArticleNewTemplate = () => {
                   <textarea
                     className={style.textarea}
                     onChange={handleTextAreaText}
-                  >
-                    {text}
-                  </textarea>
+                    value={text}
+                  />
                 </div>
                 <div className={style.previewTextWrapper}>
                   <p>プレビュー</p>
