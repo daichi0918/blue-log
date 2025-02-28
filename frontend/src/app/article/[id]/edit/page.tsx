@@ -1,7 +1,7 @@
-import { ArticleNewTemplate } from "@/components/templates/ArticleNewTemplate";
+import { ArticleEditTemplate } from "@/components/templates/ArticleEditTemplate";
 
-const AccountNewPage = () => {
-  return <ArticleNewTemplate />;
+const ArticleEditPage = () => {
+  return <ArticleEditTemplate />;
 };
 
-export default AccountNewPage;
+export default ArticleEditPage;

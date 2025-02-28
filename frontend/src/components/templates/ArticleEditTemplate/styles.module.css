@@ -1,0 +1,103 @@
+.main {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+.tagWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.tag {
+  background: var(--blue_01);
+  color: var(--gray_06);
+  border: 2px;
+  padding: 5px 10px;
+  font-size: 1.3rem;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.tag p {
+  margin: unset;
+  padding: unset;
+}
+
+.tagRemoveButton {
+  background: unset;
+  border: unset;
+  color: var(--gray_06);
+  margin: auto;
+  padding-top: 4px;
+  font-size: 1.6rem;
+}
+
+.tagRemoveButton:hover {
+  cursor: pointer;
+}
+
+.textWrapper {
+  display: flex;
+  height: 100%;
+  overflow-y: scroll;
+  max-height: 720px;
+}
+
+.basicTextWrapper,
+.previewTextWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.textarea {
+  border: 1px solid silver;
+  /* border-top: 1px solid silver; */
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.markdown {
+  border: 1px solid silver;
+  /* border-top: 1px solid silver; */
+  font-size: 1.6rem;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  background: var(--gray_00);
+}
+
+.markdown h1 {
+  border-bottom: 1px solid var(--gray_02);
+  font-size: 2.4rem;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+}
+
+.markdown h3 {
+  font-size: 1.6rem;
+}

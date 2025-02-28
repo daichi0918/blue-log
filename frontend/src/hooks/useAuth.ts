@@ -44,8 +44,7 @@ export const useAuth = () => {
     return (
       pathname == NAVIGATION_LIST.SETTING ||
       pathname === NAVIGATION_LIST.ARTICLE ||
-      pathname === NAVIGATION_LIST.ARTICLENEW ||
-      pathname === NAVIGATION_LIST.ARTICLEEDIT
+      pathname === NAVIGATION_LIST.ARTICLENEW
     );
   }, [pathname]);
 
