@@ -12,16 +12,8 @@
   z-index: 100;
 }
 
-.header div:nth-child(2) {
+.inputContainer {
   margin: 0 auto;
-}
-
-.titleWrapper:hover {
-  cursor: pointer;
-}
-
-.title {
-  font-size: 2rem;
 }
 
 /* 検索 */

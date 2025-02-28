@@ -147,14 +147,6 @@ export const ProfilesSettingsTemplate = () => {
   //   }
   // };
   useEffect(() => {
-    if (isAuth === null || user === undefined) {
-      return; // 初回レンダリングでまだ値が設定されていない場合は何もしない
-    }
-
-    if (!isAuth || Object.keys(user).length === 0) {
-      void router.push("/");
-    }
-
     if (user) {
       setImageIcon(user.image);
       setUserName(user.name);

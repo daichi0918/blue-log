@@ -114,7 +114,7 @@ export const fetchLikedArticlesByUserIdAPI = async (userId: string) => {
 };
 
 /**
- * 対象ユーザーがいいねした記事を取得
+ * 対象ユーザーが保存した記事を取得
  * @param {string} userId
  * @returns {ResponseType<Array<ArticleCardType>>}
  */
@@ -171,6 +171,58 @@ export const fetchArticleAPI = async (id: string) => {
       message: "",
     };
     if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * 記事作成のAPI
+ * @param {string} title
+ * @param {string} text
+ * @param {Array<string>} tags
+ * @returns
+ */
+export const createArticleApi = async (
+  title: string,
+  text: string,
+  tags: Array<string>,
+) => {
+  try {
+    const { data }: AxiosResponse<ArticleType> = await globalAxios.post(
+      "articles",
+      {
+        title,
+        text,
+        tags,
+      },
+    );
+    const res: ResponseType<ArticleType> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      // const axiosError = err as IErrorResponse;
+      // res.code = axiosError.response.status;
+      // res.message = axiosError.response.data.message;
       const res: ResponseType = { code: 500, message: "An error occurred" };
       if (isAxiosError(err)) {
         console.error("Axios Error:", err);

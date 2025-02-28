@@ -25,6 +25,7 @@ export const InputForm: FC<InputFormProps> = memo((props) => {
     value,
     onChange,
     additionalStyle,
+    disabled,
   } = props;
   return (
     <input
@@ -35,6 +36,7 @@ export const InputForm: FC<InputFormProps> = memo((props) => {
       value={value}
       onChange={onChange}
       style={{ ...style, ...additionalStyle }}
+      disabled={disabled}
     />
   );
 });

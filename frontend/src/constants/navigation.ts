@@ -19,6 +19,10 @@ export const NAVIGATION_LIST = {
   LOGIN: `${BASE_PATH}/signin`,
   SIGNUP: `${BASE_PATH}/signup`,
   TOP: `${BASE_PATH}/`,
+  SETTING: `${BASE_PATH}/users/:id/settings`,
+  ARTICLE: `${BASE_PATH}/article`,
+  ARTICLENEW: `${BASE_PATH}/article/new`,
+  ARTICLEEDIT: `${BASE_PATH}/article/:id/edit`,
 };
 
 /**
@@ -31,6 +35,7 @@ export const NAVIGATION_PATH = {
   SIGNIN: `/signin`,
   SIGNUP: `/signup`,
   ARTICLE: `/article/`,
+  ARTICLENEW: `/article/new`,
   // CREATE: `/todo/create`,
   // EDIT: `/todo/edit/`,
 };

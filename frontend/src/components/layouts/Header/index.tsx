@@ -3,7 +3,7 @@
 /**
  * Header
  *
- * @package molecules
+ * @package layouts
  */
 import { memo, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ import { UserImage } from "@/components/atoms/UserImage";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
 
+import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
 
 type HeaderProps = {
@@ -23,14 +24,12 @@ type HeaderProps = {
 };
 
 /**
- * HomeTemplate
+ * Header
  * @returns {JSX.Element}
  */
 export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
   const router = useRouter();
-
-  console.log(user);
 
   /**
    * 新規登録画面への遷移
@@ -53,10 +52,7 @@ export const Header = memo((props: HeaderProps) => {
     void router.push("/");
   }, [router]);
   return (
-    <header className={style.header}>
-      <div className={style.titleWrapper} onClick={navigateToHome}>
-        <p className={style.title}>Blue Log</p>
-      </div>
+    <HeaderArea>
       <div className={style.inputContainer}>
         <InputForm
           placeholder={"キーワード検索"}
@@ -99,6 +95,6 @@ export const Header = memo((props: HeaderProps) => {
           </>
         )}
       </div>
-    </header>
+    </HeaderArea>
   );
 });
