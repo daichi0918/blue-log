@@ -13,6 +13,7 @@ type LikeIconProps = {
   isliked: boolean;
   width: number;
   height: number;
+  onClick: () => void;
 };
 
 /**
@@ -20,7 +21,7 @@ type LikeIconProps = {
  * @returns {JSX.Element}
  */
 export const LikeIcon = memo((props: LikeIconProps) => {
-  const { isliked, width, height } = props;
+  const { isliked, width, height, onClick } = props;
   return (
     <>
       {isliked ? (
@@ -30,6 +31,7 @@ export const LikeIcon = memo((props: LikeIconProps) => {
           width={width}
           height={height}
           className={style.like}
+          onClick={onClick}
         />
       ) : (
         <Image
@@ -38,6 +40,7 @@ export const LikeIcon = memo((props: LikeIconProps) => {
           width={width}
           height={height}
           className={style.like}
+          onClick={onClick}
         />
       )}
     </>
