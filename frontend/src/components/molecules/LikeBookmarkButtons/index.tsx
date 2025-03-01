@@ -3,6 +3,7 @@
 import { memo, useContext, useState } from "react";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
+import { Modal } from "@/components/molecules/Modal";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";
@@ -26,6 +27,7 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   /* state */
   const [isLiked, setIsLiked] = useState(isliked);
   const [likeCounter, setLikeCounter] = useState(likeCount);
+  const [showModal, setShowModal] = useState(false);
 
   /* action */
   const toggleLike = () => {
@@ -50,6 +52,11 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       <div className={style.bookmark}>
         <BookmarkIcon isbookmarked={isbookmarked} width={18} height={22} />
       </div>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <p>ログインしてください</p>
+        </Modal>
+      )}
     </div>
   );
 });
