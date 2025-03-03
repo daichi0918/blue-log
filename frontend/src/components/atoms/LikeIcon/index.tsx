@@ -13,7 +13,7 @@ type LikeIconProps = {
   isliked: boolean;
   width: number;
   height: number;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent) => void;
 };
 
 /**
@@ -22,6 +22,7 @@ type LikeIconProps = {
  */
 export const LikeIcon = memo((props: LikeIconProps) => {
   const { isliked, width, height, onClick } = props;
+
   return (
     <>
       {isliked ? (

@@ -30,13 +30,15 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   const [showModal, setShowModal] = useState(false);
 
   /* action */
-  const toggleLike = () => {
-    // TODO: alertをモーダル表示に変換
+  const toggleLike = (event: React.MouseEvent) => {
+    event.stopPropagation();
     // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
-    if (!isAuth) alert("ログインしてください");
-
-    setIsLiked((prev) => !prev);
-    setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+    if (!isAuth) {
+      setShowModal(true);
+    } else {
+      setIsLiked((prev) => !prev);
+      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+    }
   };
   return (
     <div className={style.likeBookmarkWrapper}>
@@ -45,7 +47,7 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
           isliked={isLiked}
           width={22}
           height={22}
-          onClick={toggleLike}
+          onClick={(event) => toggleLike(event)}
         />
         <div className={style.likeCount}>{likeCounter}</div>
       </div>
