@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ReactDOM from "react-dom";
 
@@ -39,8 +40,25 @@ export const Modal = ({ onClose }: ModalProps) => {
             onClick={onClose}
           />
         </section>
-        <section className={style.section}></section>
-        <section className={style.section}></section>
+        <section className={style.section}>
+          <p className={style.text}>
+            「いいね」や「保存」機能を利用するには、ログインが必要です。
+          </p>
+        </section>
+        <section className={`${style.section} ${style.navigationTextWrapper}`}>
+          <div className={style.navigationText}>
+            <span>アカウントをお持ちの方</span>
+            <Link className={style.navigationLink} href={"/signup"}>
+              新規登録
+            </Link>
+          </div>
+          <div className={style.navigationText}>
+            <span>アカウントをお持ちでない方</span>
+            <Link className={style.navigationLink} href={"/signin"}>
+              ログイン
+            </Link>
+          </div>
+        </section>
       </div>
     </div>,
     document.body,
