@@ -1,16 +1,16 @@
 import type { ReactNode } from "react";
 import { useCallback } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ReactDOM from "react-dom";
 
 import style from "./styles.module.css";
 
 type ModalProps = {
-  children: ReactNode;
   onClose: () => void;
 };
 
-export const Modal = ({ children, onClose }: ModalProps) => {
+export const Modal = ({ onClose }: ModalProps) => {
   const router = useRouter();
 
   /**
@@ -27,12 +27,20 @@ export const Modal = ({ children, onClose }: ModalProps) => {
     void router.push("/signin");
   }, [router]);
   return ReactDOM.createPortal(
-    <div className={style.overlay} onClick={onClose}>
-      <div className={style.modal} onClick={(e) => e.stopPropagation()}>
-        {children}
-        <button onClick={onClose} className={style.closeButton}>
-          閉じる
-        </button>
+    <div className={style.overlay} data-modal>
+      <div className={style.modal}>
+        <section className={`${style.section} ${style.contentTop}`}>
+          <h3 className={style.title}>ログインして続ける</h3>
+          <Image
+            alt={"closeIcon"}
+            src={"/closeIcon.svg"}
+            width={24}
+            height={24}
+            onClick={onClose}
+          />
+        </section>
+        <section className={style.section}></section>
+        <section className={style.section}></section>
       </div>
     </div>,
     document.body,

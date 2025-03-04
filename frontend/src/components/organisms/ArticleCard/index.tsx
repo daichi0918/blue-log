@@ -36,7 +36,17 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
    * @type {function(*): void}
    */
   const handleMoveDetailPage = useCallback(
-    (id: number) => router.push(`${NAVIGATION_PATH.ARTICLE}${id}`),
+    (id: number, event: React.MouseEvent) => {
+      const targetElement = event.target as HTMLElement;
+      const modal = targetElement.closest("[data-like-bookmark]");
+      const likeBookmarkWrapper = targetElement.closest("[data-modal]");
+      // いいね・ブックマークを押下した際は遷移しない
+      if (modal || likeBookmarkWrapper) {
+        return;
+      }
+
+      router.push(`${NAVIGATION_PATH.ARTICLE}${id}`);
+    },
     [router],
   );
 
@@ -44,7 +54,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
     <article
       key={article.id}
       className={style.articleItem}
-      onClick={() => handleMoveDetailPage(article.id)}
+      onClick={(event) => handleMoveDetailPage(article.id, event)}
     >
       <section className={style.articleTitle}>
         <h1>{article.title}</h1>
@@ -63,6 +73,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
           isliked={article.isLiked}
           isbookmarked={article.isBookmarked}
           likeCount={article.likeCount}
+          data-like-bookmark
         />
       </section>
     </article>

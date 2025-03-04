@@ -47,18 +47,23 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
           isliked={isLiked}
           width={22}
           height={22}
-          onClick={(event) => toggleLike(event)}
+          onClick={(event) => {
+            toggleLike(event);
+          }}
         />
         <div className={style.likeCount}>{likeCounter}</div>
       </div>
       <div className={style.bookmark}>
-        <BookmarkIcon isbookmarked={isbookmarked} width={18} height={22} />
+        <BookmarkIcon
+          isbookmarked={isbookmarked}
+          width={18}
+          height={22}
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        />
       </div>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <p>ログインしてください</p>
-        </Modal>
-      )}
+      {showModal && <Modal onClose={() => setShowModal(false)} />}
     </div>
   );
 });
