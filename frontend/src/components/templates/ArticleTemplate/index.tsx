@@ -14,6 +14,7 @@ import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
 import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
+import { Modal } from "@/components/molecules/Modal";
 import { Tags } from "@/components/molecules/Tags";
 import { UserCard } from "@/components/organisms/UserCard";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -40,12 +41,16 @@ export const ArticleTemplate = () => {
   const param = useParams();
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
+  /* state */
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCounter, setLikeCounter] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
   const [isOpen, setIsOpen] = useState(false);
 
   /* action定義 */
-
   /**
    * キーワード検索Input
    * @param {e}
@@ -87,9 +92,35 @@ export const ArticleTemplate = () => {
     window.open(url ?? "https://facebook.com", "_blank");
   };
 
+  /* action */
+  const toggleLike = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    if (!isAuth) {
+      setShowModal(true);
+    } else {
+      setIsLiked((prev) => !prev);
+      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+    }
+  };
+
+  const toggleBookmark = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    if (!isAuth) {
+      setShowModal(true);
+    } else {
+      setIsBookmarked((prev) => !prev);
+      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+    }
+  };
+
   useEffect(() => {
     void fetchArticleById();
-  }, [param, fetchArticleById]);
+    if (article) {
+      setIsLiked(article.isLiked);
+      setIsBookmarked(article.isBookmarked);
+      setLikeCounter(article.likeCount);
+    }
+  }, [param, fetchArticleById, article]);
   return (
     <>
       <Header
@@ -106,19 +137,25 @@ export const ArticleTemplate = () => {
                 <div className={style.actionWrapper}>
                   <div className={style.actionBackground}>
                     <LikeIcon
-                      isliked={article.isLiked}
+                      isliked={isLiked}
                       width={20}
                       height={20}
+                      onClick={(event) => {
+                        toggleLike(event);
+                      }}
                     />
                   </div>
-                  <p className={style.likeCount}>{article?.likeCount}</p>
+                  <p className={style.likeCount}>{likeCounter}</p>
                 </div>
                 <div className={style.actionWrapper}>
                   <div className={style.actionBackground}>
                     <BookmarkIcon
-                      isbookmarked={article.isBookmarked}
+                      isbookmarked={isBookmarked}
                       width={20}
                       height={20}
+                      onClick={(event) => {
+                        toggleBookmark(event);
+                      }}
                     />
                   </div>
                 </div>
@@ -175,9 +212,9 @@ export const ArticleTemplate = () => {
                   </ReactMarkdown>
                   <div className={style.likeBookmarkContainer}>
                     <LikeBookmarkButtons
-                      isliked={article.isLiked}
-                      isbookmarked={article.isBookmarked}
-                      likeCount={article.likeCount}
+                      isliked={isLiked}
+                      isbookmarked={isBookmarked}
+                      likeCount={likeCounter}
                     />
                   </div>
                 </main>
@@ -261,6 +298,7 @@ export const ArticleTemplate = () => {
                   followingCount={article.user.followingCount}
                 />
               </section>
+              {showModal && <Modal onClose={() => setShowModal(false)} />}
             </div>
           </>
         ) : (

@@ -27,6 +27,7 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   /* state */
   const [isLiked, setIsLiked] = useState(isliked);
   const [likeCounter, setLikeCounter] = useState(likeCount);
+  const [isBookmarked, setIsBookmarked] = useState(isbookmarked);
   const [showModal, setShowModal] = useState(false);
 
   /* action */
@@ -37,6 +38,17 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       setShowModal(true);
     } else {
       setIsLiked((prev) => !prev);
+      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+    }
+  };
+
+  const toggleBookmark = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
+    if (!isAuth) {
+      setShowModal(true);
+    } else {
+      setIsBookmarked((prev) => !prev);
       setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
     }
   };
@@ -55,11 +67,11 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       </div>
       <div className={style.bookmark}>
         <BookmarkIcon
-          isbookmarked={isbookmarked}
+          isbookmarked={isBookmarked}
           width={18}
           height={22}
           onClick={(event) => {
-            event.stopPropagation();
+            toggleBookmark(event);
           }}
         />
       </div>
