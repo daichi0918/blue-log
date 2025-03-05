@@ -99,34 +99,40 @@ export const ArticleTemplate = () => {
   };
 
   /* action */
-  const toggleLike = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (!isAuth) {
-      setShowModal(true);
-    } else {
-      setIsLiked((prev) => !prev);
-      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
-      if (isLiked) {
-        void deleteLikeApi(String(param.id));
+  const toggleLike = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      if (!isAuth) {
+        setShowModal(true);
       } else {
-        void addLikeApi(String(param.id));
+        setIsLiked((prev) => !prev);
+        setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+        if (isLiked) {
+          void deleteLikeApi(String(param.id));
+        } else {
+          void addLikeApi(String(param.id));
+        }
       }
-    }
-  };
+    },
+    [isAuth, isLiked, param.id],
+  );
 
-  const toggleBookmark = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (!isAuth) {
-      setShowModal(true);
-    } else {
-      setIsBookmarked((prev) => !prev);
-      if (isBookmarked) {
-        void unsaveBookmarkApi(String(param.id));
+  const toggleBookmark = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      if (!isAuth) {
+        setShowModal(true);
       } else {
-        void saveBookmarkApi(String(param.id));
+        setIsBookmarked((prev) => !prev);
+        if (isBookmarked) {
+          void unsaveBookmarkApi(String(param.id));
+        } else {
+          void saveBookmarkApi(String(param.id));
+        }
       }
-    }
-  };
+    },
+    [isAuth, param.id, isBookmarked],
+  );
 
   useEffect(() => {
     void fetchArticleById();

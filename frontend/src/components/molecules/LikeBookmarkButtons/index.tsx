@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import {
   addLikeApi,
@@ -39,39 +39,47 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   const [showModal, setShowModal] = useState(false);
 
   /* action */
-  const toggleLike = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
-    if (!isAuth) {
-      setShowModal(true);
-    } else {
-      setIsLiked((prev) => !prev);
-      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
-      if (isLiked) {
-        void deleteLikeApi(String(param.id));
+  const toggleLike = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
+      if (!isAuth) {
+        setShowModal(true);
       } else {
-        void addLikeApi(String(param.id));
+        setIsLiked((prev) => !prev);
+        setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+        if (isLiked) {
+          void deleteLikeApi(String(param.id));
+        } else {
+          void addLikeApi(String(param.id));
+        }
       }
-    }
-  };
+    },
+    [isAuth, param.id, isLiked],
+  );
 
-  const toggleBookmark = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
-    if (!isAuth) {
-      setShowModal(true);
-    } else {
-      setIsBookmarked((prev) => !prev);
-      if (isBookmarked) {
-        void unsaveBookmarkApi(String(param.id));
+  const toggleBookmark = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
+      if (!isAuth) {
+        setShowModal(true);
       } else {
-        void saveBookmarkApi(String(param.id));
+        setIsBookmarked((prev) => !prev);
+        if (isBookmarked) {
+          void unsaveBookmarkApi(String(param.id));
+        } else {
+          void saveBookmarkApi(String(param.id));
+        }
       }
-    }
-  };
+    },
+    [isAuth, param.id, isBookmarked],
+  );
 
   useEffect(() => {
+    // setIsLiked(isLiked);
     setLikeCounter(likeCount);
+    // setIsBookmarked(isBookmarked);
   }, [likeCount]);
   return (
     <div className={style.likeBookmarkWrapper}>
