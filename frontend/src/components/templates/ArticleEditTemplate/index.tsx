@@ -7,11 +7,7 @@
  */
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  fetchArticleAPI,
-  fetchArticlesByUserId,
-  updateArticleApi,
-} from "@/apis/articleApi";
+import { fetchArticleAPI, updateArticleApi } from "@/apis/articleApi";
 import { InputForm } from "@/components/atoms/InputForm";
 import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
@@ -30,7 +26,7 @@ import style from "./styles.module.css";
 export const ArticleEditTemplate = () => {
   const router = useRouter();
   const param = useParams();
-  const { isAuth, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   /* state定義 */
   const [title, setTitle] = useState<string>("");

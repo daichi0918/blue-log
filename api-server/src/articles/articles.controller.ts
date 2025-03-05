@@ -50,8 +50,10 @@ export class ArticlesController {
     },
   })
   @Get()
-  async findAll() {
-    return await this.articlesService.findAll();
+  @UseGuards(OptionalAuthGuard)
+  async findAll(@Request() req: ExpressRequest & { user?: RequestUser }) {
+    const userId = req.user?.userId ?? null;
+    return await this.articlesService.findAll(userId);
   }
 
   @Get(':id')
@@ -127,6 +129,6 @@ export class ArticlesController {
     @Param('articleId') articleId: string,
     @Request() req: ExpressRequest & { user: RequestUser },
   ) {
-    return this.likeService.remove(+articleId, +req.user.userId);
+    return this.bookmarkService.remove(+articleId, +req.user.userId);
   }
 }

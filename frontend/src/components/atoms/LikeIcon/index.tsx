@@ -13,6 +13,7 @@ type LikeIconProps = {
   isliked: boolean;
   width: number;
   height: number;
+  onClick?: (event: React.MouseEvent) => void;
 };
 
 /**
@@ -20,7 +21,13 @@ type LikeIconProps = {
  * @returns {JSX.Element}
  */
 export const LikeIcon = memo((props: LikeIconProps) => {
-  const { isliked, width, height } = props;
+  const { isliked, width, height, onClick } = props;
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // ← ここでイベントの伝播を止める
+    onClick?.(event);
+  };
+
   return (
     <>
       {isliked ? (
@@ -30,6 +37,7 @@ export const LikeIcon = memo((props: LikeIconProps) => {
           width={width}
           height={height}
           className={style.like}
+          onClick={handleClick}
         />
       ) : (
         <Image
@@ -38,6 +46,7 @@ export const LikeIcon = memo((props: LikeIconProps) => {
           width={width}
           height={height}
           className={style.like}
+          onClick={handleClick}
         />
       )}
     </>

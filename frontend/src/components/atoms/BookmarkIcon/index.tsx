@@ -13,6 +13,7 @@ type BookmarkIconProps = {
   isbookmarked: boolean;
   width: number;
   height: number;
+  onClick?: (event: React.MouseEvent) => void;
 };
 
 /**
@@ -20,7 +21,11 @@ type BookmarkIconProps = {
  * @returns {JSX.Element}
  */
 export const BookmarkIcon = memo((props: BookmarkIconProps) => {
-  const { isbookmarked, width, height } = props;
+  const { isbookmarked, width, height, onClick } = props;
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // ← ここでイベントの伝播を止める
+    onClick?.(event);
+  };
   return (
     <>
       {isbookmarked ? (
@@ -30,6 +35,7 @@ export const BookmarkIcon = memo((props: BookmarkIconProps) => {
           width={width}
           height={height}
           className={style.bookmark}
+          onClick={handleClick}
         />
       ) : (
         <Image
@@ -38,6 +44,7 @@ export const BookmarkIcon = memo((props: BookmarkIconProps) => {
           width={width}
           height={height}
           className={style.bookmark}
+          onClick={handleClick}
         />
       )}
     </>
