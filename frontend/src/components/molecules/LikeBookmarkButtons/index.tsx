@@ -25,11 +25,12 @@ type LikeBookarkButtonsProps = {
   isliked: boolean;
   isbookmarked: boolean;
   likeCount: number;
+  direction?: "row" | "column";
 };
 
 export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   const param = useParams();
-  const { isliked, isbookmarked, likeCount } = props;
+  const { isliked, isbookmarked, likeCount, direction = "row" } = props;
   const { isAuth } = useContext(AuthContext);
 
   /* state */
@@ -77,34 +78,69 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   );
 
   useEffect(() => {
-    // setIsLiked(isLiked);
+    setIsLiked(isliked);
     setLikeCounter(likeCount);
-    // setIsBookmarked(isBookmarked);
-  }, [likeCount]);
+    setIsBookmarked(isbookmarked);
+  }, [likeCount, isliked, isbookmarked]);
   return (
-    <div className={style.likeBookmarkWrapper}>
-      <div className={style.like}>
-        <LikeIcon
-          isliked={isLiked}
-          width={22}
-          height={22}
-          onClick={(event) => {
-            toggleLike(event);
-          }}
-        />
-        <div className={style.likeCount}>{likeCounter}</div>
-      </div>
-      <div className={style.bookmark}>
-        <BookmarkIcon
-          isbookmarked={isBookmarked}
-          width={18}
-          height={22}
-          onClick={(event) => {
-            toggleBookmark(event);
-          }}
-        />
-      </div>
+    <>
+      {direction === "row" ? (
+        <>
+          <div className={style.likeBookmarkWrapper}>
+            <div className={style.like}>
+              <LikeIcon
+                isliked={isLiked}
+                width={22}
+                height={22}
+                onClick={(event) => {
+                  toggleLike(event);
+                }}
+              />
+              <div className={style.likeCount}>{likeCounter}</div>
+            </div>
+            <div className={style.bookmark}>
+              <BookmarkIcon
+                isbookmarked={isBookmarked}
+                width={18}
+                height={22}
+                onClick={(event) => {
+                  toggleBookmark(event);
+                }}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <section className={style.actionContainer}>
+          <div className={style.actionWrapper}>
+            <div className={style.actionBackground}>
+              <LikeIcon
+                isliked={isLiked}
+                width={20}
+                height={20}
+                onClick={(event) => {
+                  toggleLike(event);
+                }}
+              />
+            </div>
+            <p className={style.likeCount}>{likeCounter}</p>
+          </div>
+          <div className={style.actionWrapper}>
+            <div className={style.actionBackground}>
+              <BookmarkIcon
+                isbookmarked={isBookmarked}
+                width={20}
+                height={20}
+                onClick={(event) => {
+                  toggleBookmark(event);
+                }}
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {showModal && <Modal onClose={() => setShowModal(false)} />}
-    </div>
+    </>
   );
 });

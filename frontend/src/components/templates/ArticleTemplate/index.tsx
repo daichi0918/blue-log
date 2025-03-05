@@ -124,10 +124,12 @@ export const ArticleTemplate = () => {
       if (!isAuth) {
         setShowModal(true);
       } else {
-        setIsBookmarked((prev) => !prev);
+        // setIsBookmarked((prev) => !prev);
         if (isBookmarked) {
+          setIsBookmarked(false);
           void unsaveBookmarkApi(String(param.id));
         } else {
+          setIsBookmarked(true);
           void saveBookmarkApi(String(param.id));
         }
       }
@@ -155,33 +157,12 @@ export const ArticleTemplate = () => {
         {article ? (
           <>
             <div className={style.container}>
-              <section className={style.actionContainer}>
-                <div className={style.actionWrapper}>
-                  <div className={style.actionBackground}>
-                    <LikeIcon
-                      isliked={isLiked}
-                      width={20}
-                      height={20}
-                      onClick={(event) => {
-                        toggleLike(event);
-                      }}
-                    />
-                  </div>
-                  <p className={style.likeCount}>{likeCounter}</p>
-                </div>
-                <div className={style.actionWrapper}>
-                  <div className={style.actionBackground}>
-                    <BookmarkIcon
-                      isbookmarked={isBookmarked}
-                      width={20}
-                      height={20}
-                      onClick={(event) => {
-                        toggleBookmark(event);
-                      }}
-                    />
-                  </div>
-                </div>
-              </section>
+              <LikeBookmarkButtons
+                isliked={isLiked}
+                isbookmarked={isBookmarked}
+                likeCount={likeCounter}
+                direction={"column"}
+              />
               <section className={style.contentContainer}>
                 <main className={style.contentSection}>
                   <div className={style.titleContainer}>
