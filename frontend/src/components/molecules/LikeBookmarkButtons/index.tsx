@@ -26,11 +26,18 @@ type LikeBookarkButtonsProps = {
   isbookmarked: boolean;
   likeCount: number;
   direction?: "row" | "column";
+  articleId?: string;
 };
 
 export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   const param = useParams();
-  const { isliked, isbookmarked, likeCount, direction = "row" } = props;
+  const {
+    isliked,
+    isbookmarked,
+    likeCount,
+    direction = "row",
+    articleId,
+  } = props;
   const { isAuth } = useContext(AuthContext);
 
   /* state */
@@ -49,13 +56,13 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
         setIsLiked((prev) => !prev);
         setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
         if (isLiked) {
-          void deleteLikeApi(String(param.id));
+          void deleteLikeApi(String(param.id ?? articleId));
         } else {
-          void addLikeApi(String(param.id));
+          void addLikeApi(String(param.id ?? articleId));
         }
       }
     },
-    [isAuth, param.id, isLiked],
+    [isAuth, param.id, isLiked, articleId],
   );
 
   const toggleBookmark = useCallback(
@@ -67,13 +74,13 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       } else {
         setIsBookmarked((prev) => !prev);
         if (isBookmarked) {
-          void unsaveBookmarkApi(String(param.id));
+          void unsaveBookmarkApi(String(param.id ?? articleId));
         } else {
-          void saveBookmarkApi(String(param.id));
+          void saveBookmarkApi(String(param.id ?? articleId));
         }
       }
     },
-    [isAuth, param.id, isBookmarked],
+    [isAuth, param.id, isBookmarked, articleId],
   );
 
   useEffect(() => {

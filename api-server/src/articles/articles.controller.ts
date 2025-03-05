@@ -50,8 +50,10 @@ export class ArticlesController {
     },
   })
   @Get()
-  async findAll() {
-    return await this.articlesService.findAll();
+  @UseGuards(OptionalAuthGuard)
+  async findAll(@Request() req: ExpressRequest & { user?: RequestUser }) {
+    const userId = req.user?.userId ?? null;
+    return await this.articlesService.findAll(userId);
   }
 
   @Get(':id')

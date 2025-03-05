@@ -22,7 +22,7 @@ export class ArticlesService {
     });
   }
 
-  async findAll(): Promise<Array<any>> {
+  async findAll(userId: number | null): Promise<Array<any>> {
     const articles = await this.prismaService.article.findMany({
       orderBy: {
         createdAt: 'desc',
@@ -39,6 +39,18 @@ export class ArticlesService {
         _count: {
           select: { likes: true }, // いいねの数
         },
+        likes: userId
+          ? {
+              where: { userId }, // ログインユーザーがいいねしているかどうか
+              select: { userId: true },
+            }
+          : false,
+        bookmarks: userId
+          ? {
+              where: { userId }, // ログインユーザーがいいねしているかどうか
+              select: { userId: true },
+            }
+          : false,
       },
     });
 
@@ -50,6 +62,8 @@ export class ArticlesService {
       updatedAt: article.updatedAt,
       user: article.user,
       likeCount: article._count.likes,
+      isLiked: userId ? article.likes.length > 0 : false,
+      isBookmarked: userId ? article.bookmarks.length > 0 : false,
     }));
   }
 

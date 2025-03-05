@@ -73,6 +73,7 @@ export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
           isliked={article.isLiked}
           isbookmarked={article.isBookmarked}
           likeCount={article.likeCount}
+          articleId={String(article.id)}
           data-like-bookmark
         />
       </section>
