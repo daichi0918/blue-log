@@ -3,7 +3,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { fetchArticleAPI } from "@/apis/articleApi";
+import { addLikeApi, deleteLikeApi, fetchArticleAPI } from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
@@ -100,6 +100,11 @@ export const ArticleTemplate = () => {
     } else {
       setIsLiked((prev) => !prev);
       setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+      if (isLiked) {
+        void addLikeApi(String(param.id));
+      } else {
+        void deleteLikeApi(String(param.id));
+      }
     }
   };
 

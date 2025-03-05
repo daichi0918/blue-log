@@ -286,3 +286,65 @@ export const updateArticleApi = async (
     return res;
   }
 };
+
+/**
+ * いいねの追加処理
+ * @param {string} id
+ * @returns
+ */
+export const addLikeApi = async (id: string) => {
+  try {
+    await globalAxios.post(`articles/${id}/like`);
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * いいねの削除処理
+ * @param {string} id
+ * @returns
+ */
+export const deleteLikeApi = async (id: string) => {
+  try {
+    await globalAxios.delete(`articles/${id}/like`);
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};

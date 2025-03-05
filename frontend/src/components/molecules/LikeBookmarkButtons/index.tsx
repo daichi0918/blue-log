@@ -1,6 +1,8 @@
 "use client";
 
 import { memo, useContext, useState } from "react";
+import { useParams } from "next/navigation";
+import { addLikeApi, deleteLikeApi } from "@/apis/articleApi";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { Modal } from "@/components/molecules/Modal";
@@ -21,6 +23,7 @@ type LikeBookarkButtonsProps = {
 };
 
 export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
+  const param = useParams();
   const { isliked, isbookmarked, likeCount } = props;
   const { isAuth } = useContext(AuthContext);
 
@@ -39,6 +42,11 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
     } else {
       setIsLiked((prev) => !prev);
       setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+      if (isLiked) {
+        void addLikeApi(String(param.id));
+      } else {
+        void deleteLikeApi(String(param.id));
+      }
     }
   };
 
