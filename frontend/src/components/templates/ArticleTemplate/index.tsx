@@ -98,45 +98,6 @@ export const ArticleTemplate = () => {
     window.open(url ?? "https://facebook.com", "_blank");
   };
 
-  /* action */
-  const toggleLike = useCallback(
-    (event: React.MouseEvent) => {
-      event.stopPropagation();
-      if (!isAuth) {
-        setShowModal(true);
-      } else {
-        console.log("abb");
-        setIsLiked((prev) => !prev);
-        setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
-        if (isLiked) {
-          void deleteLikeApi(String(param.id));
-        } else {
-          void addLikeApi(String(param.id));
-        }
-      }
-    },
-    [isAuth, isLiked, param.id],
-  );
-
-  const toggleBookmark = useCallback(
-    (event: React.MouseEvent) => {
-      event.stopPropagation();
-      if (!isAuth) {
-        setShowModal(true);
-      } else {
-        // setIsBookmarked((prev) => !prev);
-        if (isBookmarked) {
-          setIsBookmarked(false);
-          void unsaveBookmarkApi(String(param.id));
-        } else {
-          setIsBookmarked(true);
-          void saveBookmarkApi(String(param.id));
-        }
-      }
-    },
-    [isAuth, param.id, isBookmarked],
-  );
-
   useEffect(() => {
     void fetchArticleById();
     if (article) {

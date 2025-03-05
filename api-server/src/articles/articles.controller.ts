@@ -127,6 +127,6 @@ export class ArticlesController {
     @Param('articleId') articleId: string,
     @Request() req: ExpressRequest & { user: RequestUser },
   ) {
-    return this.likeService.remove(+articleId, +req.user.userId);
+    return this.bookmarkService.remove(+articleId, +req.user.userId);
   }
 }

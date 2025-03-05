@@ -38,7 +38,6 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
   const [likeCounter, setLikeCounter] = useState(likeCount);
   const [isBookmarked, setIsBookmarked] = useState(isbookmarked);
   const [showModal, setShowModal] = useState(false);
-
   /* action */
   const toggleLike = useCallback(
     (event: React.MouseEvent) => {

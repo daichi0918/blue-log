@@ -109,6 +109,12 @@ export class ArticlesService {
               select: { userId: true },
             }
           : false,
+        bookmarks: userId
+          ? {
+              where: { userId }, // ログインユーザーがいいねしているかどうか
+              select: { userId: true },
+            }
+          : false,
       },
     });
 
@@ -128,6 +134,7 @@ export class ArticlesService {
       },
       likeCount: found._count.likes,
       isLiked: userId ? found.likes.length > 0 : false,
+      isBookmarked: userId ? found.bookmarks.length > 0 : false,
       isAuthor: userId ? found.user.id === userId : false,
     };
   }
