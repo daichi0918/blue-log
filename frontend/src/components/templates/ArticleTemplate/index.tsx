@@ -105,6 +105,7 @@ export const ArticleTemplate = () => {
       if (!isAuth) {
         setShowModal(true);
       } else {
+        console.log("abb");
         setIsLiked((prev) => !prev);
         setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
         if (isLiked) {
