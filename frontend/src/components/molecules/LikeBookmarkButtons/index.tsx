@@ -1,8 +1,13 @@
 "use client";
 
-import { memo, useContext, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { addLikeApi, deleteLikeApi } from "@/apis/articleApi";
+import {
+  addLikeApi,
+  deleteLikeApi,
+  saveBookmarkApi,
+  unsaveBookmarkApi,
+} from "@/apis/articleApi";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { Modal } from "@/components/molecules/Modal";
@@ -43,9 +48,9 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       setIsLiked((prev) => !prev);
       setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
       if (isLiked) {
-        void addLikeApi(String(param.id));
-      } else {
         void deleteLikeApi(String(param.id));
+      } else {
+        void addLikeApi(String(param.id));
       }
     }
   };
@@ -57,9 +62,17 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
       setShowModal(true);
     } else {
       setIsBookmarked((prev) => !prev);
-      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+      if (isBookmarked) {
+        void unsaveBookmarkApi(String(param.id));
+      } else {
+        void saveBookmarkApi(String(param.id));
+      }
     }
   };
+
+  useEffect(() => {
+    setLikeCounter(likeCount);
+  }, [likeCount]);
   return (
     <div className={style.likeBookmarkWrapper}>
       <div className={style.like}>

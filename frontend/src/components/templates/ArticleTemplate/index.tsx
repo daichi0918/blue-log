@@ -3,7 +3,13 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { addLikeApi, deleteLikeApi, fetchArticleAPI } from "@/apis/articleApi";
+import {
+  addLikeApi,
+  deleteLikeApi,
+  fetchArticleAPI,
+  saveBookmarkApi,
+  unsaveBookmarkApi,
+} from "@/apis/articleApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
@@ -101,9 +107,9 @@ export const ArticleTemplate = () => {
       setIsLiked((prev) => !prev);
       setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
       if (isLiked) {
-        void addLikeApi(String(param.id));
-      } else {
         void deleteLikeApi(String(param.id));
+      } else {
+        void addLikeApi(String(param.id));
       }
     }
   };
@@ -114,7 +120,11 @@ export const ArticleTemplate = () => {
       setShowModal(true);
     } else {
       setIsBookmarked((prev) => !prev);
-      setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+      if (isBookmarked) {
+        void unsaveBookmarkApi(String(param.id));
+      } else {
+        void saveBookmarkApi(String(param.id));
+      }
     }
   };
 
@@ -125,7 +135,7 @@ export const ArticleTemplate = () => {
       setIsBookmarked(article.isBookmarked);
       setLikeCounter(article.likeCount);
     }
-  }, [param, fetchArticleById, article]);
+  }, [article, fetchArticleById]);
   return (
     <>
       <Header
