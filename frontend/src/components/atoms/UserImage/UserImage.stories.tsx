@@ -1,6 +1,4 @@
-import { CSSProperties, JSX } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 
 import { UserImage } from ".";
 
