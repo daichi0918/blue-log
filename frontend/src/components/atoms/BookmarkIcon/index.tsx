@@ -4,7 +4,7 @@ import Image from "next/image";
 import style from "./styles.module.css";
 
 /**
- * LikeIcon
+ * BookmarkIcon
  *
  * @package atoms
  */
