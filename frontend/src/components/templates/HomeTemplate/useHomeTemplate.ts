@@ -3,7 +3,7 @@
  *
  * @package templates
  */
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchArticleListApi } from "@/apis/articleApi";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
@@ -49,6 +49,10 @@ export const useHomeTemplate = () => {
       res?.data && typeof res.data === "object" ? res.data : [],
     );
   }, []);
+  // 初回レンダリング時に記事一覧を取得
+  useEffect(() => {
+    void fetchArticleCardList();
+  }, [fetchArticleCardList]);
 
   return {
     articleDisplayLength,
@@ -57,7 +61,6 @@ export const useHomeTemplate = () => {
     sortKey,
     handleInputSearch,
     handleShowMoreArticles,
-    fetchArticleCardList,
     handleSortChange,
   };
 };
