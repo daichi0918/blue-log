@@ -1,16 +1,10 @@
 "use client";
 
-import { useCallback, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { updateUser } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import { NAVIGATION_PATH } from "@/constants/navigation";
-import { AuthContext } from "@/contexts/AuthContext";
-import { type EventType } from "@/type/Event";
 
 /**
  * ProfilesSettingsTemplate
@@ -18,144 +12,30 @@ import { type EventType } from "@/type/Event";
  * @package templates
  */
 import style from "./styles.module.css";
+import { useProfileSettingsTemplate } from "./useProfileSettingsTemplate";
 
 /**
  * ProfilesSettingsTemplate
  * @returns {JSX.Element}
  */
 export const ProfilesSettingsTemplate = () => {
-  const router = useRouter();
-  // 認証情報を取得
-  const { isAuth, user } = useContext(AuthContext);
-  /* state定義 */
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  const [imageIcon, setImageIcon] = useState<string | undefined>("");
-  const [userName, setUserName] = useState<string | undefined>("");
-  const [profile, setProfile] = useState<string | undefined>("");
-  const [twitter, setTwitter] = useState<string | undefined>("");
-  const [github, setGithub] = useState<string | undefined>("");
-  const [facebook, setFacebook] = useState<string | undefined>("");
-
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  /* action定義 */
-  /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
-  /**
-   * ユーザー名のインプット
-   * @param {e}
-   */
-  const handleInputUserName: EventType["onChangeInput"] = useCallback((e) => {
-    setUserName(e.target.value);
-  }, []);
-  /**
-   * 自己紹介文のインプット
-   * @param {e}
-   */
-  const handleTextAreaProfile: EventType["onChangeTextArea"] = useCallback(
-    (e) => {
-      setProfile(e.target.value);
-    },
-    [],
-  );
-
-  /**
-   * twitterのインプット
-   * @param {e}
-   */
-  const handleInputTwitter: EventType["onChangeInput"] = useCallback((e) => {
-    setTwitter(e.target.value);
-  }, []);
-  /**
-   * githubのインプット
-   * @param {e}
-   */
-  const handleInputGithub: EventType["onChangeInput"] = useCallback((e) => {
-    setGithub(e.target.value);
-  }, []);
-
-  /**
-   * facebookのインプット
-   * @param {e}
-   */
-  const handleInputFacebook: EventType["onChangeInput"] = useCallback((e) => {
-    setFacebook(e.target.value);
-  }, []);
-
-  /**
-   *
-   */
-  const handleUpdateUser = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const res = await updateUser(
-        String(user?.id),
-        imageIcon,
-        userName,
-        profile,
-        twitter,
-        github,
-        facebook,
-      );
-      if (res?.code >= 400) {
-        alert(res.message);
-        return;
-      }
-      if (res?.data) {
-        setImageIcon(res?.data.image);
-        setUserName(res?.data.name);
-        setProfile(res?.data.profile);
-        setTwitter(res?.data.twitter);
-        setGithub(res?.data.github);
-        setFacebook(res?.data.facebook);
-
-        router.push(NAVIGATION_PATH.TOP);
-      }
-    },
-    [user?.id, imageIcon, userName, profile, twitter, github, facebook, router],
-  );
-
-  // const handleImageUpload = async (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  // ) => {
-  //   const file = event.target.files?.[0];
-  //   if (!file) return;
-
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("userId", user?.id.toString()); // ユーザーIDを送信
-
-  //   try {
-  //     const response = await fetch("/api/upload", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
-
-  //     const result = await response.json();
-
-  //     if (response.ok) {
-  //       setImagePreview(result.filePath); // アップロードした画像のパスを保存
-  //     } else {
-  //       console.error("アップロードに失敗しました", result);
-  //     }
-  //   } catch (error) {
-  //     console.error("アップロード中にエラーが発生しました", error);
-  //   }
-  // };
-  useEffect(() => {
-    if (user) {
-      setImageIcon(user.image);
-      setUserName(user.name);
-      setProfile(user.profile);
-      setTwitter(user.twitter);
-      setGithub(user.github);
-      setFacebook(user.facebook);
-    }
-  }, [isAuth, user, router]);
+  const {
+    isAuth,
+    user,
+    inputArticleSearch,
+    userName,
+    profile,
+    twitter,
+    github,
+    facebook,
+    handleInputSearch,
+    handleInputUserName,
+    handleTextAreaProfile,
+    handleInputTwitter,
+    handleInputGithub,
+    handleInputFacebook,
+    handleUpdateUser,
+  } = useProfileSettingsTemplate();
 
   return (
     <>

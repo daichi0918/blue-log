@@ -5,7 +5,7 @@
  *
  * @package templates
  */
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -31,13 +31,8 @@ export const HomeTemplate = () => {
     articleListAll,
     handleInputSearch,
     handleShowMoreArticles,
-    fetchArticleCardList,
     handleSortChange,
   } = useHomeTemplate();
-  // 初回レンダリング時に記事一覧を取得
-  useEffect(() => {
-    void fetchArticleCardList();
-  }, [fetchArticleCardList]);
 
   return (
     <>
