@@ -21,4 +21,19 @@ describe("useSignUpTemplate, Hooksテスト", () => {
       expect(result.current.name).toBe(expectValue);
     });
   });
+  describe("【関数テスト】handleInputEmail", () => {
+    test("【正常系】emailを更新できること", () => {
+      const expectValue = "example@test.com";
+
+      const eventObject = {
+        target: {
+          value: expectValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useSignUpTemplate());
+      expect(result.current.email).toBe("");
+      act(() => result.current.handleInputEmail(eventObject));
+      expect(result.current.email).toBe(expectValue);
+    });
+  });
 });

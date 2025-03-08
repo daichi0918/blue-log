@@ -8,7 +8,7 @@ import { useSignInTemplate } from "./useSignInTemplate";
 describe("useSignInTemplate, Hooksテスト", () => {
   describe("【関数テスト】handleInputEmail", () => {
     test("【正常系】emailを更新できること", () => {
-      const expectValue = "テスト";
+      const expectValue = "example@test.com";
 
       const eventObject = {
         target: {
