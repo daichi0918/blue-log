@@ -36,4 +36,19 @@ describe("useSignUpTemplate, Hooksテスト", () => {
       expect(result.current.email).toBe(expectValue);
     });
   });
+  describe("【関数テスト】handleInputPassword", () => {
+    test("【正常系】passwordを更新できること", () => {
+      const expectValue = "password";
+
+      const eventObject = {
+        target: {
+          value: expectValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useSignUpTemplate());
+      expect(result.current.password).toBe("");
+      act(() => result.current.handleInputPassword(eventObject));
+      expect(result.current.password).toBe(expectValue);
+    });
+  });
 });
