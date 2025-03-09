@@ -1,7 +1,5 @@
 import { act } from "react";
-import { useRouter } from "next/navigation";
 import { renderHook } from "@testing-library/react";
-import { mockUseRouter } from "jest.setup";
 
 import { useProfileSettingsTemplate } from "./useProfileSettingsTemplate";
 
