@@ -81,4 +81,19 @@ describe("useSignUpTemplate, Hooksテスト", () => {
       expect(result.current.github).toBe(expectValue);
     });
   });
+  describe("【関数テスト】handleInputFacebook", () => {
+    test("【正常系】facebookを更新できること", () => {
+      const expectValue = "facebook";
+
+      const eventObject = {
+        target: {
+          value: expectValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useProfileSettingsTemplate());
+      expect(result.current.facebook).toBe("");
+      act(() => result.current.handleInputFacebook(eventObject));
+      expect(result.current.facebook).toBe(expectValue);
+    });
+  });
 });
