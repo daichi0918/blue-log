@@ -51,4 +51,43 @@ describe("useSignUpTemplate, Hooksテスト", () => {
       expect(result.current.password).toBe(expectValue);
     });
   });
+  describe("【関数テスト】togglePasswordVisibility", () => {
+    test("【正常系】パスワードの表示状態を切り替えられること", () => {
+      const { result } = renderHook(() => useSignUpTemplate());
+
+      // 初期状態を確認
+      expect(result.current.isPasswordVisible).toBe(false);
+
+      // 関数を実行し、状態が true に変わることを確認
+      act(() => result.current.togglePasswordVisibility());
+      expect(result.current.isPasswordVisible).toBe(true);
+
+      // もう一度実行し、false に戻ることを確認
+      act(() => result.current.togglePasswordVisibility());
+      expect(result.current.isPasswordVisible).toBe(false);
+    });
+  });
+
+  jest.mock("next/navigation");
+
+  describe("【関数テスト】navigateToSignIn", () => {
+    test("【正常系】/signin に遷移できること", () => {
+      const mockRouter = mockUseRouter();
+      const pushMock = jest.fn();
+
+      (useRouter as jest.Mock).mockReturnValue({
+        ...mockRouter,
+        push: pushMock,
+      });
+
+      const { result } = renderHook(() => useSignUpTemplate());
+
+      act(() => {
+        result.current.navigateToSignIn();
+      });
+
+      expect(pushMock).toHaveBeenCalledTimes(1);
+      expect(pushMock).toHaveBeenCalledWith("/signin");
+    });
+  });
 });
