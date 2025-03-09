@@ -66,4 +66,19 @@ describe("useSignUpTemplate, Hooksテスト", () => {
       expect(result.current.twitter).toBe(expectValue);
     });
   });
+  describe("【関数テスト】handleInputGithub", () => {
+    test("【正常系】githubを更新できること", () => {
+      const expectValue = "github";
+
+      const eventObject = {
+        target: {
+          value: expectValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      const { result } = renderHook(() => useProfileSettingsTemplate());
+      expect(result.current.github).toBe("");
+      act(() => result.current.handleInputGithub(eventObject));
+      expect(result.current.github).toBe(expectValue);
+    });
+  });
 });
