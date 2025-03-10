@@ -67,18 +67,39 @@ export class ArticlesController {
   }
 
   @Get('user/:userId')
-  async findByUserId(@Param('userId') userId: string) {
-    return await this.articlesService.findByUserId(+userId);
+  @UseGuards(OptionalAuthGuard)
+  async findByUserId(
+    @Param('userId') userId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const requestUserId = req.user?.userId ?? null;
+    return await this.articlesService.findByUserId(+userId, requestUserId);
   }
 
   @Get('user/:userId/like')
-  async findLikedByUserId(@Param('userId') userId: string) {
-    return await this.articlesService.findLikedArticlesByUserId(+userId);
+  @UseGuards(OptionalAuthGuard)
+  async findLikedByUserId(
+    @Param('userId') userId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const requestUserId = req.user?.userId ?? null;
+    return await this.articlesService.findLikedArticlesByUserId(
+      +userId,
+      requestUserId,
+    );
   }
 
   @Get('user/:userId/bookmark')
-  async findBookmarkedByUserId(@Param('userId') userId: string) {
-    return await this.articlesService.findBookmarkedArticlesByUserId(+userId);
+  @UseGuards(OptionalAuthGuard)
+  async findBookmarkedByUserId(
+    @Param('userId') userId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const requestUserId = req.user?.userId ?? null;
+    return await this.articlesService.findBookmarkedArticlesByUserId(
+      +userId,
+      requestUserId,
+    );
   }
 
   @Patch(':id')
