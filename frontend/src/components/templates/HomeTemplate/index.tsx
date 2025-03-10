@@ -28,7 +28,7 @@ export const HomeTemplate = () => {
   const {
     articleDisplayLength,
     inputArticleSearch,
-    articleListAll,
+    sortedArticles,
     handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
@@ -51,15 +51,15 @@ export const HomeTemplate = () => {
           </section>
           {/* 記事一覧リスト */}
           <section>
-            {articleListAll.length > 0 &&
-              articleListAll
+            {sortedArticles.length > 0 &&
+              sortedArticles
                 .slice(0, articleDisplayLength)
                 .map((article) => (
                   <ArticleCard key={article.id} article={article} />
                 ))}
           </section>
           {/* もっと見るボタン */}
-          {articleListAll.length > articleDisplayLength && (
+          {sortedArticles.length > articleDisplayLength && (
             <section className={style.showMore}>
               <BaseButton
                 color={"secondary"}

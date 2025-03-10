@@ -43,6 +43,31 @@ export const useHomeTemplate = () => {
     setSortKey(e.target.value);
   };
 
+  const sortArticles = useCallback(
+    (articles: ArticleCardType[]) => {
+      return [...articles].sort((a, b) => {
+        switch (sortKey) {
+          case "newest":
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          case "oldest":
+            return (
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+          case "likes":
+            return (b.likeCount ?? 0) - (a.likeCount ?? 0);
+          default:
+            return 0;
+        }
+      });
+    },
+    [sortKey],
+  );
+
+  // 記事並べ替え
+  const sortedArticles = sortArticles(articleListAll);
+
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListApi();
     setArticleListAll(
@@ -57,8 +82,8 @@ export const useHomeTemplate = () => {
   return {
     articleDisplayLength,
     inputArticleSearch,
-    articleListAll,
     sortKey,
+    sortedArticles,
     handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
