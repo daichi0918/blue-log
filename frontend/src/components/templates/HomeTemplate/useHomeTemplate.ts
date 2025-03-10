@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchArticleListApi } from "@/apis/articleApi";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
+import { sortArticles } from "@/utils/sortArticles";
 
 /**
  * useHomeTemplate
@@ -43,6 +44,9 @@ export const useHomeTemplate = () => {
     setSortKey(e.target.value);
   };
 
+  // 記事並べ替え
+  const sortedArticles = sortArticles(articleListAll, sortKey);
+
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListApi();
     setArticleListAll(
@@ -57,8 +61,8 @@ export const useHomeTemplate = () => {
   return {
     articleDisplayLength,
     inputArticleSearch,
-    articleListAll,
     sortKey,
+    sortedArticles,
     handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
