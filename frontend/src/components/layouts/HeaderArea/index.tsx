@@ -5,6 +5,7 @@
  */
 import type { ReactNode } from "react";
 import { memo, useCallback } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import style from "./styles.module.css";
@@ -28,7 +29,12 @@ export const HeaderArea = memo(({ children }: Props) => {
   return (
     <header className={style.header}>
       <div className={style.titleWrapper} onClick={navigateToHome}>
-        <p className={style.title}>Blue Log</p>
+        <Image
+          alt={"headerIcon"}
+          src={"/HeaderIcon.svg"}
+          width={100}
+          height={75}
+        />
       </div>
       {children}
     </header>
