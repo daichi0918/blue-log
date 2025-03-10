@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchArticleListApi } from "@/apis/articleApi";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
+import { sortArticles } from "@/utils/sortArticles";
 
 /**
  * useHomeTemplate
@@ -43,30 +44,8 @@ export const useHomeTemplate = () => {
     setSortKey(e.target.value);
   };
 
-  const sortArticles = useCallback(
-    (articles: ArticleCardType[]) => {
-      return [...articles].sort((a, b) => {
-        switch (sortKey) {
-          case "newest":
-            return (
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-            );
-          case "oldest":
-            return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            );
-          case "likes":
-            return (b.likeCount ?? 0) - (a.likeCount ?? 0);
-          default:
-            return 0;
-        }
-      });
-    },
-    [sortKey],
-  );
-
   // 記事並べ替え
-  const sortedArticles = sortArticles(articleListAll);
+  const sortedArticles = sortArticles(articleListAll, sortKey);
 
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
     const res = await fetchArticleListApi();

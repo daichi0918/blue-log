@@ -15,6 +15,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleCardType } from "@/type/ArticleCard";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
+import { sortArticles } from "@/utils/sortArticles";
 
 /**
  * useAccountTemplate
@@ -65,27 +66,7 @@ export const useAccountTemplate = () => {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortKey(e.target.value);
   };
-  const sortArticles = useCallback(
-    (articles: ArticleCardType[]) => {
-      return [...articles].sort((a, b) => {
-        switch (sortKey) {
-          case "newest":
-            return (
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-            );
-          case "oldest":
-            return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            );
-          case "likes":
-            return (b.likeCount ?? 0) - (a.likeCount ?? 0);
-          default:
-            return 0;
-        }
-      });
-    },
-    [sortKey],
-  );
+
   /**
    * 特定のユーザーが投稿した記事を取得・反映
    */
@@ -94,11 +75,11 @@ export const useAccountTemplate = () => {
       const res = await fetchArticlesByUserId(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setPostedArticles(data);
-      setDisplayArticles(sortArticles(data));
+      setDisplayArticles(sortArticles(data, sortKey));
     } else {
-      setDisplayArticles(sortArticles(postedArticles));
+      setDisplayArticles(sortArticles(postedArticles, sortKey));
     }
-  }, [param.id, postedArticles, sortArticles]);
+  }, [param.id, postedArticles, sortKey]);
   /**
    * 特定のユーザーがいいねした記事を取得・反映
    */
@@ -107,11 +88,11 @@ export const useAccountTemplate = () => {
       const res = await fetchLikedArticlesByUserIdAPI(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setLikedArticles(data);
-      setDisplayArticles(sortArticles(data));
+      setDisplayArticles(sortArticles(data, sortKey));
     } else {
-      setDisplayArticles(sortArticles(likedArticles));
+      setDisplayArticles(sortArticles(likedArticles, sortKey));
     }
-  }, [param.id, likedArticles, sortArticles]);
+  }, [param.id, likedArticles, sortKey]);
 
   /**
    * 特定のユーザー取得
@@ -131,11 +112,11 @@ export const useAccountTemplate = () => {
       const res = await fetchBookmarkedArticlesByUserIdAPI(String(param.id));
       const data = res?.data && typeof res.data === "object" ? res.data : [];
       setSavedArticles(data);
-      setDisplayArticles(sortArticles(data));
+      setDisplayArticles(sortArticles(data, sortKey));
     } else {
-      setDisplayArticles(sortArticles(savedArticles));
+      setDisplayArticles(sortArticles(savedArticles, sortKey));
     }
-  }, [param.id, savedArticles, sortArticles]);
+  }, [param.id, savedArticles, sortKey]);
 
   useEffect(() => {
     // ユーザー取得
