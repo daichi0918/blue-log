@@ -1,5 +1,4 @@
 import { act } from "react";
-import { type ArticleCardType } from "@/type/ArticleCard";
 import { renderHook } from "@testing-library/react";
 
 import { useAccountTemplate } from "./useAccountTemplate";
