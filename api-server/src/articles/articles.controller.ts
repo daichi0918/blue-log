@@ -67,8 +67,13 @@ export class ArticlesController {
   }
 
   @Get('user/:userId')
-  async findByUserId(@Param('userId') userId: string) {
-    return await this.articlesService.findByUserId(+userId);
+  @UseGuards(OptionalAuthGuard)
+  async findByUserId(
+    @Param('userId') userId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const requestUserId = req.user?.userId ?? null;
+    return await this.articlesService.findByUserId(+userId, requestUserId);
   }
 
   @Get('user/:userId/like')

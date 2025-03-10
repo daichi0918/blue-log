@@ -153,7 +153,7 @@ export class ArticlesService {
     };
   }
 
-  async findByUserId(userId: number) {
+  async findByUserId(userId: number, requestUserId?: number | null) {
     const articles = await this.prismaService.article.findMany({
       where: {
         userId: userId,
@@ -173,6 +173,18 @@ export class ArticlesService {
         _count: {
           select: { likes: true }, // いいねの数
         },
+        likes: requestUserId
+          ? {
+              where: { userId: requestUserId }, // ログインユーザーがいいねしているかどうか
+              select: { userId: true },
+            }
+          : false,
+        bookmarks: requestUserId
+          ? {
+              where: { userId: requestUserId }, // ログインユーザーがブックマークしているかどうか
+              select: { userId: true },
+            }
+          : false,
       },
     });
 
@@ -184,6 +196,8 @@ export class ArticlesService {
       updatedAt: article.updatedAt,
       user: article.user,
       likeCount: article._count.likes,
+      isLiked: requestUserId ? article.likes.length > 0 : false,
+      isBookmarked: requestUserId ? article.bookmarks.length > 0 : false,
     }));
   }
 
