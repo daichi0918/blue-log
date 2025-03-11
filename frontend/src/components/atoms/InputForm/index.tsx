@@ -1,4 +1,4 @@
-import type { CSSProperties, FC, JSX } from "react";
+import type { CSSProperties, JSX } from "react";
 import { memo } from "react";
 
 import style from "./styles.module.css";
