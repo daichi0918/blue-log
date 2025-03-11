@@ -17,7 +17,7 @@ type InputFormProps = {
  * InputForm
  * @returns {JSX.Element}
  */
-export const InputForm: FC<InputFormProps> = memo((props) => {
+export const InputForm = memo((props: InputFormProps) => {
   const {
     id,
     type = "text",
