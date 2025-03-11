@@ -1,4 +1,4 @@
-import type { CSSProperties, FC, JSX } from "react";
+import type { CSSProperties, JSX } from "react";
 import { memo } from "react";
 
 import style from "./styles.module.css";
@@ -20,7 +20,7 @@ type BaseButtonProps = {
  * BaseButton
  * @returns {JSX.Element}
  */
-export const BaseButton: FC<BaseButtonProps> = memo((props) => {
+export const BaseButton = memo((props: BaseButtonProps) => {
   const {
     color,
     size,

@@ -29,7 +29,7 @@ export const AuthContext = createContext({} as ContextInterface);
  * @returns
  */
 
-export const AuthProvider: FC<Props> = ({ children }) => {
+export const AuthProvider = ({ children }: Props) => {
   const { user, isAuth, signIn, signOut } = useAuth();
   return (
     <AuthContext.Provider
