@@ -26,7 +26,7 @@ type ArticleCardProps = {
  * @param {ArticleProps}
  * @returns {JSX.Element}
  */
-export const ArticleCard: FC<ArticleCardProps> = memo((props) => {
+export const ArticleCard = memo((props: ArticleCardProps) => {
   const router = useRouter();
   const { article } = props;
 
