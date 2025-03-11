@@ -1,6 +1,5 @@
 "use client";
 
-import type { FC } from "react";
 import { memo } from "react";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
@@ -21,7 +20,7 @@ type ArticleInfoProps = {
   createdAt: string;
 };
 
-export const ArticleInfo: FC<ArticleInfoProps> = memo((props) => {
+export const ArticleInfo = memo((props: ArticleInfoProps) => {
   const { userId, userName, image, createdAt } = props;
   return (
     <UserLink userId={userId}>
