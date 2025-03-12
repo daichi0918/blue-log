@@ -5,7 +5,7 @@
  *
  * @package contexts
  */
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { createContext } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { type UserType } from "@/type/User";
