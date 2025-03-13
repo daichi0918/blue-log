@@ -14,14 +14,13 @@ import { UserImage } from "@/components/atoms/UserImage";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
-import { type UserType } from "@/type/User";
 
 import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
 
 type HeaderProps = {
-  user: UserType | undefined;
-  isAuth: boolean;
+  // user: UserType | undefined;
+  // isAuth: boolean;
   searchInputValue: string;
   handleInputSearch: EventType["onChangeInput"];
 };
@@ -31,8 +30,8 @@ type HeaderProps = {
  * @returns {JSX.Element}
  */
 export const Header = memo((props: HeaderProps) => {
-  const { isAuth, user, searchInputValue, handleInputSearch } = props;
-  const { signOut } = useContext(AuthContext);
+  const { searchInputValue, handleInputSearch } = props;
+  const { isAuth, user, signOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 

@@ -22,8 +22,6 @@ import { useHomeTemplate } from "./useHomeTemplate";
  * @returns {JSX.Element}
  */
 export const HomeTemplate = () => {
-  // 認証情報を取得
-  const { isAuth, user } = useContext(AuthContext);
   // HomeTemplateのカスタムフックを使用
   const {
     articleDisplayLength,
@@ -38,8 +36,6 @@ export const HomeTemplate = () => {
     <>
       {/* ヘッダー */}
       <Header
-        user={user}
-        isAuth={isAuth}
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
