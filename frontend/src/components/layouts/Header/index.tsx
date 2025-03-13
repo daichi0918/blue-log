@@ -5,13 +5,15 @@
  *
  * @package layouts
  */
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
+import { NAVIGATION_LIST } from "@/constants/navigation";
+import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
 
@@ -31,6 +33,7 @@ type HeaderProps = {
  */
 export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
+  const { signOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -59,6 +62,14 @@ export const Header = memo((props: HeaderProps) => {
   const navigateToMyPage = useCallback(() => {
     void router.push(`/user/${user?.id}`);
   }, [router, user?.id]);
+  /**
+   * ログアウト
+   */
+  const handleSignOut = useCallback(async () => {
+    localStorage.removeItem("access_token");
+    void signOut();
+    router.push(NAVIGATION_LIST.LOGIN);
+  }, [router, signOut]);
 
   return (
     <HeaderArea>
@@ -85,7 +96,7 @@ export const Header = memo((props: HeaderProps) => {
                     <Image src="/edit.svg" alt="edit" width={16} height={16} />
                     <p>マイページ</p>
                   </li>
-                  <li className={style.menuItem}>
+                  <li className={style.menuItem} onClick={handleSignOut}>
                     <Image
                       src="/delete.svg"
                       alt="delete"
