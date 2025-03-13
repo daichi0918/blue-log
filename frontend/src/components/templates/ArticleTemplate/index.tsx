@@ -51,8 +51,6 @@ export const ArticleTemplate = () => {
   return (
     <>
       <Header
-        user={user}
-        isAuth={isAuth}
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />

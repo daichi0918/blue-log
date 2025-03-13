@@ -23,8 +23,6 @@ import { useAccountTemplate } from "./useAccountTemplate";
 export const AccountTemplate = () => {
   const {
     MENU_ITEMS,
-    isAuth,
-    user,
     inputArticleSearch,
     displayArticles,
     postedArticles,
@@ -41,8 +39,6 @@ export const AccountTemplate = () => {
     <>
       <>
         <Header
-          user={user}
-          isAuth={isAuth}
           searchInputValue={inputArticleSearch}
           handleInputSearch={handleInputSearch}
         />

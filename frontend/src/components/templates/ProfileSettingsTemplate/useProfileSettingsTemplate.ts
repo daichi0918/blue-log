@@ -120,8 +120,6 @@ export const useProfileSettingsTemplate = () => {
   }, [isAuth, user, router]);
 
   return {
-    isAuth,
-    user,
     inputArticleSearch,
     imageIcon,
     userName,

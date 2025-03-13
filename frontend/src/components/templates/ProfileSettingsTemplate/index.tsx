@@ -20,8 +20,6 @@ import { useProfileSettingsTemplate } from "./useProfileSettingsTemplate";
  */
 export const ProfilesSettingsTemplate = () => {
   const {
-    isAuth,
-    user,
     inputArticleSearch,
     userName,
     profile,
@@ -40,8 +38,6 @@ export const ProfilesSettingsTemplate = () => {
   return (
     <>
       <Header
-        user={user}
-        isAuth={isAuth}
         searchInputValue={inputArticleSearch}
         handleInputSearch={handleInputSearch}
       />
