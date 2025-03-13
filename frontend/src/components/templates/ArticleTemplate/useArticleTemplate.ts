@@ -4,8 +4,9 @@
  * @package templates
  */
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { fetchArticleAPI } from "@/apis/articleApi";
+import { followUserApi, unfollowUserApi } from "@/apis/authApi";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
 import { type EventType } from "@/type/Event";
@@ -15,6 +16,7 @@ import { type EventType } from "@/type/Event";
  */
 export const useArticleTemplate = () => {
   const param = useParams();
+  const router = useRouter();
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
   /* state */
@@ -25,6 +27,9 @@ export const useArticleTemplate = () => {
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
   const [isOpen, setIsOpen] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(
+    article?.user.followers?.includes(user?.id ?? -1),
+  );
 
   /* action定義 */
   /**
@@ -67,6 +72,40 @@ export const useArticleTemplate = () => {
   const navigateToFacebook = (url: string | null) => {
     window.open(url ?? "https://facebook.com", "_blank");
   };
+  /**
+   * プロフィール画面への遷移
+   */
+  const navigateToProfile = useCallback(() => {
+    void router.push(`/user/${user?.id}/settings`);
+  }, [router, user]);
+
+  /**
+   * ユーザーフォロー関数
+   */
+  /** フォロー処理 */
+  const followUser = useCallback(async (): Promise<void> => {
+    try {
+      const res = await followUserApi(String(param.id));
+      // console.log(res?.code);
+      setIsFollowing(res?.code === 201 && true);
+    } catch (error) {
+      console.error("フォロー処理に失敗しました:", error);
+    }
+  }, [param.id]);
+
+  /**
+   * ユーザーアンフォロー関数
+   */
+  /** フォロー処理 */
+  const unfollowUser = useCallback(async (): Promise<void> => {
+    try {
+      const res = await unfollowUserApi(String(param.id));
+      // console.log(res?.code);
+      setIsFollowing(res?.code === 200 && false);
+    } catch (error) {
+      console.error("フォロー処理に失敗しました:", error);
+    }
+  }, [param.id]);
 
   useEffect(() => {
     void fetchArticleById();
@@ -87,11 +126,15 @@ export const useArticleTemplate = () => {
     inputArticleSearch,
     article,
     isOpen,
+    isFollowing,
     setShowModal,
     handleInputSearch,
     toggleMenu,
     navigateToX,
     navigateToGithub,
     navigateToFacebook,
+    navigateToProfile,
+    followUser,
+    unfollowUser,
   };
 };

@@ -193,7 +193,7 @@ export const updateUser = async (
  * ユーザーフォロー
  * @param {string} userId
  */
-export const followUser = async (userId: string) => {
+export const followUserApi = async (userId: string) => {
   try {
     await globalAxios.post(`auth/${userId}/follow`);
   } catch (err) {
@@ -223,7 +223,7 @@ export const followUser = async (userId: string) => {
  * ユーザーアンフォロー
  * @param {string} userId
  */
-export const unfollowUser = async (userId: string) => {
+export const unfollowUserApi = async (userId: string) => {
   try {
     await globalAxios.delete(`auth/${userId}/follow`);
   } catch (err) {
