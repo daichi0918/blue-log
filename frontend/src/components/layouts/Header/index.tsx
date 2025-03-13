@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { UserImage } from "@/components/atoms/UserImage";
-import { UserLink } from "@/components/atoms/UserLink";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type EventType } from "@/type/Event";
