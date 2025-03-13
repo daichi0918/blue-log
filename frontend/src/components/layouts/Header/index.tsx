@@ -5,11 +5,13 @@
  *
  * @package layouts
  */
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { UserImage } from "@/components/atoms/UserImage";
+import { UserLink } from "@/components/atoms/UserLink";
 import { type EventType } from "@/type/Event";
 import { type UserType } from "@/type/User";
 
@@ -29,6 +31,7 @@ type HeaderProps = {
  */
 export const Header = memo((props: HeaderProps) => {
   const { isAuth, user, searchInputValue, handleInputSearch } = props;
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   /**
@@ -44,6 +47,18 @@ export const Header = memo((props: HeaderProps) => {
   const navigateToSignIn = useCallback(() => {
     void router.push("/signin");
   }, [router]);
+  /**
+   * 編集・削除トグル制御
+   */
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
+  /**
+   * マイページ画面遷移
+   */
+  const navigateToMyPage = useCallback(() => {
+    void router.push(`/user/${user?.id}`);
+  }, [router, user?.id]);
 
   return (
     <HeaderArea>
@@ -62,7 +77,27 @@ export const Header = memo((props: HeaderProps) => {
       <div className={style.authSection}>
         {isAuth && user ? (
           <>
-            <UserImage image={user?.image} userName={user?.name} />
+            <div className={style.actiomMenuWrapper} onClick={toggleMenu}>
+              <UserImage image={user?.image} userName={user?.name} />
+              <div className={style.actionMenu}>
+                <ul className={`${style.menuList} ${isOpen ? style.show : ""}`}>
+                  <li className={style.menuItem} onClick={navigateToMyPage}>
+                    <Image src="/edit.svg" alt="edit" width={16} height={16} />
+                    <p>マイページ</p>
+                  </li>
+                  <li className={style.menuItem}>
+                    <Image
+                      src="/delete.svg"
+                      alt="delete"
+                      width={16}
+                      height={16}
+                    />
+                    <p>ログアウト</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             <BaseButton
               color={"primary"}
               size={"medium"}
