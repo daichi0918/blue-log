@@ -1,9 +1,12 @@
 "use client";
 
-import { memo, useContext } from "react";
+import { memo, useCallback, useContext, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { followUserApi, unfollowUserApi } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
+import { Modal } from "@/components/molecules/Modal";
 import { AuthContext } from "@/contexts/AuthContext";
 import { IconContext } from "react-icons";
 import { FaFacebook, FaGithub } from "react-icons/fa";
@@ -37,7 +40,10 @@ type UserCardProps = {
  * @returns {JSX.Element}
  */
 export const UserCard = memo((props: UserCardProps) => {
+  const param = useParams();
+  const router = useRouter();
   const { user, isAuth } = useContext(AuthContext);
+
   const {
     userId,
     userName,
@@ -50,6 +56,10 @@ export const UserCard = memo((props: UserCardProps) => {
     followerCount,
     followingCount,
   } = props;
+  const [isFollowing, setIsFollowing] = useState(
+    followers?.includes(user?.id ?? -1),
+  );
+  const [showModal, setShowModal] = useState(false);
   /**
    * Xへ遷移
    */
@@ -68,60 +78,107 @@ export const UserCard = memo((props: UserCardProps) => {
   const navigateToFacebook = (url: string | null) => {
     window.open(url ?? "https://facebook.com", "_blank");
   };
-  return (
-    <div className={style.userProfileWrapper}>
-      <UserLink userId={userId}>
-        <div className={style.userInfo}>
-          <UserImage image={userImage} userName={userName} />
-          <p className={style.userName}>{userName}</p>
-        </div>
-      </UserLink>
+  /**
+   * プロフィール画面への遷移
+   */
+  const navigateToProfile = useCallback(() => {
+    void router.push(`/user/${userId}/settings`);
+  }, [router, userId]);
 
-      <div className={style.followWrapper}>
-        <p>
-          <span>{followerCount}</span>フォロワー <span>{followingCount}</span>
-          フォロー中
-        </p>
-      </div>
-      {userProfile && (
-        <div className={style.userProfile}>
-          <p className={style.profileText}>{userProfile}</p>
+  /**
+   * ユーザーフォロー関数
+   */
+  /** フォロー処理 */
+  const followUser = useCallback(async (): Promise<void> => {
+    try {
+      const res = await followUserApi(String(param.id));
+      // console.log(res?.code);
+      setIsFollowing(res?.code === 201 && true);
+    } catch (error) {
+      console.error("フォロー処理に失敗しました:", error);
+    }
+  }, [param.id]);
+
+  /**
+   * ユーザーアンフォロー関数
+   */
+  /** フォロー処理 */
+  const unfollowUser = useCallback(async (): Promise<void> => {
+    try {
+      const res = await unfollowUserApi(String(param.id));
+      // console.log(res?.code);
+      setIsFollowing(res?.code === 200 && false);
+    } catch (error) {
+      console.error("フォロー処理に失敗しました:", error);
+    }
+  }, [param.id]);
+  return (
+    <>
+      <div className={style.userProfileWrapper}>
+        <UserLink userId={userId}>
+          <div className={style.userInfo}>
+            <UserImage image={userImage} userName={userName} />
+            <p className={style.userName}>{userName}</p>
+          </div>
+        </UserLink>
+
+        <div className={style.followWrapper}>
+          <p>
+            <span>{followerCount}</span>フォロワー <span>{followingCount}</span>
+            フォロー中
+          </p>
         </div>
-      )}
-      <BaseButton
-        color={"secondary"}
-        size={"small"}
-        text={
-          !isAuth
-            ? "フォロー"
-            : userId === user?.id
-              ? "プロフィールを編集"
-              : followers?.includes(user?.id ?? -1)
-                ? "フォローを外す"
-                : "フォロー"
-        }
-        additionalStyle={{ width: "100%", margin: "15px 0" }}
-      />
-      <div className={style.userSnsInfo}>
-        <IconContext.Provider
-          value={{ size: "20px", style: { marginRight: "15px" } }}
-        >
-          <FaXTwitter onClick={() => navigateToX(twitterURL)} />
-        </IconContext.Provider>
-        <IconContext.Provider
-          value={{ size: "20px", style: { marginRight: "15px" } }}
-        >
-          <FaGithub onClick={() => navigateToGithub(githubURL)} />
-        </IconContext.Provider>
-        <IconContext.Provider
-          value={{
-            size: "20px",
-            style: { marginRight: "15px", color: "#0966ff" },
-          }}
-        >
-          <FaFacebook onClick={() => navigateToFacebook(facebookURL)} />
-        </IconContext.Provider>
+        {userProfile && (
+          <div className={style.userProfile}>
+            <p className={style.profileText}>{userProfile}</p>
+          </div>
+        )}
+        <BaseButton
+          color={"secondary"}
+          size={"small"}
+          text={
+            !isAuth
+              ? "フォロー"
+              : userId === user?.id
+                ? "プロフィールを編集"
+                : isFollowing
+                  ? "フォローを外す"
+                  : "フォロー"
+          }
+          onClick={
+            !isAuth
+              ? () => setShowModal(true)
+              : userId === user?.id
+                ? () => void navigateToProfile()
+                : isFollowing
+                  ? () => void unfollowUser()
+                  : () => void followUser()
+          }
+          additionalStyle={{ width: "100%", margin: "15px 0" }}
+        />
+        <div className={style.userSnsInfo}>
+          <IconContext.Provider
+            value={{ size: "20px", style: { marginRight: "15px" } }}
+          >
+            <FaXTwitter onClick={() => navigateToX(twitterURL)} />
+          </IconContext.Provider>
+          <IconContext.Provider
+            value={{ size: "20px", style: { marginRight: "15px" } }}
+          >
+            <FaGithub onClick={() => navigateToGithub(githubURL)} />
+          </IconContext.Provider>
+          <IconContext.Provider
+            value={{
+              size: "20px",
+              style: { marginRight: "15px", color: "#0966ff" },
+            }}
+          >
+            <FaFacebook onClick={() => navigateToFacebook(facebookURL)} />
+          </IconContext.Provider>
+        </div>
       </div>
-    </div>
+
+      {showModal && <Modal onClose={() => setShowModal(false)} />}
+    </>
   );
 });

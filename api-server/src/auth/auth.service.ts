@@ -161,6 +161,46 @@ export class AuthService {
   }
 
   /**
+   * ユーザーをフォローする
+   * @param {number} followerId フォローする側のユーザーID
+   * @param {number} followingId フォローされる側のユーザーID
+   */
+  async followUser(followerId: number, followingId: number): Promise<void> {
+    if (followerId === followingId) {
+      throw new UnauthorizedException('自分自身をフォローすることはできません');
+    }
+
+    // フォロー済みかチェック
+    const existingFollow = await this.prismaService.follow.findUnique({
+      where: { followerId_followingId: { followerId, followingId } },
+    });
+
+    if (!existingFollow) {
+      await this.prismaService.follow.create({
+        data: { followerId, followingId },
+      });
+    }
+  }
+
+  /**
+   * ユーザーのフォローを解除する
+   * @param {number} followerId フォローを解除する側のユーザーID
+   * @param {number} followingId フォローを解除される側のユーザーID
+   */
+  async unfollowUser(followerId: number, followingId: number): Promise<void> {
+    // フォローしているかチェック
+    const existingFollow = await this.prismaService.follow.findUnique({
+      where: { followerId_followingId: { followerId, followingId } },
+    });
+
+    if (existingFollow) {
+      await this.prismaService.follow.delete({
+        where: { followerId_followingId: { followerId, followingId } },
+      });
+    }
+  }
+
+  /**
    * 認証チェック機能
    * @param {number} userId
    */

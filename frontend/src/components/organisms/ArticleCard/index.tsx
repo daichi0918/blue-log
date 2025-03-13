@@ -1,6 +1,5 @@
 "use client";
 
-import type { FC } from "react";
 import { memo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { NAVIGATION_PATH } from "@/constants/navigation";

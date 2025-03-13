@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -44,6 +46,28 @@ export class AuthController {
     @Body() credentialsDto: CredentialsDto,
   ): Promise<{ token: string }> {
     return await this.authService.signIn(credentialsDto);
+  }
+
+  @Post(':id/follow')
+  @UseGuards(AuthGuard('jwt'))
+  async follow(
+    @Param('id') followingId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const followerId = req.user.userId;
+    await this.authService.followUser(followerId, +followingId);
+    return { message: 'フォローしました' };
+  }
+
+  @Delete(':id/follow')
+  @UseGuards(AuthGuard('jwt'))
+  async unfollow(
+    @Param('id') followingId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const followerId = req.user.userId;
+    await this.authService.unfollowUser(followerId, +followingId);
+    return { message: 'フォローを解除しました' };
   }
 
   @Post('authentication')

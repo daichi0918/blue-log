@@ -20,7 +20,7 @@ type UserLinkProps = {
  */
 export const UserLink = ({ userId, children }: UserLinkProps) => {
   return (
-    <Link href={`/users/${userId}`} className={style.link}>
+    <Link href={`/user/${userId}`} className={style.link}>
       {children}
     </Link>
   );

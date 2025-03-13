@@ -30,6 +30,10 @@
   align-items: center;
 }
 
+.contentTop > img {
+  cursor: pointer;
+}
+
 .title {
   color: var(--gray_06);
   font-size: 2rem;

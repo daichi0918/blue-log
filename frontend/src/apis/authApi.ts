@@ -190,6 +190,66 @@ export const updateUser = async (
 };
 
 /**
+ * ユーザーフォロー
+ * @param {string} userId
+ */
+export const followUserApi = async (userId: string) => {
+  try {
+    await globalAxios.post(`auth/${userId}/follow`);
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
+ * ユーザーアンフォロー
+ * @param {string} userId
+ */
+export const unfollowUserApi = async (userId: string) => {
+  try {
+    await globalAxios.delete(`auth/${userId}/follow`);
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: "",
+    };
+    if (isAxiosError(err)) {
+      const res: ResponseType = { code: 500, message: "An error occurred" };
+      if (isAxiosError(err)) {
+        console.error("Axios Error:", err);
+        if (err.response) {
+          res.code = err.response.status;
+          res.message =
+            typeof err.message === "string" ? err.message : "Unknown error";
+        } else {
+          res.message = err.message;
+        }
+      }
+      return res;
+    }
+    return res;
+  }
+};
+
+/**
  * 認証チェックAPI
  * @returns
  */

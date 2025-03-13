@@ -41,13 +41,18 @@ export const ArticleTemplate = () => {
     inputArticleSearch,
     article,
     isOpen,
+    isFollowing,
     setShowModal,
     handleInputSearch,
     toggleMenu,
     navigateToX,
     navigateToGithub,
     navigateToFacebook,
+    navigateToProfile,
+    followUser,
+    unfollowUser,
   } = useArticleTemplate();
+
   return (
     <>
       <Header
@@ -144,9 +149,18 @@ export const ArticleTemplate = () => {
                             ? "フォロー"
                             : article.user.id === user?.id
                               ? "プロフィールを編集"
-                              : article.user.followers?.includes(user?.id ?? -1)
+                              : isFollowing
                                 ? "フォローを外す"
                                 : "フォロー"
+                        }
+                        onClick={
+                          !isAuth
+                            ? () => setShowModal(true)
+                            : article.user.id === user?.id
+                              ? () => void navigateToProfile()
+                              : isFollowing
+                                ? () => void unfollowUser()
+                                : () => void followUser()
                         }
                       />
                     </div>
