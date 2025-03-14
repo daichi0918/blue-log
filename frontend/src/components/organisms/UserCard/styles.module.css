@@ -31,6 +31,10 @@
   margin: 0 5px;
 }
 
+.userSnsInfo {
+  display: flex;
+}
+
 .userSnsInfo svg:hover {
   cursor: pointer;
 }

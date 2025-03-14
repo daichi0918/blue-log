@@ -19,8 +19,6 @@ import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
 
 type HeaderProps = {
-  // user: UserType | undefined;
-  // isAuth: boolean;
   searchInputValue: string;
   handleInputSearch: EventType["onChangeInput"];
 };

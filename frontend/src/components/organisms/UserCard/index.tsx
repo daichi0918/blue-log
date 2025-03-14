@@ -4,11 +4,11 @@ import { memo, useCallback, useContext, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { followUserApi, unfollowUserApi } from "@/apis/authApi";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
 import { Modal } from "@/components/molecules/Modal";
 import { AuthContext } from "@/contexts/AuthContext";
-import { IconContext } from "react-icons";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -157,24 +157,26 @@ export const UserCard = memo((props: UserCardProps) => {
           additionalStyle={{ width: "100%", margin: "15px 0" }}
         />
         <div className={style.userSnsInfo}>
-          <IconContext.Provider
-            value={{ size: "20px", style: { marginRight: "15px" } }}
-          >
-            <FaXTwitter onClick={() => navigateToX(twitterURL)} />
-          </IconContext.Provider>
-          <IconContext.Provider
-            value={{ size: "20px", style: { marginRight: "15px" } }}
-          >
-            <FaGithub onClick={() => navigateToGithub(githubURL)} />
-          </IconContext.Provider>
-          <IconContext.Provider
-            value={{
+          <SNSIcon
+            Icon={FaXTwitter}
+            onClick={() => navigateToX(twitterURL)}
+            iconContextValue={{ size: "20px", style: { marginRight: "15px" } }}
+          />
+
+          <SNSIcon
+            Icon={FaGithub}
+            onClick={() => navigateToGithub(githubURL)}
+            iconContextValue={{ size: "20px", style: { marginRight: "15px" } }}
+          />
+
+          <SNSIcon
+            Icon={FaFacebook}
+            onClick={() => navigateToFacebook(facebookURL)}
+            iconContextValue={{
               size: "20px",
               style: { marginRight: "15px", color: "#0966ff" },
             }}
-          >
-            <FaFacebook onClick={() => navigateToFacebook(facebookURL)} />
-          </IconContext.Provider>
+          />
         </div>
       </div>
 
