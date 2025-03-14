@@ -1,6 +1,8 @@
 import type { IconType } from "react-icons";
 import { IconContext } from "react-icons";
 
+import style from "./styles.module.css";
+
 type SNSIconProps = {
   Icon: IconType;
   onClick: () => void;
@@ -9,8 +11,10 @@ type SNSIconProps = {
 
 export const SNSIcon = ({ Icon, onClick, iconContextValue }: SNSIconProps) => {
   return (
-    <IconContext.Provider value={iconContextValue}>
-      <Icon onClick={onClick} />
-    </IconContext.Provider>
+    <div className={style.icon}>
+      <IconContext.Provider value={iconContextValue}>
+        <Icon onClick={onClick} />
+      </IconContext.Provider>
+    </div>
   );
 };
