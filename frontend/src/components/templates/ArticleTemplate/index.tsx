@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
 import { Footer } from "@/components/layouts/Footer";
@@ -12,7 +13,6 @@ import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons"
 import { Modal } from "@/components/molecules/Modal";
 import { Tags } from "@/components/molecules/Tags";
 import { UserCard } from "@/components/organisms/UserCard";
-import { IconContext } from "react-icons";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import ReactMarkdown from "react-markdown";
@@ -158,32 +158,30 @@ export const ArticleTemplate = () => {
                     </div>
                   )}
                   <div className={style.userSnsInfo}>
-                    <IconContext.Provider
-                      value={{ size: "20px", style: { marginRight: "15px" } }}
-                    >
-                      <FaXTwitter
-                        onClick={() => navigateToX(article.user.twitter)}
-                      />
-                    </IconContext.Provider>
-                    <IconContext.Provider
-                      value={{ size: "20px", style: { marginRight: "15px" } }}
-                    >
-                      <FaGithub
-                        onClick={() => navigateToGithub(article.user.github)}
-                      />
-                    </IconContext.Provider>
-                    <IconContext.Provider
-                      value={{
+                    <SNSIcon
+                      Icon={FaXTwitter}
+                      onClick={() => navigateToX(article.user.twitter)}
+                      iconContextValue={{
+                        size: "20px",
+                        style: { marginRight: "15px" },
+                      }}
+                    />
+                    <SNSIcon
+                      Icon={FaGithub}
+                      onClick={() => navigateToGithub(article.user.github)}
+                      iconContextValue={{
+                        size: "20px",
+                        style: { marginRight: "15px" },
+                      }}
+                    />
+                    <SNSIcon
+                      Icon={FaFacebook}
+                      onClick={() => navigateToFacebook(article.user.facebook)}
+                      iconContextValue={{
                         size: "20px",
                         style: { marginRight: "15px", color: "#0966ff" },
                       }}
-                    >
-                      <FaFacebook
-                        onClick={() =>
-                          navigateToFacebook(article.user.facebook)
-                        }
-                      />
-                    </IconContext.Provider>
+                    />
                   </div>
                 </section>
               </section>
