@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { LoadingEffect } from "@/components/atoms/LoadingEffect";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
@@ -34,13 +35,11 @@ export const ArticleTemplate = () => {
   const {
     isAuth,
     user,
-    isLiked,
-    likeCounter,
-    isBookmarked,
     showModal,
     inputArticleSearch,
     article,
     isOpen,
+    isLoading,
     setShowModal,
     handleInputSearch,
     toggleMenu,
@@ -55,13 +54,15 @@ export const ArticleTemplate = () => {
         handleInputSearch={handleInputSearch}
       />
       <PageContainer>
-        {article ? (
+        {isLoading ? (
+          <LoadingEffect />
+        ) : article ? (
           <>
             <div className={style.container}>
               <LikeBookmarkButtons
-                isliked={isLiked}
-                isbookmarked={isBookmarked}
-                likeCount={likeCounter}
+                isliked={article.isLiked}
+                isbookmarked={article.isBookmarked}
+                likeCount={article.likeCount}
                 direction={"column"}
               />
               <section className={style.contentContainer}>
@@ -116,9 +117,9 @@ export const ArticleTemplate = () => {
                   </ReactMarkdown>
                   <div className={style.likeBookmarkContainer}>
                     <LikeBookmarkButtons
-                      isliked={isLiked}
-                      isbookmarked={isBookmarked}
-                      likeCount={likeCounter}
+                      isliked={article.isLiked}
+                      isbookmarked={article.isBookmarked}
+                      likeCount={article.likeCount}
                     />
                   </div>
                 </main>

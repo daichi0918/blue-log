@@ -49,7 +49,7 @@ export const useHomeTemplate = () => {
   const sortedArticles = sortArticles(articleListAll, sortKey);
 
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
-    setIsLoading(true); // ローディング開始
+    setIsLoading(true);
     try {
       const res = await fetchArticleListApi();
       setArticleListAll(

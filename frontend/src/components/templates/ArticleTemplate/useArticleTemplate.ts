@@ -20,9 +20,6 @@ export const useArticleTemplate = () => {
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
   /* state */
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCounter, setLikeCounter] = useState(0);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
@@ -30,6 +27,7 @@ export const useArticleTemplate = () => {
   const [isFollowing, setIsFollowing] = useState(
     article?.user.followers?.includes(user?.id ?? -1),
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /* action定義 */
   /**
@@ -43,10 +41,15 @@ export const useArticleTemplate = () => {
    * 記事データ取得
    */
   const fetchArticleById = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleAPI(String(param.id));
-    setArticle(
-      res?.data && typeof res.data === "object" ? res.data : undefined,
-    );
+    setIsLoading(true);
+    try {
+      const res = await fetchArticleAPI(String(param.id));
+      setArticle(
+        res?.data && typeof res.data === "object" ? res.data : undefined,
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }, [param]);
   /**
    * 編集・削除トグル制御
@@ -109,24 +112,22 @@ export const useArticleTemplate = () => {
 
   useEffect(() => {
     void fetchArticleById();
-    if (article) {
-      setIsLiked(article.isLiked);
-      setIsBookmarked(article.isBookmarked);
-      setLikeCounter(article.likeCount);
-    }
-  }, [article, fetchArticleById]);
+    // if (article) {
+    //   setIsLiked(article.isLiked);
+    //   setIsBookmarked(article.isBookmarked);
+    //   setLikeCounter(article.likeCount);
+    // }
+  }, [fetchArticleById]);
 
   return {
     isAuth,
     user,
-    isLiked,
-    likeCounter,
-    isBookmarked,
     showModal,
     inputArticleSearch,
     article,
     isOpen,
     isFollowing,
+    isLoading,
     setShowModal,
     handleInputSearch,
     toggleMenu,
