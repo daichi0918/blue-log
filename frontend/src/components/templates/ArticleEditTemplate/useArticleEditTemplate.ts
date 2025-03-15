@@ -23,6 +23,7 @@ export const useArticleEditTemplate = () => {
   const [tags, setTags] = useState<Array<string>>([]);
   const [tagInput, setTagInput] = useState<string>("");
   const [text, setText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /* action定義 */
   /**
@@ -71,15 +72,20 @@ export const useArticleEditTemplate = () => {
    * 記事データ取得
    */
   const fetchArticleById = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleAPI(String(param.id));
-    if (res?.data && typeof res.data === "object") {
-      if (user?.id !== res?.data?.user.id) {
-        router.push(NAVIGATION_LIST.LOGIN);
-      } else {
-        setTitle(res?.data?.title);
-        setText(res?.data?.text);
-        setTags(res?.data?.tags);
+    setIsLoading(true);
+    try {
+      const res = await fetchArticleAPI(String(param.id));
+      if (res?.data && typeof res.data === "object") {
+        if (user?.id !== res?.data?.user.id) {
+          router.push(NAVIGATION_LIST.LOGIN);
+        } else {
+          setTitle(res?.data?.title);
+          setText(res?.data?.text);
+          setTags(res?.data?.tags);
+        }
       }
+    } finally {
+      setIsLoading(false);
     }
   }, [param, router, user?.id]);
 
@@ -107,6 +113,7 @@ export const useArticleEditTemplate = () => {
     tags,
     tagInput,
     text,
+    isLoading,
     handleInputTitle,
     handleInputTags,
     handleRemoveTag,
