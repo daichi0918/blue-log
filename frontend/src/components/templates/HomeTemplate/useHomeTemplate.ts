@@ -20,6 +20,7 @@ export const useHomeTemplate = () => {
     [],
   );
   const [sortKey, setSortKey] = useState<string>("newest");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /* action定義 */
 
@@ -48,10 +49,15 @@ export const useHomeTemplate = () => {
   const sortedArticles = sortArticles(articleListAll, sortKey);
 
   const fetchArticleCardList = useCallback(async (): Promise<void> => {
-    const res = await fetchArticleListApi();
-    setArticleListAll(
-      res?.data && typeof res.data === "object" ? res.data : [],
-    );
+    setIsLoading(true); // ローディング開始
+    try {
+      const res = await fetchArticleListApi();
+      setArticleListAll(
+        res?.data && typeof res.data === "object" ? res.data : [],
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
   // 初回レンダリング時に記事一覧を取得
   useEffect(() => {
@@ -63,6 +69,7 @@ export const useHomeTemplate = () => {
     inputArticleSearch,
     sortKey,
     sortedArticles,
+    isLoading,
     handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
