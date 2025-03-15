@@ -6,6 +6,7 @@
  * @package templates
  */
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { LoadingEffect } from "@/components/atoms/LoadingEffect";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -25,6 +26,7 @@ export const HomeTemplate = () => {
     articleDisplayLength,
     inputArticleSearch,
     sortedArticles,
+    isLoading,
     handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
@@ -38,34 +40,37 @@ export const HomeTemplate = () => {
         handleInputSearch={handleInputSearch}
       />
       <PageContainer>
-        <main className={style.articlesContainer}>
-          {/* 並び替え */}
-          <section className={style.articleCardSort}>
-            <SortSelect onChange={handleSortChange} />
-          </section>
-          {/* 記事一覧リスト */}
-          <section>
-            {sortedArticles.length > 0 &&
-              sortedArticles
-                .slice(0, articleDisplayLength)
-                .map((article) => (
-                  <ArticleCard key={article.id} article={article} />
-                ))}
-          </section>
-          {/* もっと見るボタン */}
-          {sortedArticles.length > articleDisplayLength && (
-            <section className={style.showMore}>
-              <BaseButton
-                color={"secondary"}
-                size={"medium"}
-                text={"もっと見る"}
-                onClick={handleShowMoreArticles}
-              />
+        {isLoading ? (
+          <LoadingEffect />
+        ) : (
+          <main className={style.articlesContainer}>
+            {/* 並び替え */}
+            <section className={style.articleCardSort}>
+              <SortSelect onChange={handleSortChange} />
             </section>
-          )}
-        </main>
+            {/* 記事一覧リスト */}
+            <section>
+              {sortedArticles.length > 0 &&
+                sortedArticles
+                  .slice(0, articleDisplayLength)
+                  .map((article) => (
+                    <ArticleCard key={article.id} article={article} />
+                  ))}
+            </section>
+            {/* もっと見るボタン */}
+            {sortedArticles.length > articleDisplayLength && (
+              <section className={style.showMore}>
+                <BaseButton
+                  color={"secondary"}
+                  size={"medium"}
+                  text={"もっと見る"}
+                  onClick={handleShowMoreArticles}
+                />
+              </section>
+            )}
+          </main>
+        )}
       </PageContainer>
-
       {/* フッター */}
       <Footer />
     </>
