@@ -8,12 +8,16 @@ import { useParams, useRouter } from "next/navigation";
 import { fetchArticleAPI, updateArticleApi } from "@/apis/articleApi";
 import { NAVIGATION_LIST, NAVIGATION_PATH } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { type EventType } from "@/type/Event";
 
 /**
  * useArticleEditTemplate
  */
 export const useArticleEditTemplate = () => {
+  // 認証リダイレクトを実行
+  useAuthRedirect();
+
   const router = useRouter();
   const param = useParams();
   const { user } = useContext(AuthContext);
