@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import ReactDOM from "react-dom";
 
 import style from "./styles.module.css";
@@ -11,19 +10,22 @@ import style from "./styles.module.css";
  */
 
 type ModalProps = {
+  title: string;
   onClose: () => void;
+  children: React.ReactNode;
 };
 
 /**
  * Modal
  * @returns {JSX.Element}
  */
-export const Modal = ({ onClose }: ModalProps) => {
+export const Modal = (props: ModalProps) => {
+  const { title, onClose, children } = props;
   return ReactDOM.createPortal(
     <div className={style.overlay} data-modal>
       <div className={style.modal}>
         <section className={`${style.section} ${style.contentTop}`}>
-          <h3 className={style.title}>ログインして続ける</h3>
+          <h3 className={style.title}>{title}</h3>
           <Image
             alt={"closeIcon"}
             src={"/closeIcon.svg"}
@@ -32,7 +34,7 @@ export const Modal = ({ onClose }: ModalProps) => {
             onClick={onClose}
           />
         </section>
-        <section className={style.section}>
+        {/* <section className={style.section}>
           <p className={style.text}>
             「いいね」や「保存」機能を利用するには、ログインが必要です。
           </p>
@@ -50,7 +52,8 @@ export const Modal = ({ onClose }: ModalProps) => {
               ログイン
             </Link>
           </div>
-        </section>
+        </section> */}
+        {children}
       </div>
     </div>,
     document.body,

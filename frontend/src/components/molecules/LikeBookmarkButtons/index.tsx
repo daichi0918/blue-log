@@ -10,7 +10,7 @@ import {
 } from "@/apis/articleApi";
 import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
 import { LikeIcon } from "@/components/atoms/LikeIcon";
-import { Modal } from "@/components/molecules/Modal";
+import { LoginModal } from "@/components/organisms/LoginModal";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import style from "./styles.module.css";
@@ -146,7 +146,7 @@ export const LikeBookmarkButtons = memo((props: LikeBookarkButtonsProps) => {
         </section>
       )}
 
-      {showModal && <Modal onClose={() => setShowModal(false)} />}
+      {showModal && <LoginModal onClose={() => setShowModal(false)} />}
     </>
   );
 });

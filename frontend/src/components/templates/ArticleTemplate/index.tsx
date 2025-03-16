@@ -11,8 +11,8 @@ import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
 import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
-import { Modal } from "@/components/molecules/Modal";
 import { Tags } from "@/components/molecules/Tags";
+import { LoginModal } from "@/components/organisms/LoginModal";
 import { UserCard } from "@/components/organisms/UserCard";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -201,7 +201,7 @@ export const ArticleTemplate = () => {
                   followingCount={article.user.followingCount}
                 />
               </section>
-              {showModal && <Modal onClose={() => setShowModal(false)} />}
+              {showModal && <LoginModal onClose={() => setShowModal(false)} />}
             </div>
           </>
         ) : (

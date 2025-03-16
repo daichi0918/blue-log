@@ -7,11 +7,11 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
-import { Modal } from "@/components/molecules/Modal";
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
+import { LoginModal } from "../LoginModal";
 import style from "./styles.module.css";
 
 /**
@@ -180,7 +180,7 @@ export const UserCard = memo((props: UserCardProps) => {
         </div>
       </div>
 
-      {showModal && <Modal onClose={() => setShowModal(false)} />}
+      {showModal && <LoginModal onClose={() => setShowModal(false)} />}
     </>
   );
 });
