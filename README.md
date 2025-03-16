@@ -1,9 +1,52 @@
 # blue-log
 
-### 難しいところ・詰まったところ
+NestJS × Next.js のブログアプリ(REST API)
 
-- article のグローバルステートの定義
-- api-server: article の findById で、認証情報ある場合ない場合、あっても認証できない場合での実装方法
+## 技術構成
+
+### フロントエンド
+
+- TypeScript
+- React v19
+- Next.js v15.1.5
+- Context API
+- Jest, Testing Library
+- ESLint, Prettier
+- Storybook
+- Chromatic
+
+### バックエンド
+
+- TypeScript
+- Node.js,Express
+- Prisma
+- ESLint, Prettier
+
+### その他
+
+- Docker
+- PostgreSQL
+
+## 仕様
+
+- 認証機能
+  - 新規会員登録
+  - ログイン
+  - ログアウト
+  - ユーザー登録編集機能
+- 記事機能
+  - 一覧表示
+  - 並べ替え機能
+  - 詳細表示
+  - 新規登録処理
+  - 編集処理
+  - 削除処理
+  - フォロー機能
+  - いいね・ブックマーク機能
+
+## figma
+
+- https://www.figma.com/design/KrcE4C6fyn8KGBf8cUVOls/Daichi
 
 ### 参考
 

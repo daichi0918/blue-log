@@ -67,6 +67,13 @@ export const Header = memo((props: HeaderProps) => {
     router.push(NAVIGATION_LIST.LOGIN);
   }, [router, signOut]);
 
+  /**
+   * 新規投稿画面遷移
+   */
+  const navigateToArticleNew = useCallback(() => {
+    void router.push(`/article/new`);
+  }, [router]);
+
   return (
     <HeaderArea>
       <div className={style.inputContainer}>
@@ -110,7 +117,7 @@ export const Header = memo((props: HeaderProps) => {
               size={"medium"}
               text={"投稿"}
               additionalStyle={{ marginLeft: "25px" }}
-              onClick={navigateToSignUp}
+              onClick={navigateToArticleNew}
             />
           </>
         ) : (
