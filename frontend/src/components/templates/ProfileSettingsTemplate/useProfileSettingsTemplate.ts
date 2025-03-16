@@ -4,19 +4,24 @@
  * @package templates
  */
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { updateUser } from "@/apis/authApi";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { type EventType } from "@/type/Event";
 
 /**
  * useProfileSettingsTemplate
  */
 export const useProfileSettingsTemplate = () => {
+  // 認証リダイレクトを実行
+  useAuthRedirect();
+
   const router = useRouter();
   // 認証情報を取得
   const { isAuth, user } = useContext(AuthContext);
+  const { id } = useParams();
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [imageIcon, setImageIcon] = useState<string | undefined>("");
@@ -117,7 +122,7 @@ export const useProfileSettingsTemplate = () => {
       setGithub(user.github);
       setFacebook(user.facebook);
     }
-  }, [isAuth, user, router]);
+  }, [isAuth, user?.id, id, user, router]);
 
   return {
     inputArticleSearch,

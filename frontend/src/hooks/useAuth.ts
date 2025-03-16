@@ -37,14 +37,21 @@ export const useAuth = () => {
     setIsAuth(false);
   }, []);
 
+  // const convertPathToRegex = (path: string) => {
+  //   // `:id` を `(\d+)` に置換して正規表現に変換
+  //   const regexString = `^${path.replace(/:id/g, "(\\d+)").replace(/\//g, "\\/")}$`;
+  //   return new RegExp(regexString);
+  // };
+
   /**
    * 認証されていないと表示されないページの判定処理
    */
   const isProtectedPage = useCallback(() => {
     return (
-      pathname == NAVIGATION_LIST.SETTING ||
-      pathname === NAVIGATION_LIST.ARTICLE ||
       pathname === NAVIGATION_LIST.ARTICLENEW
+      // ||
+      // pathname === NAVIGATION_LIST.ARTICLEEDIT ||
+      // pathname === NAVIGATION_LIST.SETTING
     );
   }, [pathname]);
 
@@ -61,19 +68,23 @@ export const useAuth = () => {
    * 認証ルーティング
    */
   const authRouting = useCallback(async () => {
-    let auth = false;
+    // let auth = false;
     const res = await authenticationApi();
 
     if (res?.data?.user) {
       setUser(res?.data?.user);
       setIsAuth(true);
-      auth = true;
+      // auth = true;
     }
+    // console.log("auth");
+    // console.log(isAuth);
+    // console.log("isProtectedPage");
+    // console.log(isProtectedPage());
     // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
-    if (!auth && isProtectedPage()) router.push(NAVIGATION_LIST.LOGIN);
+    if (!isAuth && isProtectedPage()) router.push(NAVIGATION_LIST.LOGIN);
     // // ログイン済で認証ページにいる場合、Todo一覧ページにリダイレクト
-    if (auth && isPublicAuthPage()) router.push(NAVIGATION_LIST.TOP);
-  }, [isProtectedPage, isPublicAuthPage, router]);
+    if (isAuth && isPublicAuthPage()) router.push(NAVIGATION_LIST.TOP);
+  }, [isProtectedPage, isPublicAuthPage, router, isAuth]);
 
   useEffect(() => {
     void authRouting();
