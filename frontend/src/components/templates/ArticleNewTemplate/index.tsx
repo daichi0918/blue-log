@@ -104,7 +104,9 @@ export const ArticleNewTemplate = () => {
                 </div>
                 <div className={style.previewTextWrapper}>
                   <p>プレビュー</p>
-                  <MarkdonwPreview text={text} />
+                  <div className={style.markdownWrapper}>
+                    <MarkdonwPreview text={text} />
+                  </div>
                 </div>
               </section>
             </section>

@@ -17,5 +17,5 @@ type ArticleContentWrapperProps = {
 export const ArticleContentWrapper = ({
   children,
 }: ArticleContentWrapperProps) => {
-  return <main className={style.contentSection}>{children}</main>;
+  return <div className={style.contentSection}>{children}</div>;
 };

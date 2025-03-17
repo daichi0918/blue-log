@@ -1,0 +1,12 @@
+.section {
+  margin: 0 auto;
+  width: 65%;
+}
+
+.title {
+  font-size: 2.4rem;
+}
+
+.text {
+  font-size: 1.4rem;
+}
