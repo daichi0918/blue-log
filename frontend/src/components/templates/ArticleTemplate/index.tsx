@@ -6,6 +6,7 @@ import { LoadingEffect } from "@/components/atoms/LoadingEffect";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
+import { ArticleContentWrapper } from "@/components/layouts/ArticleContentWrapper";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -66,7 +67,8 @@ export const ArticleTemplate = () => {
                 direction={"column"}
               />
               <section className={style.contentContainer}>
-                <main className={style.contentSection}>
+                {/* <main className={style.contentSection}> */}
+                <ArticleContentWrapper>
                   <div className={style.titleContainer}>
                     <div className={style.titleWrapper}>
                       <h1 className={style.title}>{article?.title}</h1>
@@ -120,7 +122,7 @@ export const ArticleTemplate = () => {
                       likeCount={article.likeCount}
                     />
                   </div>
-                </main>
+                </ArticleContentWrapper>
                 <section className={style.contentSection}>
                   <div className={style.userInfoFollowButtonWrapper}>
                     <UserLink userId={article.user.id}>
