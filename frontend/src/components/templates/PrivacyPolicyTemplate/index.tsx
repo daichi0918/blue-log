@@ -7,7 +7,6 @@ import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { MarkdonwPreview } from "@/components/molecules/MarkdonwPreview";
 import { type EventType } from "@/type/Event";
-import ReactMarkdown from "react-markdown";
 
 /**
  * PrivacyPolicyTemplate
@@ -45,8 +44,17 @@ export const PrivacyPolicyTemplate = () => {
             <p className={style.text}>
               BlueLog（以下、「当サイト」）では、利用者のプライバシーを尊重し、個人情報の適切な取り扱いに努めます。本プライバシーポリシーでは、当サイトが収集する情報とその利用目的について説明します。
             </p>
-            <MarkdonwPreview
-              text={`##  1. 収集する情報
+            <MarkdonwPreview text={privacyPolicyMarkdown}></MarkdonwPreview>
+          </ArticleContentWrapper>
+        </section>
+      </PageContainer>
+      <Footer />
+    </>
+  );
+};
+
+const privacyPolicyMarkdown = `
+## 1. 収集する情報
 当サイトでは、以下の情報を収集する場合があります。
 - お問い合わせフォームやコメント欄に入力された情報（名前、メールアドレスなど）
 - サイト利用時に自動収集される情報（IPアドレス、ブラウザ情報、クッキーなど）
@@ -85,12 +93,4 @@ export const PrivacyPolicyTemplate = () => {
 制定日: 2025-03-17
 
 最終更新日: 2025-03-17
-`}
-            ></MarkdonwPreview>
-          </ArticleContentWrapper>
-        </section>
-      </PageContainer>
-      <Footer />
-    </>
-  );
-};
+`;
