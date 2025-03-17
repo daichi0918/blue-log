@@ -9,7 +9,7 @@ import { InputForm } from "@/components/atoms/InputForm";
 import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
 import { PageContainer } from "@/components/layouts/PageContainer";
-import ReactMarkdown from "react-markdown";
+import { MarkdonwPreview } from "@/components/molecules/MarkdonwPreview";
 
 import style from "./styles.module.css";
 import { useArticleNewTemplate } from "./useArticleNewTemplate";
@@ -104,9 +104,7 @@ export const ArticleNewTemplate = () => {
                 </div>
                 <div className={style.previewTextWrapper}>
                   <p>プレビュー</p>
-                  <ReactMarkdown className={style.markdown}>
-                    {text}
-                  </ReactMarkdown>
+                  <MarkdonwPreview text={text} />
                 </div>
               </section>
             </section>
