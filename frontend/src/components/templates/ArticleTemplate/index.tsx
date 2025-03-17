@@ -6,17 +6,18 @@ import { LoadingEffect } from "@/components/atoms/LoadingEffect";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
+import { ArticleContentWrapper } from "@/components/layouts/ArticleContentWrapper";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
 import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
+import { MarkdonwPreview } from "@/components/molecules/MarkdonwPreview";
 import { Tags } from "@/components/molecules/Tags";
 import { LoginModal } from "@/components/organisms/LoginModal";
 import { UserCard } from "@/components/organisms/UserCard";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import ReactMarkdown from "react-markdown";
 
 import style from "./styles.module.css";
 import { useArticleTemplate } from "./useArticleTemplate";
@@ -66,7 +67,8 @@ export const ArticleTemplate = () => {
                 direction={"column"}
               />
               <section className={style.contentContainer}>
-                <main className={style.contentSection}>
+                {/* <main className={style.contentSection}> */}
+                <ArticleContentWrapper>
                   <div className={style.titleContainer}>
                     <div className={style.titleWrapper}>
                       <h1 className={style.title}>{article?.title}</h1>
@@ -112,9 +114,7 @@ export const ArticleTemplate = () => {
                       createdAt={article.createdAt}
                     />
                   </div>
-                  <ReactMarkdown className={style.markdown}>
-                    {article.text}
-                  </ReactMarkdown>
+                  <MarkdonwPreview text={article.text} />
                   <div className={style.likeBookmarkContainer}>
                     <LikeBookmarkButtons
                       isliked={article.isLiked}
@@ -122,7 +122,7 @@ export const ArticleTemplate = () => {
                       likeCount={article.likeCount}
                     />
                   </div>
-                </main>
+                </ArticleContentWrapper>
                 <section className={style.contentSection}>
                   <div className={style.userInfoFollowButtonWrapper}>
                     <UserLink userId={article.user.id}>

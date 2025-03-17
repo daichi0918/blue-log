@@ -1,0 +1,6 @@
+.contentSection {
+  background: var(--gray_00);
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
