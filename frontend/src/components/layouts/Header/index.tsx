@@ -12,27 +12,22 @@ import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { UserImage } from "@/components/atoms/UserImage";
 import { NAVIGATION_LIST } from "@/constants/navigation";
+import { ArticleContext } from "@/contexts/ArticleContext";
 import { AuthContext } from "@/contexts/AuthContext";
-import { type EventType } from "@/type/Event";
 
 import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
-
-type HeaderProps = {
-  searchInputValue: string;
-  handleInputSearch: EventType["onChangeInput"];
-};
 
 /**
  * Header
  * @returns {JSX.Element}
  */
-export const Header = memo((props: HeaderProps) => {
-  const { searchInputValue, handleInputSearch } = props;
-  const { isAuth, user, signOut } = useContext(AuthContext);
+export const Header = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
+  const { isAuth, user, signOut } = useContext(AuthContext);
+  const { inputArticleSearch, handleInputSearch } = useContext(ArticleContext);
   /**
    * 新規登録画面への遷移
    */
@@ -79,7 +74,7 @@ export const Header = memo((props: HeaderProps) => {
       <div className={style.inputContainer}>
         <InputForm
           placeholder={"キーワード検索"}
-          value={searchInputValue}
+          value={inputArticleSearch}
           onChange={handleInputSearch}
           additionalStyle={{
             minWidth: "400px",

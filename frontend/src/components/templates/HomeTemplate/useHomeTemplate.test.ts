@@ -4,21 +4,6 @@ import { renderHook } from "@testing-library/react";
 import { useHomeTemplate } from "./useHomeTemplate";
 
 describe("useSignUpTemplate, Hooksテスト", () => {
-  describe("【関数テスト】handleInputSearch", () => {
-    test("【正常系】inputArticleSearchを更新できること", () => {
-      const expectValue = "検索";
-
-      const eventObject = {
-        target: {
-          value: expectValue,
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
-      const { result } = renderHook(() => useHomeTemplate());
-      expect(result.current.inputArticleSearch).toBe("");
-      act(() => result.current.handleInputSearch(eventObject));
-      expect(result.current.inputArticleSearch).toBe(expectValue);
-    });
-  });
   describe("【関数テスト】handleShowMoreArticles", () => {
     test("【正常系】articleDisplayLengthが+10されること", () => {
       const { result } = renderHook(() => useHomeTemplate());

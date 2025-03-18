@@ -9,7 +9,6 @@ import { fetchArticleAPI } from "@/apis/articleApi";
 import { followUserApi, unfollowUserApi } from "@/apis/authApi";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
-import { type EventType } from "@/type/Event";
 
 /**
  * useArticleTemplate
@@ -21,7 +20,6 @@ export const useArticleTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   /* state */
   const [showModal, setShowModal] = useState(false);
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [article, setArticle] = useState<ArticleType>();
   const [isOpen, setIsOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(
@@ -30,13 +28,6 @@ export const useArticleTemplate = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /* action定義 */
-  /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
   /**
    * 記事データ取得
    */
@@ -118,24 +109,17 @@ export const useArticleTemplate = () => {
 
   useEffect(() => {
     void fetchArticleById();
-    // if (article) {
-    //   setIsLiked(article.isLiked);
-    //   setIsBookmarked(article.isBookmarked);
-    //   setLikeCounter(article.likeCount);
-    // }
   }, [fetchArticleById]);
 
   return {
     isAuth,
     user,
     showModal,
-    inputArticleSearch,
     article,
     isOpen,
     isFollowing,
     isLoading,
     setShowModal,
-    handleInputSearch,
     toggleMenu,
     navigateToX,
     navigateToGithub,

@@ -20,13 +20,11 @@ import { useProfileSettingsTemplate } from "./useProfileSettingsTemplate";
  */
 export const ProfilesSettingsTemplate = () => {
   const {
-    inputArticleSearch,
     userName,
     profile,
     twitter,
     github,
     facebook,
-    handleInputSearch,
     handleInputUserName,
     handleTextAreaProfile,
     handleInputTwitter,
@@ -37,10 +35,7 @@ export const ProfilesSettingsTemplate = () => {
 
   return (
     <>
-      <Header
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
+      <Header />
       <PageContainer>
         <main className={style.container}>
           <section className={`${style.section} ${style.sectionTop}`}>

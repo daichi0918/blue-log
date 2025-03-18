@@ -24,10 +24,8 @@ export const HomeTemplate = () => {
   // HomeTemplateのカスタムフックを使用
   const {
     articleDisplayLength,
-    inputArticleSearch,
     sortedArticles,
     isLoading,
-    handleInputSearch,
     handleShowMoreArticles,
     handleSortChange,
   } = useHomeTemplate();
@@ -35,10 +33,7 @@ export const HomeTemplate = () => {
   return (
     <>
       {/* ヘッダー */}
-      <Header
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
+      <Header />
       <PageContainer>
         {isLoading ? (
           <LoadingEffect />
