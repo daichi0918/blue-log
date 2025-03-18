@@ -81,6 +81,12 @@ export const useArticleTemplate = () => {
   const navigateToProfile = useCallback(() => {
     void router.push(`/user/${user?.id}/settings`);
   }, [router, user]);
+  /**
+   * 編集画面への遷移
+   */
+  const navigateToArticleEdit = useCallback(() => {
+    void router.push(`/article/${String(param.id)}/edit`);
+  }, [router, param]);
 
   /**
    * ユーザーフォロー関数
@@ -137,5 +143,6 @@ export const useArticleTemplate = () => {
     navigateToProfile,
     followUser,
     unfollowUser,
+    navigateToArticleEdit,
   };
 };
