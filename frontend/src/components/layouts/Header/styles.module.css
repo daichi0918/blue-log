@@ -133,7 +133,6 @@
 .menuItem:last-child {
   color: red;
 }
-
 .menuItem:hover {
   background: var(--blue_01);
 }

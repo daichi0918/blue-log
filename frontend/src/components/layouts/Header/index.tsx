@@ -96,15 +96,21 @@ export const Header = memo((props: HeaderProps) => {
               <div className={style.actionMenu}>
                 <ul className={`${style.menuList} ${isOpen ? style.show : ""}`}>
                   <li className={style.menuItem} onClick={navigateToMyPage}>
-                    <Image src="/edit.svg" alt="edit" width={16} height={16} />
+                    <Image
+                      src="/mypage.svg"
+                      alt="mypage"
+                      width={16}
+                      height={16}
+                    />
                     <p>マイページ</p>
                   </li>
                   <li className={style.menuItem} onClick={handleSignOut}>
                     <Image
-                      src="/delete.svg"
+                      src="/logout.svg"
                       alt="delete"
                       width={16}
                       height={16}
+                      className={style.logoutIcon}
                     />
                     <p>ログアウト</p>
                   </li>
