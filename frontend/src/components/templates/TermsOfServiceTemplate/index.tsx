@@ -1,12 +1,10 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import { ArticleContentWrapper } from "@/components/layouts/ArticleContentWrapper";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { MarkdonwPreview } from "@/components/molecules/MarkdonwPreview";
-import { type EventType } from "@/type/Event";
 
 /**
  * TermsOfServiceTemplate
@@ -20,23 +18,9 @@ import style from "./styles.module.css";
  * @returns {JSX.Element}
  */
 export const TermsOfServiceTemplate = () => {
-  /* state定義 */
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
-  /* action定義 */
-  /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
-
   return (
     <>
-      <Header
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
+      <Header />
       <PageContainer>
         <section className={style.section}>
           <ArticleContentWrapper>

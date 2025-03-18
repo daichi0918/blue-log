@@ -23,14 +23,12 @@ import { useAccountTemplate } from "./useAccountTemplate";
 export const AccountTemplate = () => {
   const {
     MENU_ITEMS,
-    inputArticleSearch,
     displayArticles,
     postedArticles,
     selectedIndex,
     displayCount,
     currentUser,
     setSelectedIndex,
-    handleInputSearch,
     handleLoadMore,
     handleSortChange,
   } = useAccountTemplate();
@@ -38,10 +36,7 @@ export const AccountTemplate = () => {
   return (
     <>
       <>
-        <Header
-          searchInputValue={inputArticleSearch}
-          handleInputSearch={handleInputSearch}
-        />
+        <Header />
         <PageContainer>
           {postedArticles && currentUser && (
             <div className={style.container}>

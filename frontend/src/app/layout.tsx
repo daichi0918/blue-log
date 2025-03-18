@@ -1,3 +1,4 @@
+import { ArticleProvider } from "@/contexts/ArticleContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 import "@/styles/globals.css";
@@ -15,7 +16,9 @@ const RootLayout = (props: RootLayoutProps) => {
   return (
     <html lang="ja">
       <body className="">
-        <AuthProvider>{props.children}</AuthProvider>
+        <AuthProvider>
+          <ArticleProvider>{props.children}</ArticleProvider>
+        </AuthProvider>
       </body>
     </html>
   );
