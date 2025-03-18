@@ -37,12 +37,10 @@ export const ArticleTemplate = () => {
     isAuth,
     user,
     showModal,
-    inputArticleSearch,
     article,
     isOpen,
     isLoading,
     setShowModal,
-    handleInputSearch,
     toggleMenu,
     navigateToX,
     navigateToGithub,
@@ -51,10 +49,7 @@ export const ArticleTemplate = () => {
   } = useArticleTemplate();
   return (
     <>
-      <Header
-        searchInputValue={inputArticleSearch}
-        handleInputSearch={handleInputSearch}
-      />
+      <Header />
       <PageContainer>
         {isLoading ? (
           <LoadingEffect />
