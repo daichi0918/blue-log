@@ -73,6 +73,7 @@
   max-height: 700px;
   height: 100%;
   overflow-y: scroll;
+  background-color: var(--gray_00);
 }
 
 .textarea {

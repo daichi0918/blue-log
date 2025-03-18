@@ -55,9 +55,6 @@
 
 .textWrapper {
   display: flex;
-  height: 100%;
-  overflow-y: scroll;
-  max-height: 720px;
 }
 
 .basicTextWrapper,
@@ -65,8 +62,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;
-  overflow-y: scroll;
 }
 
 .markdownWrapper {
@@ -74,7 +69,11 @@
   padding: unset;
   border: 1px solid silver;
   width: 100%;
+  min-height: 520px;
+  max-height: 700px;
   height: 100%;
+  overflow-y: scroll;
+  background-color: var(--gray_00);
 }
 
 .textarea {
@@ -83,6 +82,8 @@
   font-size: 1.6rem;
   padding: 0.5rem;
   width: 100%;
+  min-height: 520px;
+  max-height: 700px;
   height: 100%;
   padding: 10px;
 }
