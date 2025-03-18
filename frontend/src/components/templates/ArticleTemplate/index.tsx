@@ -47,6 +47,7 @@ export const ArticleTemplate = () => {
     navigateToX,
     navigateToGithub,
     navigateToFacebook,
+    navigateToArticleEdit,
   } = useArticleTemplate();
   return (
     <>
@@ -80,7 +81,10 @@ export const ArticleTemplate = () => {
                           <ul
                             className={`${style.menuList} ${isOpen ? style.show : ""}`}
                           >
-                            <li className={style.menuItem}>
+                            <li
+                              className={style.menuItem}
+                              onClick={navigateToArticleEdit}
+                            >
                               <Image
                                 src="/edit.svg"
                                 alt="edit"
