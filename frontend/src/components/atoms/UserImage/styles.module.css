@@ -5,6 +5,10 @@
   /* margin-top: 10px; */
 }
 
+.userIcon:hover {
+  cursor: pointer;
+}
+
 .userImg,
 .noUserImg {
   width: 100%;
