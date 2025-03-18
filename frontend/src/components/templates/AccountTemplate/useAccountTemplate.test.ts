@@ -4,27 +4,6 @@ import { renderHook } from "@testing-library/react";
 import { useAccountTemplate } from "./useAccountTemplate";
 
 describe("useAccountTemplate, Hooksテスト", () => {
-  describe("【関数テスト】handleInputSearch", () => {
-    test("【正常系】inputArticleSearchが更新されること", () => {
-      const expectValue = "検索キーワード";
-      const eventObject = {
-        target: {
-          value: expectValue,
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
-
-      const { result } = renderHook(() => useAccountTemplate());
-
-      expect(result.current.inputArticleSearch).toBe(""); // 初期状態
-
-      // handleInputSearchを呼び出す
-      act(() => result.current.handleInputSearch(eventObject));
-
-      // 入力値が更新されていることを確認
-      expect(result.current.inputArticleSearch).toBe(expectValue);
-    });
-  });
-
   describe("【関数テスト】handleLoadMore", () => {
     test("【正常系】displayCountが更新されること", () => {
       const { result } = renderHook(() => useAccountTemplate());

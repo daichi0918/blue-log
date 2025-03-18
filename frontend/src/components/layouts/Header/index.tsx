@@ -8,14 +8,12 @@
 import { memo, useCallback, useContext, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Article from "@/app/article/[id]/page";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 import { UserImage } from "@/components/atoms/UserImage";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 import { ArticleContext } from "@/contexts/ArticleContext";
 import { AuthContext } from "@/contexts/AuthContext";
-import { type EventType } from "@/type/Event";
 
 import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";

@@ -9,21 +9,6 @@ describe("useSignUpTemplate, Hooksテスト", () => {
     // useParams のモックデータをテストごとに設定
     mockUseParams.mockReturnValue({ id: "123" });
   });
-  describe("【関数テスト】handleInputSearch", () => {
-    test("【正常系】inputArticleSearchを更新できること", () => {
-      const expectValue = "検索";
-
-      const eventObject = {
-        target: {
-          value: expectValue,
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
-      const { result } = renderHook(() => useArticleTemplate());
-      expect(result.current.inputArticleSearch).toBe("");
-      act(() => result.current.handleInputSearch(eventObject));
-      expect(result.current.inputArticleSearch).toBe(expectValue);
-    });
-  });
 
   describe("【関数テスト】toggleMenu", () => {
     test("【正常系】toggleMenuでisOpenの状態が切り替わる", () => {

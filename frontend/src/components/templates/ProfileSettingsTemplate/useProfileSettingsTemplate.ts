@@ -23,7 +23,6 @@ export const useProfileSettingsTemplate = () => {
   const { isAuth, user } = useContext(AuthContext);
   const { id } = useParams();
   /* state定義 */
-  const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   const [imageIcon, setImageIcon] = useState<string | undefined>("");
   const [userName, setUserName] = useState<string | undefined>("");
   const [profile, setProfile] = useState<string | undefined>("");
@@ -33,13 +32,6 @@ export const useProfileSettingsTemplate = () => {
 
   // const [imagePreview, setImagePreview] = useState<string | null>(null);
   /* action定義 */
-  /**
-   * キーワード検索Input
-   * @param {e}
-   */
-  const handleInputSearch: EventType["onChangeInput"] = useCallback((e) => {
-    setInputArticleSearch(e.target.value);
-  }, []);
   /**
    * ユーザー名のインプット
    * @param {e}
@@ -125,14 +117,12 @@ export const useProfileSettingsTemplate = () => {
   }, [isAuth, user?.id, id, user, router]);
 
   return {
-    inputArticleSearch,
     imageIcon,
     userName,
     profile,
     twitter,
     github,
     facebook,
-    handleInputSearch,
     handleInputUserName,
     handleTextAreaProfile,
     handleInputTwitter,

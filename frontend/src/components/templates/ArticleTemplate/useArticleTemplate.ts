@@ -109,11 +109,6 @@ export const useArticleTemplate = () => {
 
   useEffect(() => {
     void fetchArticleById();
-    // if (article) {
-    //   setIsLiked(article.isLiked);
-    //   setIsBookmarked(article.isBookmarked);
-    //   setLikeCounter(article.likeCount);
-    // }
   }, [fetchArticleById]);
 
   return {
