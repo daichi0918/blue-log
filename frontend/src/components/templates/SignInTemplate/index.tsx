@@ -6,6 +6,7 @@
  * @package templates
  */
 import Image from "next/image";
+import Link from "next/link";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
 
@@ -90,6 +91,9 @@ export const SignInTemplate = () => {
             <p className={style.authLink} onClick={navigateToSignUp}>
               新規登録
             </p>
+          </div>
+          <div className={style.homeLink}>
+            <Link href={"/"}>HOME</Link>
           </div>
         </div>
       </div>

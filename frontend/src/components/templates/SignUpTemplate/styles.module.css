@@ -88,3 +88,12 @@
 .authLink:hover {
   cursor: pointer;
 }
+
+.homeLink {
+  margin: 0 auto;
+}
+
+.homeLink > a {
+  color: var(--blue_04);
+  font-size: 1.2rem;
+}
