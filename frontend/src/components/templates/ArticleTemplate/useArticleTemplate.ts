@@ -48,6 +48,35 @@ export const useArticleTemplate = () => {
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
+
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      const threeDots = document.getElementById("threeDots");
+      const userIcon = document.getElementById("userIcon");
+      if (
+        isOpen &&
+        threeDots &&
+        userIcon && // メニューが存在しているか
+        event.target instanceof Node && // 型チェック
+        !threeDots.contains(event.target) && // メニュー外をクリックした場合
+        !userIcon.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen],
+  );
+
+  useEffect(() => {
+    // イベントリスナー追加
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // クリーンアップ
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   /**
    * Xへ遷移
    */

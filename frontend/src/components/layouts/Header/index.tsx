@@ -5,14 +5,7 @@
  *
  * @package layouts
  */
-import {
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
@@ -55,8 +48,8 @@ export const Header = memo(() => {
     setIsOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
       const menuElement = document.getElementById("toggleMenu");
       const userIcon = document.getElementById("userIcon");
       if (
@@ -69,8 +62,11 @@ export const Header = memo(() => {
       ) {
         setIsOpen(false);
       }
-    };
+    },
+    [isOpen],
+  );
 
+  useEffect(() => {
     // イベントリスナー追加
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -78,7 +74,7 @@ export const Header = memo(() => {
       // クリーンアップ
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen]);
+  }, [handleClickOutside]);
 
   /**
    * マイページ画面遷移
