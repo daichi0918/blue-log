@@ -70,10 +70,15 @@ export const ArticleTemplate = () => {
                       <h1 className={style.title}>{article?.title}</h1>
                     </div>
                     {article?.isAuthor && (
-                      <div className={style.meatballMenu} onClick={toggleMenu}>
+                      <div
+                        id={"threeDots"}
+                        className={style.meatballMenu}
+                        onClick={toggleMenu}
+                      >
                         <span className={style.actionDots}></span>
                         <div className={style.actionMenu}>
                           <ul
+                            id={"toggleMenu"}
                             className={`${style.menuList} ${isOpen ? style.show : ""}`}
                           >
                             <li
