@@ -5,7 +5,14 @@
  *
  * @package layouts
  */
-import { memo, useCallback, useContext, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/components/atoms/BaseButton";
@@ -25,7 +32,7 @@ import style from "./styles.module.css";
 export const Header = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
+  // const menuRef = useRef<HTMLUListElement | null>(null);
   const { isAuth, user, signOut } = useContext(AuthContext);
   const { inputArticleSearch, handleInputSearch } = useContext(ArticleContext);
   /**
@@ -47,6 +54,32 @@ export const Header = memo(() => {
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const menuElement = document.getElementById("toggleMenu");
+      const userIcon = document.getElementById("userIcon");
+      if (
+        isOpen &&
+        menuElement &&
+        userIcon && // メニューが存在しているか
+        event.target instanceof Node && // 型チェック
+        !menuElement.contains(event.target) && // メニュー外をクリックした場合
+        !userIcon.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    // イベントリスナー追加
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // クリーンアップ
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   /**
    * マイページ画面遷移
    */
@@ -86,10 +119,17 @@ export const Header = memo(() => {
       <div className={style.authSection}>
         {isAuth && user ? (
           <>
-            <div className={style.actiomMenuWrapper} onClick={toggleMenu}>
+            <div
+              id={"userIcon"}
+              className={style.actionMenuWrapper}
+              onClick={toggleMenu}
+            >
               <UserImage image={user?.image} userName={user?.name} />
               <div className={style.actionMenu}>
-                <ul className={`${style.menuList} ${isOpen ? style.show : ""}`}>
+                <ul
+                  id={"toggleMenu"}
+                  className={`${style.menuList} ${isOpen ? style.show : ""}`}
+                >
                   <li className={style.menuItem} onClick={navigateToMyPage}>
                     <Image
                       src="/mypage.svg"
