@@ -27,7 +27,7 @@ export const AccountTemplate = () => {
     postedArticles,
     selectedIndex,
     displayCount,
-    currentUser,
+    profileUser,
     setSelectedIndex,
     handleLoadMore,
     handleSortChange,
@@ -38,22 +38,22 @@ export const AccountTemplate = () => {
       <>
         <Header />
         <PageContainer>
-          {postedArticles && currentUser && (
+          {postedArticles && profileUser && (
             <div className={style.container}>
               <aside className={style.sidebarContainer}>
-                {currentUser && (
+                {profileUser && (
                   <UserCard
-                    userId={currentUser.id}
-                    userName={currentUser.name}
-                    userImage={currentUser.image ?? null}
-                    userProfile={currentUser.profile ?? null}
-                    twitterURL={currentUser.twitter ?? null}
-                    githubURL={currentUser.github ?? null}
-                    facebookURL={currentUser.facebook ?? null}
-                    profile={currentUser.profile ?? null}
-                    color={currentUser.backgroundColor}
-                    followerCount={currentUser.followerCount}
-                    followingCount={currentUser.followingCount}
+                    userId={profileUser.id}
+                    userName={profileUser.name}
+                    userImage={profileUser.image ?? null}
+                    userProfile={profileUser.profile ?? null}
+                    twitterURL={profileUser.twitter ?? null}
+                    githubURL={profileUser.github ?? null}
+                    facebookURL={profileUser.facebook ?? null}
+                    profile={profileUser.profile ?? null}
+                    color={profileUser.backgroundColor}
+                    followerCount={profileUser.followerCount}
+                    followingCount={profileUser.followingCount}
                   />
                 )}
               </aside>
