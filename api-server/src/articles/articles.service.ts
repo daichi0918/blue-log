@@ -34,7 +34,7 @@ export class ArticlesService {
         createdAt: true,
         updatedAt: true,
         user: {
-          select: { id: true, name: true, image: true }, // ユーザー情報
+          select: { id: true, name: true, image: true, backgroundColor: true }, // ユーザー情報
         },
         _count: {
           select: { likes: true }, // いいねの数
@@ -86,6 +86,7 @@ export class ArticlesService {
             facebook: true,
             github: true,
             profile: true,
+            backgroundColor: true,
             followers: {
               select: {
                 follower: {
@@ -168,7 +169,7 @@ export class ArticlesService {
         createdAt: true,
         updatedAt: true,
         user: {
-          select: { id: true, name: true, image: true }, // ユーザー情報
+          select: { id: true, name: true, image: true, backgroundColor: true }, // ユーザー情報
         },
         _count: {
           select: { likes: true }, // いいねの数
@@ -223,7 +224,7 @@ export class ArticlesService {
         createdAt: true,
         updatedAt: true,
         user: {
-          select: { id: true, name: true, image: true },
+          select: { id: true, name: true, image: true, backgroundColor: true },
         },
         _count: {
           select: { likes: true },
@@ -278,7 +279,7 @@ export class ArticlesService {
         createdAt: true,
         updatedAt: true,
         user: {
-          select: { id: true, name: true, image: true },
+          select: { id: true, name: true, image: true, backgroundColor: true },
         },
         _count: {
           select: { likes: true },
