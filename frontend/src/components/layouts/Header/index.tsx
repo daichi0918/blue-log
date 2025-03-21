@@ -120,7 +120,11 @@ export const Header = memo(() => {
               className={style.actionMenuWrapper}
               onClick={toggleMenu}
             >
-              <UserImage image={user?.image} userName={user?.name} />
+              <UserImage
+                image={user?.image}
+                userName={user?.name}
+                color={user?.backgroundColor}
+              />
               <div className={style.actionMenu}>
                 <ul
                   id={"toggleMenu"}

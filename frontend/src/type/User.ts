@@ -12,6 +12,7 @@ export type UserType = {
   github?: string;
   facebook?: string;
   profile?: string;
+  backgroundColor: string;
   followers?: Array<number>;
   following?: Array<number>;
   followerCount: number;

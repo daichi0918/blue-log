@@ -30,6 +30,8 @@ export const HomeTemplate = () => {
     handleSortChange,
   } = useHomeTemplate();
 
+  console.log(sortedArticles);
+
   return (
     <>
       {/* ヘッダー */}

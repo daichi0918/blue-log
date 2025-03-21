@@ -17,15 +17,16 @@ type ArticleInfoProps = {
   userId: number;
   userName: string;
   image: string | null;
+  color: string;
   createdAt: string;
 };
 
 export const ArticleInfo = memo((props: ArticleInfoProps) => {
-  const { userId, userName, image, createdAt } = props;
+  const { userId, userName, image, color, createdAt } = props;
   return (
     <UserLink userId={userId}>
       <div className={style.articleInfo}>
-        <UserImage image={image} userName={userName} />
+        <UserImage image={image} userName={userName} color={color} />
         <div className={style.nameDateWrapper}>
           <p className={style.userName}>{userName}</p>
           <p className={style.date}>{formatDate(String(createdAt))}</p>

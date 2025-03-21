@@ -67,6 +67,7 @@ export const ArticleCard = memo((props: ArticleCardProps) => {
           userName={article.user.name}
           image={article.user.image}
           createdAt={article.createdAt}
+          color={article.user.backgroundColor}
         />
         <LikeBookmarkButtons
           isliked={article.isLiked}

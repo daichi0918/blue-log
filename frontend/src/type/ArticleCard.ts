@@ -21,6 +21,7 @@ export type ArticleCardType = {
     twitter: string | null;
     github: string | null;
     facebook: string | null;
+    backgroundColor: string;
   };
   likeCount: number;
   isLiked: boolean;

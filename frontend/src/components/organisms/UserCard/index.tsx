@@ -28,6 +28,7 @@ type UserCardProps = {
   twitterURL: string | null;
   githubURL: string | null;
   facebookURL: string | null;
+  color: string;
   profile: string | null;
   followers?: Array<number>;
   followerCount?: number;
@@ -52,6 +53,7 @@ export const UserCard = memo((props: UserCardProps) => {
     twitterURL,
     githubURL,
     facebookURL,
+    color,
     followers,
     followerCount,
     followingCount,
@@ -117,7 +119,7 @@ export const UserCard = memo((props: UserCardProps) => {
       <div className={style.userProfileWrapper}>
         <UserLink userId={userId}>
           <div className={style.userInfo}>
-            <UserImage image={userImage} userName={userName} />
+            <UserImage image={userImage} userName={userName} color={color} />
             <p className={style.userName}>{userName}</p>
           </div>
         </UserLink>
