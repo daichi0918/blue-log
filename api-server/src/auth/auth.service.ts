@@ -12,6 +12,7 @@ import { JwtPayload } from 'src/types/jwtPayload';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { getRandomColor } from '../utils/getRandomColor';
 
 @Injectable()
 export class AuthService {
@@ -89,23 +90,25 @@ export class AuthService {
     const { name, email, password } = createUserDto;
 
     const user = await this.prismaService.user.findFirst({
-      where: {
-        email,
-      },
+      where: { email },
     });
 
-    if (!!user) {
+    if (user) {
       throw new UnauthorizedException(
         `${email} は別のアカウントで使用されています。`,
       );
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const randomColor = getRandomColor(); // ランダムな背景色を生成
 
     const createdUser = await this.prismaService.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
+        backgroundColor: randomColor, // 背景色を保存
       },
     });
 
@@ -118,6 +121,7 @@ export class AuthService {
       twitter: createdUser.twitter,
       github: createdUser.github,
       facebook: createdUser.facebook,
+      backgroundColor: createdUser.backgroundColor, // 背景色を含める
       createdAt: createdUser.createdAt,
       updateAt: createdUser.updateAt,
     };
@@ -126,6 +130,7 @@ export class AuthService {
       sub: createdUser.id,
       username: createdUser.name,
     };
+
     return {
       user: resUser,
       accessToken: this.jwtService.sign(payload),
@@ -219,6 +224,7 @@ export class AuthService {
       email: user.email,
       image: user.image,
       profile: user.profile,
+      backgroundColor: user.backgroundColor,
       twitter: user.twitter,
       github: user.github,
       facebook: user.facebook,
