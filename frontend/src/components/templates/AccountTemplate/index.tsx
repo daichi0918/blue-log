@@ -51,6 +51,7 @@ export const AccountTemplate = () => {
                     githubURL={currentUser.github ?? null}
                     facebookURL={currentUser.facebook ?? null}
                     profile={currentUser.profile ?? null}
+                    color={currentUser.backgroundColor}
                     followerCount={currentUser.followerCount}
                     followingCount={currentUser.followingCount}
                   />

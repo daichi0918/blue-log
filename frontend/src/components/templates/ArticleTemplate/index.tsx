@@ -115,6 +115,7 @@ export const ArticleTemplate = () => {
                       userId={article.user.id}
                       userName={article.user.name}
                       image={article.user.image}
+                      color={article.user.backgroundColor}
                       createdAt={article.createdAt}
                     />
                   </div>
@@ -134,6 +135,7 @@ export const ArticleTemplate = () => {
                         <UserImage
                           image={article.user.image}
                           userName={article.user.name}
+                          color={article.user.backgroundColor}
                         />
                         <p className={style.userName}>{article.user.name}</p>
                       </div>
@@ -200,6 +202,7 @@ export const ArticleTemplate = () => {
                   githubURL={article.user.github}
                   facebookURL={article.user.facebook}
                   profile={article.user.profile}
+                  color={article.user.backgroundColor}
                   followers={article.user.followers}
                   followerCount={article.user.followerCount}
                   followingCount={article.user.followingCount}

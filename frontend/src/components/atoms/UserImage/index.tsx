@@ -1,6 +1,7 @@
 import { memo } from "react";
 import Image from "next/image";
-import { useRandomColor } from "@/utils/getRandomColor";
+
+// import { useRandomColor } from "@/utils/getRandomColor";
 
 import style from "./styles.module.css";
 
@@ -13,6 +14,7 @@ import style from "./styles.module.css";
 type UserImageProps = {
   image: string | null | undefined;
   userName: string;
+  color: string;
 };
 
 /**
@@ -20,8 +22,7 @@ type UserImageProps = {
  * @returns {JSX.Element}
  */
 export const UserImage = memo((props: UserImageProps) => {
-  const randomColor = useRandomColor();
-  const { image, userName } = props;
+  const { image, userName, color } = props;
   return (
     <div className={style.userIcon}>
       {image ? (
@@ -33,10 +34,7 @@ export const UserImage = memo((props: UserImageProps) => {
           height={"32"}
         />
       ) : (
-        <span
-          style={{ background: randomColor ?? "#FFD700" }}
-          className={style.noUserImg}
-        >
+        <span style={{ background: color }} className={style.noUserImg}>
           {userName.charAt(0)}
         </span>
       )}

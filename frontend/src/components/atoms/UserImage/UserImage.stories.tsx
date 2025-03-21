@@ -27,5 +27,6 @@ export const NoImageIcon: Story = {
   args: {
     image: null,
     userName: "example",
+    color: "#98FB98",
   },
 };

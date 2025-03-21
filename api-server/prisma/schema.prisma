@@ -28,22 +28,23 @@ model Article {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  email     String     @unique @db.VarChar(255)
-  password  String     @db.VarChar(255)
-  image     String?    @db.VarChar(255)
-  twitter   String?    @db.VarChar(255)
-  facebook  String?    @db.VarChar(255)
-  github    String?    @db.VarChar(255)
-  profile   String?    @db.Text
-  createdAt DateTime   @default(now()) @db.Timestamp(0)
-  updateAt  DateTime   @updatedAt @db.Timestamp(0)
-  articles  Article[]
-  likes     Like[]
-  bookmarks Bookmark[]
-  following Follow[]   @relation("Following", fields: [], references: [])
-  followers Follow[]   @relation("Followers", fields: [], references: [])
+  id              Int        @id @default(autoincrement())
+  name            String     @db.VarChar(255)
+  email           String     @unique @db.VarChar(255)
+  password        String     @db.VarChar(255)
+  image           String?    @db.VarChar(255)
+  twitter         String?    @db.VarChar(255)
+  facebook        String?    @db.VarChar(255)
+  github          String?    @db.VarChar(255)
+  profile         String?    @db.Text
+  backgroundColor String     @db.VarChar(7)
+  createdAt       DateTime   @default(now()) @db.Timestamp(0)
+  updateAt        DateTime   @updatedAt @db.Timestamp(0)
+  articles        Article[]
+  likes           Like[]
+  bookmarks       Bookmark[]
+  following       Follow[]   @relation("Following", fields: [], references: [])
+  followers       Follow[]   @relation("Followers", fields: [], references: [])
 }
 
 model Like {
