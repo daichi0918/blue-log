@@ -23,7 +23,7 @@ export const useAccountTemplate = () => {
   const param = useParams();
   const MENU_ITEMS = ["投稿した記事", "いいねした記事", "保存した記事"];
 
-  const { isAuth, user } = useContext(AuthContext);
+  const { isAuth, user: authUser } = useContext(AuthContext);
   /* state定義 */
   const [displayArticles, setDisplayArticles] = useState<
     Array<ArticleCardType>
@@ -40,7 +40,7 @@ export const useAccountTemplate = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [displayCount, setDisplayCount] = useState<number>(5);
   const [sortKey, setSortKey] = useState<string>("newest");
-  const [currentUser, setCurrentUser] = useState<UserType | undefined>(
+  const [profileUser, setProfileUser] = useState<UserType | undefined>(
     undefined,
   );
 
@@ -90,7 +90,7 @@ export const useAccountTemplate = () => {
    */
   const fetchUser = useCallback(async (): Promise<void> => {
     const res = await fetchUserById(String(param.id));
-    setCurrentUser(
+    setProfileUser(
       res?.data && typeof res.data === "object" ? res.data : undefined,
     );
   }, [param]);
@@ -137,7 +137,7 @@ export const useAccountTemplate = () => {
   return {
     MENU_ITEMS,
     isAuth,
-    user,
+    authUser,
     displayArticles,
     postedArticles,
     likedArticles,
@@ -145,7 +145,7 @@ export const useAccountTemplate = () => {
     selectedIndex,
     displayCount,
     sortKey,
-    currentUser,
+    profileUser,
     setSelectedIndex,
     handleLoadMore,
     handleSortChange,
