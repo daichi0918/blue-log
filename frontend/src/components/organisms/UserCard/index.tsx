@@ -94,7 +94,6 @@ export const UserCard = memo((props: UserCardProps) => {
   const followUser = useCallback(async (): Promise<void> => {
     try {
       const res = await followUserApi(String(param.id));
-      // console.log(res?.code);
       setIsFollowing(res?.code === 201 && true);
     } catch (error) {
       console.error("フォロー処理に失敗しました:", error);
@@ -108,7 +107,6 @@ export const UserCard = memo((props: UserCardProps) => {
   const unfollowUser = useCallback(async (): Promise<void> => {
     try {
       const res = await unfollowUserApi(String(param.id));
-      // console.log(res?.code);
       setIsFollowing(res?.code === 200 && false);
     } catch (error) {
       console.error("フォロー処理に失敗しました:", error);

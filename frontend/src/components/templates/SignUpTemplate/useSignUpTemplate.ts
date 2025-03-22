@@ -64,11 +64,6 @@ export const useSignUpTemplate = () => {
   const handleSignUp = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log("Form Submitted with values:", {
-        name,
-        email,
-        password,
-      });
       const res = await signUpApi(name, email, password);
       if (res?.code >= 400) {
         alert(res.message);

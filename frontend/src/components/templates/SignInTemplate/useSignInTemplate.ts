@@ -64,7 +64,6 @@ export const useSignInTemplate = () => {
       }
       if (res?.data?.user) {
         await signIn(res.data.user);
-        console.log(res.data);
         // 暗号化
         const ecrypted = crypto.AES.encrypt(res.data.accessToken, "hogefuga");
         localStorage.setItem("access_token", ecrypted.toString());
