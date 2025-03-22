@@ -120,13 +120,13 @@ export const ArticleTemplate = () => {
                     />
                   </div>
                   <MarkdonwPreview text={article.text} />
-                  <div className={style.likeBookmarkContainer}>
+                  {/* <div className={style.likeBookmarkContainer}>
                     <LikeBookmarkButtons
                       isliked={article.isLiked}
                       isbookmarked={article.isBookmarked}
                       likeCount={article.likeCount}
                     />
-                  </div>
+                  </div> */}
                 </ArticleContentWrapper>
                 <section className={style.contentSection}>
                   <div className={style.userInfoFollowButtonWrapper}>
