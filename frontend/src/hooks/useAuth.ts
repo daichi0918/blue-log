@@ -68,18 +68,12 @@ export const useAuth = () => {
    * 認証ルーティング
    */
   const authRouting = useCallback(async () => {
-    // let auth = false;
     const res = await authenticationApi();
 
     if (res?.data?.user) {
       setUser(res?.data?.user);
       setIsAuth(true);
-      // auth = true;
     }
-    // console.log("auth");
-    // console.log(isAuth);
-    // console.log("isProtectedPage");
-    // console.log(isProtectedPage());
     // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
     if (!isAuth && isProtectedPage()) router.push(NAVIGATION_LIST.LOGIN);
     // // ログイン済で認証ページにいる場合、Todo一覧ページにリダイレクト
