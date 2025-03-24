@@ -7,6 +7,7 @@
  */
 import { InputForm } from "@/components/atoms/InputForm";
 import { LoadingEffect } from "@/components/atoms/LoadingEffect";
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -118,6 +119,8 @@ export const ArticleEditTemplate = () => {
           </main>
         )}
       </PageContainer>
+      {/* スクロールトップアイコン */}
+      <ScrollTopIcon />
       <Footer />
     </>
   );

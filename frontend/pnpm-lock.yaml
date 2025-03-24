@@ -89,6 +89,9 @@ importers:
       "@types/react-dom":
         specifier: ^19
         version: 19.0.3(@types/react@19.0.7)
+      "@types/react-scroll":
+        specifier: ^1.8.10
+        version: 1.8.10
       "@typescript-eslint/eslint-plugin":
         specifier: ^8.22.0
         version: 8.22.0(@typescript-eslint/parser@8.22.0(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3))(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
@@ -2550,6 +2553,12 @@ packages:
       }
     peerDependencies:
       "@types/react": ^19.0.0
+
+  "@types/react-scroll@1.8.10":
+    resolution:
+      {
+        integrity: sha512-RD4Z7grbdNGOKwKnUBKar6zNxqaW3n8m9QSrfvljW+gmkj1GArb8AFBomVr6xMOgHPD3v1uV3BrIf01py57daQ==,
+      }
 
   "@types/react@19.0.7":
     resolution:
@@ -10935,6 +10944,10 @@ snapshots:
   "@types/parse-json@4.0.2": {}
 
   "@types/react-dom@19.0.3(@types/react@19.0.7)":
+    dependencies:
+      "@types/react": 19.0.7
+
+  "@types/react-scroll@1.8.10":
     dependencies:
       "@types/react": 19.0.7
 

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { LoadingEffect } from "@/components/atoms/LoadingEffect";
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
 import { UserImage } from "@/components/atoms/UserImage";
 import { UserLink } from "@/components/atoms/UserLink";
@@ -215,6 +216,8 @@ export const ArticleTemplate = () => {
           <div>もう一度読み込んでください</div>
         )}
       </PageContainer>
+      {/* スクロールトップアイコン */}
+      <ScrollTopIcon />
       <Footer />
     </>
   );
