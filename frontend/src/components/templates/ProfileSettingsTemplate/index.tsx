@@ -2,6 +2,7 @@
 
 import { BaseButton } from "@/components/atoms/BaseButton";
 import { InputForm } from "@/components/atoms/InputForm";
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -124,6 +125,8 @@ export const ProfilesSettingsTemplate = () => {
           </section>
         </main>
       </PageContainer>
+      {/* スクロールトップアイコン */}
+      <ScrollTopIcon />
       <Footer />
     </>
   );

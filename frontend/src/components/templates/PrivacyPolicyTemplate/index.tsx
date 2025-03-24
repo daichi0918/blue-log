@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { ArticleContentWrapper } from "@/components/layouts/ArticleContentWrapper";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
@@ -32,6 +33,8 @@ export const PrivacyPolicyTemplate = () => {
           </ArticleContentWrapper>
         </section>
       </PageContainer>
+      {/* スクロールトップアイコン */}
+      <ScrollTopIcon />
       <Footer />
     </>
   );

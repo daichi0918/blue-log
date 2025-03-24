@@ -6,6 +6,7 @@
  * @package templates
  */
 import { InputForm } from "@/components/atoms/InputForm";
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { ArticleFormHeader } from "@/components/layouts/ArticleFormHeader";
 import { Footer } from "@/components/layouts/Footer";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -113,6 +114,8 @@ export const ArticleNewTemplate = () => {
           </form>
         </main>
       </PageContainer>
+      {/* スクロールトップアイコン */}
+      <ScrollTopIcon />
       <Footer />
     </>
   );

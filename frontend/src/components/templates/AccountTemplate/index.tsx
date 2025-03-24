@@ -6,6 +6,7 @@
  * @package templates
  */
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
@@ -101,6 +102,8 @@ export const AccountTemplate = () => {
             </div>
           )}
         </PageContainer>
+        {/* スクロールトップアイコン */}
+        <ScrollTopIcon />
         <Footer />
       </>
     </>
