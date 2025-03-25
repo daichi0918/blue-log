@@ -5,7 +5,13 @@
  */
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { fetchArticleAPI } from "@/apis/articleApi";
+import {
+  addLikeApi,
+  deleteLikeApi,
+  fetchArticleAPI,
+  saveBookmarkApi,
+  unsaveBookmarkApi,
+} from "@/apis/articleApi";
 import { followUserApi, unfollowUserApi } from "@/apis/authApi";
 import { AuthContext } from "@/contexts/AuthContext";
 import { type ArticleType } from "@/type/Article";
@@ -26,8 +32,54 @@ export const useArticleTemplate = () => {
     article?.user.followers?.includes(user?.id ?? -1),
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCounter, setLikeCounter] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   /* action定義 */
+  const toggleLike = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
+      if (!isAuth) {
+        setShowModal(true);
+      } else {
+        setIsLiked((prev) => !prev);
+        setLikeCounter((prev) => (isLiked ? prev - 1 : prev + 1));
+        if (isLiked) {
+          void deleteLikeApi(String(param.id ?? article?.id));
+        } else {
+          void addLikeApi(String(param.id ?? article?.id));
+        }
+      }
+    },
+    [isAuth, param.id, isLiked, article?.id],
+  );
+
+  const toggleBookmark = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      // TODO: 記事一覧画面では、いいね!ボタン押下した後に記事詳細ページに遷移するからそこの制御の実装
+      if (!isAuth) {
+        setShowModal(true);
+      } else {
+        setIsBookmarked((prev) => !prev);
+        if (isBookmarked) {
+          void unsaveBookmarkApi(String(param.id ?? article?.id));
+        } else {
+          void saveBookmarkApi(String(param.id ?? article?.id));
+        }
+      }
+    },
+    [isAuth, param.id, isBookmarked, article?.id],
+  );
+  useEffect(() => {
+    if (article) {
+      setIsLiked(article.isLiked);
+      setIsBookmarked(article.isBookmarked);
+      setLikeCounter(article.likeCount);
+    }
+  }, [article]);
   /**
    * 記事データ取得
    */
@@ -155,5 +207,10 @@ export const useArticleTemplate = () => {
     followUser,
     unfollowUser,
     navigateToArticleEdit,
+    isLiked,
+    isBookmarked,
+    likeCounter,
+    toggleLike,
+    toggleBookmark,
   };
 };

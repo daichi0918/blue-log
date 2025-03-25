@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { BaseButton } from "@/components/atoms/BaseButton";
+import { BookmarkIcon } from "@/components/atoms/BookmarkIcon";
+import { LikeIcon } from "@/components/atoms/LikeIcon";
 import { LoadingEffect } from "@/components/atoms/LoadingEffect";
 import { ScrollTopIcon } from "@/components/atoms/ScrollTopIcon";
 import { SNSIcon } from "@/components/atoms/SNSIcon";
@@ -12,7 +14,6 @@ import { Footer } from "@/components/layouts/Footer";
 import { Header } from "@/components/layouts/Header";
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { ArticleInfo } from "@/components/molecules/ArticleInfo";
-import { LikeBookmarkButtons } from "@/components/molecules/LikeBookmarkButtons";
 import { MarkdonwPreview } from "@/components/molecules/MarkdonwPreview";
 import { Tags } from "@/components/molecules/Tags";
 import { LoginModal } from "@/components/organisms/LoginModal";
@@ -47,7 +48,14 @@ export const ArticleTemplate = () => {
     navigateToGithub,
     navigateToFacebook,
     navigateToArticleEdit,
+    isLiked,
+    isBookmarked,
+    likeCounter,
+    toggleLike,
+    toggleBookmark,
   } = useArticleTemplate();
+  console.log("article");
+  console.log(article);
   return (
     <>
       <Header />
@@ -57,12 +65,33 @@ export const ArticleTemplate = () => {
         ) : article ? (
           <>
             <div className={style.container}>
-              <LikeBookmarkButtons
-                isliked={article.isLiked}
-                isbookmarked={article.isBookmarked}
-                likeCount={article.likeCount}
-                direction={"column"}
-              />
+              <section className={style.actionContainer}>
+                <div className={style.actionWrapper}>
+                  <div className={style.actionBackground}>
+                    <LikeIcon
+                      isliked={isLiked}
+                      width={20}
+                      height={20}
+                      onClick={(event) => {
+                        toggleLike(event);
+                      }}
+                    />
+                  </div>
+                  <p className={style.likeCount}>{likeCounter}</p>
+                </div>
+                <div className={style.actionWrapper}>
+                  <div className={style.actionBackground}>
+                    <BookmarkIcon
+                      isbookmarked={isBookmarked}
+                      width={20}
+                      height={20}
+                      onClick={(event) => {
+                        toggleBookmark(event);
+                      }}
+                    />
+                  </div>
+                </div>
+              </section>
               <section className={style.contentContainer}>
                 {/* <main className={style.contentSection}> */}
                 <ArticleContentWrapper>
@@ -128,6 +157,29 @@ export const ArticleTemplate = () => {
                       likeCount={article.likeCount}
                     />
                   </div> */}
+                  <div className={style.likeBookmarkWrapper}>
+                    <div className={style.like}>
+                      <LikeIcon
+                        isliked={isLiked}
+                        width={22}
+                        height={22}
+                        onClick={(event) => {
+                          toggleLike(event);
+                        }}
+                      />
+                      <div className={style.likeCount}>{likeCounter}</div>
+                    </div>
+                    <div className={style.bookmark}>
+                      <BookmarkIcon
+                        isbookmarked={isBookmarked}
+                        width={18}
+                        height={22}
+                        onClick={(event) => {
+                          toggleBookmark(event);
+                        }}
+                      />
+                    </div>
+                  </div>
                 </ArticleContentWrapper>
                 <section className={style.contentSection}>
                   <div className={style.userInfoFollowButtonWrapper}>
