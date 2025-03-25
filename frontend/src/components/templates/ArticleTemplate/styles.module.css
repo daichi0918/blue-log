@@ -243,3 +243,68 @@
   width: 70%;
   margin-left: 15px;
 }
+
+/* いいね・ブックマークボタン */
+.likeBookmarkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 150px;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.likeCount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--gray_05);
+  margin-left: 15px;
+}
+
+.bookmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 縦型 */
+.actionContainer {
+  grid-area: actions;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.actionContainer .actionWrapper {
+  margin-bottom: 10px;
+}
+
+.actionContainer .likeCount {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: var(--gray_05);
+  margin: unset;
+  margin-top: 10px;
+}
+
+.actionBackground {
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
