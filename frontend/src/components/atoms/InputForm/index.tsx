@@ -24,6 +24,7 @@ export const InputForm = memo((props: InputFormProps) => {
     placeholder,
     value,
     onChange,
+    onKeyDown,
     additionalStyle,
     disabled,
   } = props;
@@ -35,6 +36,7 @@ export const InputForm = memo((props: InputFormProps) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       style={{ ...style, ...additionalStyle }}
       disabled={disabled}
     />
