@@ -14,6 +14,7 @@ import { UserImage } from "@/components/atoms/UserImage";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 import { ArticleContext } from "@/contexts/ArticleContext";
 import { AuthContext } from "@/contexts/AuthContext";
+import { type EventType } from "@/type/Event";
 
 import { HeaderArea } from "../HeaderArea";
 import style from "./styles.module.css";
@@ -66,6 +67,17 @@ export const Header = memo(() => {
     [isOpen],
   );
 
+  /**
+   * Home画面遷移
+   */
+  const handleEnterSearch: EventType["onkeypress"] = useCallback(
+    (e) => {
+      if (e.key === "Enter" && inputArticleSearch.trim() !== "")
+        router.push("/");
+    },
+    [inputArticleSearch, router],
+  );
+
   useEffect(() => {
     // イベントリスナー追加
     document.addEventListener("mousedown", handleClickOutside);
@@ -105,6 +117,7 @@ export const Header = memo(() => {
           placeholder={"キーワード検索"}
           value={inputArticleSearch}
           onChange={handleInputSearch}
+          onKeyDown={handleEnterSearch}
           additionalStyle={{
             minWidth: "400px",
             minHeight: "40px",
