@@ -21,7 +21,7 @@ export const useHomeTemplate = () => {
   const [sortKey, setSortKey] = useState<string>("newest");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  /* global state定義 */
+  /* グローバル state定義 */
   const { inputArticleSearch } = useContext(ArticleContext);
 
   /* action定義 */
