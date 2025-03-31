@@ -4,14 +4,12 @@
  * @package hooks
  */
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 import { type EventType } from "@/type/Event";
 
 /**
  * useArticle
  */
 export const useArticle = () => {
-  const router = useRouter();
   /* state定義 */
   const [inputArticleSearch, setInputArticleSearch] = useState<string>("");
   /* action定義 */
