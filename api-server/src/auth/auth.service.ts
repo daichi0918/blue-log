@@ -74,7 +74,7 @@ export class AuthService {
     const updatedUser = await this.prismaService.user.update({
       where: { id },
       data: {
-        ...updateUserDto, // 渡されたデータのみを更新
+        ...updateUserDto,
       },
     });
 
