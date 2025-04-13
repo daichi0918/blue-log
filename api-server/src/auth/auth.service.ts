@@ -121,7 +121,7 @@ export class AuthService {
       twitter: createdUser.twitter,
       github: createdUser.github,
       facebook: createdUser.facebook,
-      backgroundColor: createdUser.backgroundColor, // 背景色を含める
+      backgroundColor: createdUser.backgroundColor,
       createdAt: createdUser.createdAt,
       updateAt: createdUser.updateAt,
     };
