@@ -34,7 +34,7 @@ export class ArticlesService {
         createdAt: true,
         updatedAt: true,
         user: {
-          select: { id: true, name: true, image: true, backgroundColor: true }, // ユーザー情報
+          select: { id: true, name: true, image: true, backgroundColor: true }, 
         },
         _count: {
           select: { likes: true }, // いいねの数
