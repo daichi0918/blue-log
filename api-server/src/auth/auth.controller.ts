@@ -1,0 +1,78 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { CredentialsDto } from './dto/credentials.dto';
+import { User } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
+import { Request as ExpressRequest } from 'express';
+import { RequestUser } from '../types/requestUser';
+import { UpdateUserDto } from './dto/update-user.dto';
+
+@Controller('auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
+  @Get(':id')
+  async getUserById(
+    @Param('id') id: string,
+  ): Promise<User & { followerCount: number; followingCount: number }> {
+    return await this.authService.fetchUserProfile(+id);
+  }
+
+  @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
+  async update(@Param('id') id: string, @Body() updateUsereDto: UpdateUserDto) {
+    return await this.authService.updateUserProfile(+id, updateUsereDto);
+  }
+
+  @Post('signup')
+  async signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return await this.authService.createUser(createUserDto);
+  }
+
+  @Post('signin')
+  async signIn(
+    @Body() credentialsDto: CredentialsDto,
+  ): Promise<{ token: string }> {
+    return await this.authService.signIn(credentialsDto);
+  }
+
+  @Post(':id/follow')
+  @UseGuards(AuthGuard('jwt'))
+  async follow(
+    @Param('id') followingId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const followerId = req.user.userId;
+    await this.authService.followUser(followerId, +followingId);
+    return { message: 'フォローしました' };
+  }
+
+  @Delete(':id/follow')
+  @UseGuards(AuthGuard('jwt'))
+  async unfollow(
+    @Param('id') followingId: string,
+    @Request() req: ExpressRequest & { user?: RequestUser },
+  ) {
+    const followerId = req.user.userId;
+    await this.authService.unfollowUser(followerId, +followingId);
+    return { message: 'フォローを解除しました' };
+  }
+
+  @Post('authentication')
+  @UseGuards(AuthGuard('jwt'))
+  async authentication(@Request() req: ExpressRequest & { user: RequestUser }) {
+    return await this.authService.authCheck(req.user.userId);
+  }
+}

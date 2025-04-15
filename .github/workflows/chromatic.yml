@@ -1,0 +1,31 @@
+name: 'Chromatic Publish'
+
+on: push
+
+env:
+  NODE_VERSION: '20.0.0'
+  PNPM_VERSION: '9.15.0'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: storybook-auto-build
+    defaults:
+      run:
+        working-directory: frontend # frontend ディレクトリ内で実行
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - uses: chromaui/action@latest
+        # Options required for Chromatic's GitHub Action
+        with:
+          #👇 Chromatic projectToken,
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          workingDir: frontend

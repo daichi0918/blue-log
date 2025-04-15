@@ -1,0 +1,74 @@
+.articleItem {
+  border: 1px solid var(--gray_02);
+  background: var(--gray_00);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 30px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.articleItem > section {
+  margin: 5px 0;
+}
+
+.articleTitle {
+  color: var(--gray_06);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.articleTitle h1 {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  line-height: 1.5em;
+  max-height: calc(1.5em * 2);
+}
+
+.articleTagsWrapper {
+  margin-top: 10px;
+}
+
+.articleInfoWrapper {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.likeBookmarkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liked,
+.notLiked {
+  margin-right: 15px;
+}
+
+.likeCount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--gray_05);
+}
+
+.bookmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

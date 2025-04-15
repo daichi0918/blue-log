@@ -1,0 +1,21 @@
+.userIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* margin-top: 10px; */
+}
+
+.userIcon:hover {
+  cursor: pointer;
+}
+
+.userImg,
+.noUserImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+}

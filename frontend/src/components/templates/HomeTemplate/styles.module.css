@@ -1,0 +1,25 @@
+.articlesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 65%;
+  margin: 0 auto;
+}
+
+.articlesContainer > section {
+  width: 100%;
+}
+
+/* 並び替え */
+.articleCardSort {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+/* もっとみる */
+.showMore {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

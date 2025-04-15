@@ -1,0 +1,43 @@
+.button {
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 0 16px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+/* サイズ */
+.small {
+  min-width: 80px;
+  height: 32px;
+  font-size: 1.2rem;
+}
+
+.medium {
+  min-width: 90px;
+  height: 40px;
+  font-size: 1.4rem;
+}
+
+/* 色 */
+.primary {
+  background: var(--blue_04);
+  border: 1px solid var(--blue_04);
+  color: var(--gray_00);
+}
+
+.primary:hover {
+  background: var(--blue_05);
+}
+
+.secondary {
+  background: var(--gray_00);
+  border: 1px solid var(--blue_04);
+  color: var(--blue_04);
+}
+
+.secondary:hover {
+  background: var(--blue_01);
+}
