@@ -41,7 +41,7 @@ export class ArticlesService {
         },
         likes: userId
           ? {
-              where: { userId }, // ログインユーザーがいいねしているかどうか
+              where: { userId },
               select: { userId: true },
             }
           : false,
